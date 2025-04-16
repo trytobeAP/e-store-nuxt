@@ -4,6 +4,8 @@ Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduct
 
 ## Setup
 
+Rename `.env.example` to `.env` to get baseUrl. I have decided to use `.env` to store baseUrl and since `.env` is untrackable I have chosen that way to organized a code and api structure.
+
 Make sure to install dependencies:
 
 ```bash
