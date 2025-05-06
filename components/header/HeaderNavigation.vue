@@ -1,15 +1,18 @@
+// components/header/HeaderNavigation.vue
 <template>
-  <span class="navigation">
-    <HeaderNavigationGroupText
-      class="shop"
-      :items="textNavItems"
-    />
-    <span class="separator" />
-    <HeaderNavigationGroupIcon
-      class="user"
-      :items="iconNavItems"
-    />
-  </span>
+  <nav>
+    <span class="header-navigation-container">
+      <UtilsNavigationGroupText
+        class="header-text-nav"
+        :items="textNavItems"
+      />
+      <span class="separator" />
+      <UtilsNavigationGroupIcon
+        class="header-icon-nav"
+        :items="iconNavItems"
+      />
+    </span>
+  </nav>
 </template>
 
 <script setup lang="ts">
@@ -28,9 +31,7 @@ const initialTextItems = ["shop", "blog", "our story"];
 const shopItemsContent = initialTextItems.map((elem) => {
   return elem
     .split(" ")
-    .map((word) => {
-      return word[0].toUpperCase() + word.slice(1);
-    })
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 });
 
@@ -38,13 +39,10 @@ const shopItemsLinks = initialTextItems.map((elem) => {
   return elem.split(" ").join("-");
 });
 
-const textNavItems: TextNavItem[] = [];
-for (let i = 0; i < initialTextItems.length; i++) {
-  textNavItems.push({
-    content: shopItemsContent[i],
-    linkSlug: shopItemsLinks[i],
-  });
-}
+const textNavItems: TextNavItem[] = initialTextItems.map((_, i) => ({
+  content: shopItemsContent[i],
+  linkSlug: shopItemsLinks[i],
+}));
 
 const iconNavItems: IconNavItem[] = [
   { linkSlug: "search", iconName: "material-symbols:search-rounded" },
@@ -54,7 +52,7 @@ const iconNavItems: IconNavItem[] = [
 </script>
 
 <style scoped lang="scss">
-.navigation {
+.header-navigation-container {
   display: flex;
   align-items: flex-start;
   gap: 48px;
@@ -62,8 +60,20 @@ const iconNavItems: IconNavItem[] = [
 
 .separator {
   width: 1px;
-  height: 24px;
+  height: 18px;
   background-color: theme-color("opposite-color");
-  margin-top: 2px;
+  margin-top: 4px;
+}
+
+.header-text-nav {
+  gap: 64px;
+
+  :deep(.text-link) {
+    font-weight: 500;
+  }
+}
+
+.header-icon-nav {
+  gap: 38px;
 }
 </style>

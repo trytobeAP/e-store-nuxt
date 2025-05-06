@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <header>
-      <HeaderComponent />
-    </header>
+    <HeaderComponent />
+
     <main>
       <slot />
     </main>
-    <footer>
-      <FooterComponent />
-    </footer>
+
+    <FooterComponent />
   </div>
 </template>

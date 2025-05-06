@@ -1,9 +1,9 @@
-export interface ProductRating {
+interface ProductRating {
   rate: number;
   count: number;
 }
 
-export interface Product {
+interface Product {
   id: number;
   title: string;
   price: number;
@@ -13,4 +13,4 @@ export interface Product {
   rating: ProductRating;
 }
 
-export type ProductList = Product[];
+export type { Product };

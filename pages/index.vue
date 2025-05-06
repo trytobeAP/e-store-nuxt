@@ -1,11 +1,11 @@
 <template>
-  <HomePage />
+  <div class="component-styles">
+    <p> home page content </p>
+  </div>
 </template>
 
-<script setup>
-definePageMeta({
-  layout: "default",
-});
-</script>
-
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.component-styles {
+  color: theme-color("opposite-color");
+}
+</style>

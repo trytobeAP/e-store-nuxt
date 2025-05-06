@@ -1,32 +1,38 @@
 <template>
-  <span class="icon-navigation">
-    <NavigationItem
+  <span
+    class="icon-navigation"
+    v-bind="$attrs"
+  >
+    <UtilsNavigationItem
       v-for="item in items"
       :key="item.linkSlug"
       :link="`/${item.linkSlug}`"
       class="nav-link icon-link"
+      :class="item.classes"
     >
       <Icon
         :name="item.iconName"
         size="24"
       />
-    </NavigationItem>
+    </UtilsNavigationItem>
   </span>
 </template>
 
 <script setup lang="ts">
-interface UserNavItem {
+interface IconNavItem {
   linkSlug: string;
   iconName: string;
+  classes?: string | string[] | Record<string, boolean>;
 }
-defineProps<{ items: UserNavItem[] }>();
+
+defineProps<{ items: IconNavItem[] }>();
 </script>
 
 <style scoped lang="scss">
 .icon-navigation {
   display: inline-flex;
   align-items: center;
-  gap: 38px;
+  gap: 30px;
 }
 
 .icon-link {

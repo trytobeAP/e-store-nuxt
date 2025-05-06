@@ -1,13 +1,17 @@
 <template>
-  <span class="text-navigation">
-    <NavigationItem
+  <span
+    class="text-navigation"
+    v-bind="$attrs"
+  >
+    <UtilsNavigationItem
       v-for="item in items"
       :key="item.linkSlug"
       :link="`/${item.linkSlug}`"
       class="nav-link text-link"
+      :class="item.classes"
     >
       {{ item.content }}
-    </NavigationItem>
+    </UtilsNavigationItem>
   </span>
 </template>
 
@@ -15,6 +19,7 @@
 interface TextNavItem {
   linkSlug: string;
   content: string;
+  classes?: string | string[] | Record<string, boolean>;
 }
 
 defineProps<{ items: TextNavItem[] }>();
@@ -29,12 +34,6 @@ defineProps<{ items: TextNavItem[] }>();
 
 .text-link {
   font-size: 16px;
-  font-weight: 400;
   line-height: 27px;
-  color: theme-color("link-color-light");
-
-  &:hover {
-    color: theme-color("link-color");
-  }
 }
 </style>
