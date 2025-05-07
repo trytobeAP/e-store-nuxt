@@ -135,16 +135,11 @@ onUnmounted(() => {
     color: theme-color(gray-dark-color);
     opacity: 0.8;
   }
-
-  &[aria-invalid="true"] {
-    border-color: theme-color(error-color);
-    box-shadow: inset 0 -2px 0 0 theme-color(error-color);
-  }
 }
 
 .validation-error-message {
   position: absolute;
-  bottom: -16px;
+  bottom: -30px;
   left: 0;
   color: theme-color(error-color);
   font-size: 0.8rem;

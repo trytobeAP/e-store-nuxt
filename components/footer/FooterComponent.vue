@@ -1,37 +1,27 @@
 <template>
-  <footer>
-    <div class="content">
-      <hr class="divider" />
-      <div class="d-flex justify-between footer-row">
-        <UtilsNavigationGroupText
-          class="footer-text-nav"
-          :items="textNavItems"
-        />
-        <div class="newsletter-wrapper">
-          <UtilsNewsletterForm />
-        </div>
+  <footer class="content">
+    <hr class="divider" />
+    <div class="d-flex justify-between footer-row">
+      <UtilsNavigationGroupText
+        class="footer-text-nav"
+        :items="textNavItems"
+      />
+      <div class="newsletter-wrapper">
+        <UtilsNewsletterForm />
       </div>
-      <div class="d-flex justify-between footer-row">
-        <FooterNavigationLicense />
-        <UtilsNavigationGroupIcon
-          class="footer-icon-nav"
-          :items="IconNavItems"
-        />
-      </div>
+    </div>
+    <div class="d-flex justify-between footer-row">
+      <FooterNavigationLicense />
+      <UtilsNavigationGroupIcon
+        class="footer-icon-nav"
+        :items="IconNavItems"
+      />
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-interface TextNavItem {
-  linkSlug: string;
-  content: string;
-}
-
-interface IconNavItem {
-  linkSlug: string;
-  iconName: string;
-}
+import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 
 const initialTextItems = [
   "contact",
@@ -39,17 +29,9 @@ const initialTextItems = [
   "shipping and returns",
 ];
 
-const moreInfoItemsContent = initialTextItems.map((elem) => {
-  return elem.toUpperCase();
-});
-
-const moreInfoItemsLinkSlug = initialTextItems.map((elem) => {
-  return elem.split(" ").join("-");
-});
-
-const textNavItems: TextNavItem[] = initialTextItems.map((_, i) => ({
-  content: moreInfoItemsContent[i],
-  linkSlug: moreInfoItemsLinkSlug[i],
+const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
+  content: item.toUpperCase(),
+  linkSlug: item.split(" ").join("-"),
 }));
 
 const IconNavItems: IconNavItem[] = [

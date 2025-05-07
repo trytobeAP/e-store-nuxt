@@ -1,4 +1,3 @@
-// components/header/HeaderNavigation.vue
 <template>
   <nav>
     <span class="header-navigation-container">
@@ -16,32 +15,16 @@
 </template>
 
 <script setup lang="ts">
-interface TextNavItem {
-  linkSlug: string;
-  content: string;
-}
-
-interface IconNavItem {
-  linkSlug: string;
-  iconName: string;
-}
+import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 
 const initialTextItems = ["shop", "blog", "our story"];
 
-const shopItemsContent = initialTextItems.map((elem) => {
-  return elem
+const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
+  content: item
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-});
-
-const shopItemsLinks = initialTextItems.map((elem) => {
-  return elem.split(" ").join("-");
-});
-
-const textNavItems: TextNavItem[] = initialTextItems.map((_, i) => ({
-  content: shopItemsContent[i],
-  linkSlug: shopItemsLinks[i],
+    .join(" "),
+  linkSlug: item.split(" ").join("-"),
 }));
 
 const iconNavItems: IconNavItem[] = [

@@ -8,7 +8,9 @@
 </template>
 
 <script setup lang="ts">
-const { link = "/" } = defineProps<{ link?: string }>();
+withDefaults(defineProps<{ link?: string }>(), {
+  link: "/",
+});
 </script>
 
 <style scoped lang="scss">

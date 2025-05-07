@@ -22,7 +22,11 @@ interface TextNavItem {
   classes?: string | string[] | Record<string, boolean>;
 }
 
-defineProps<{ items: TextNavItem[] }>();
+interface Props {
+  items: TextNavItem[];
+}
+
+defineProps<Props>();
 </script>
 
 <style scoped lang="scss">

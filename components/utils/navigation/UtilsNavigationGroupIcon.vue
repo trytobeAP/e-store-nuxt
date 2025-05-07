@@ -25,7 +25,11 @@ interface IconNavItem {
   classes?: string | string[] | Record<string, boolean>;
 }
 
-defineProps<{ items: IconNavItem[] }>();
+interface Props {
+  items: IconNavItem[];
+}
+
+defineProps<Props>();
 </script>
 
 <style scoped lang="scss">
