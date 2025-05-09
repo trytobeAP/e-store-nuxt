@@ -1,0 +1,46 @@
+@use "sass:map";
+
+$breakpoints-xl: "1440px";
+$breakpoints-l: "1024px";
+$breakpoints-m: "768px";
+$breakpoints-s: "375px";
+
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+
+$light-theme: (
+  accent-color: #a18a68,
+  white-color: #ffffff,
+  black-color: #000000,
+  gray-dark-color: #707070,
+  gray-color: #d8d8d8,
+  gray-light-color: #efefef,
+  error-color: #d82700,
+  link-color: #000000,
+  link-color-light: #707070,
+  main-color: #ffffff,
+  opposite-color: #000000,
+  body-bg-color: #ffffff,
+);
+
+$dark-theme: (
+  accent-color: #a18a68,
+  white-color: #ffffff,
+  black-color: #000000,
+  gray-dark-color: #707070,
+  gray-color: #d8d8d8,
+  gray-light-color: #efefef,
+  error-color: #d82700,
+  link-color: #ffffff,
+  link-color-light: #707070,
+  main-color: #000000,
+  opposite-color: #ffffff,
+  body-bg-color: #000000,
+);
+
+$current-theme: $light-theme;
+
+@function theme-color($color-name) {
+  @return map.get($current-theme, $color-name);
+}
