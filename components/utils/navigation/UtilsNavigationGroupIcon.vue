@@ -35,14 +35,14 @@ defineProps<Props>();
 <style scoped lang="scss">
 .icon-navigation {
   display: inline-flex;
-  align-items: center;
   gap: 30px;
+  align-items: center;
 }
 
 .icon-link {
-  line-height: 27px;
   display: inline-flex;
   align-items: center;
+  line-height: 27px;
   vertical-align: middle;
 }
 </style>

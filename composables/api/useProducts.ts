@@ -6,7 +6,7 @@ import type { Product } from "~/types/Product";
 type ProductsApiResponse = ApiResponse<Product[]>;
 
 export function useProducts(
-  options: UseFetchOptions<ProductsApiResponse> = {}
+  options: UseFetchOptions<ProductsApiResponse> = {},
 ) {
   const defaults: UseFetchOptions<ProductsApiResponse> = {
     key: "/products",

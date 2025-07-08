@@ -9,7 +9,7 @@ type ProductApiResponse = ApiResponse<Product>;
 
 export function useProduct(
   productId: MaybeRef<string | number | undefined | null>,
-  options: UseFetchOptions<ProductApiResponse> = {}
+  options: UseFetchOptions<ProductApiResponse> = {},
 ) {
   const url = computed(() => {
     const id = unref(productId);

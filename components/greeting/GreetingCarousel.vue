@@ -43,9 +43,9 @@ onMounted(() => {
 <style scoped lang="scss">
 .greeting-loading,
 .greeting-error {
-  text-align: center;
   padding: 40px;
   font-size: 1.2rem;
   color: theme-color("gray-dark-color");
+  text-align: center;
 }
 </style>
