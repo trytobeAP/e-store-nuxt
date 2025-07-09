@@ -33,11 +33,11 @@ const getStoredEmails = (): string[] => {
  * @returns 'success' | 'duplicate' | 'error' в зависимости от результата
  */
 export const addEmailToNewsletter = (
-  emailToAdd: string
+  emailToAdd: string,
 ): "success" | "duplicate" | "error" => {
   if (!import.meta.client) {
     console.warn(
-      "Attempted newsletter subscription outside of client environment."
+      "Attempted newsletter subscription outside of client environment.",
     );
     return "error";
   }
@@ -52,7 +52,7 @@ export const addEmailToNewsletter = (
 
     if (
       emails.some(
-        (storedEmail) => storedEmail.toLowerCase() === normalizedEmail
+        (storedEmail) => storedEmail.toLowerCase() === normalizedEmail,
       )
     ) {
       return "duplicate";
@@ -64,7 +64,7 @@ export const addEmailToNewsletter = (
   } catch (storageError) {
     console.error(
       "Error interacting with localStorage during add:",
-      storageError
+      storageError,
     );
     return "error";
   }

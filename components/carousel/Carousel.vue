@@ -60,7 +60,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onUnmounted, watch, nextTick, type Ref } from "vue";
+import {
+  ref,
+  computed,
+  onMounted,
+  onUnmounted,
+  watch,
+  nextTick,
+  type Ref,
+} from "vue";
 import type { CarouselImage } from "~/types/CarouselImage";
 
 interface Props {
@@ -206,7 +214,7 @@ watch(
     } else {
       stopAutoplay();
     }
-  }
+  },
 );
 
 watch(currentSlideIndex, (newIndex, oldIndex) => {
@@ -239,7 +247,7 @@ watch(
         }
       } else {
         console.warn(
-          "Carousel: props.images watcher - viewportWidth not yet known. Slide index will be set once width is available."
+          "Carousel: props.images watcher - viewportWidth not yet known. Slide index will be set once width is available.",
         );
       }
       startAutoplay();
@@ -248,7 +256,7 @@ watch(
       stopAutoplay();
     }
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 );
 
 watch(viewportWidth, (newWidth, oldWidth) => {
@@ -282,12 +290,12 @@ const updateViewportWidth = () => {
       }
     } else if (newWidth === 0 && viewportWidth.value !== 0) {
       console.warn(
-        "updateViewportWidth: offsetWidth is 0. Carousel might be temporarily hidden."
+        "updateViewportWidth: offsetWidth is 0. Carousel might be temporarily hidden.",
       );
     }
   } else {
     console.warn(
-      "updateViewportWidth: viewportRef not available or not visible."
+      "updateViewportWidth: viewportRef not available or not visible.",
     );
   }
 };
@@ -308,7 +316,7 @@ onMounted(() => {
       resizeObserver.observe(viewportRef.value);
     } else {
       console.warn(
-        "ResizeObserver not available or viewportRef not ready, falling back to window resize for width."
+        "ResizeObserver not available or viewportRef not ready, falling back to window resize for width.",
       );
       window.addEventListener("resize", updateViewportWidth);
     }
@@ -328,8 +336,8 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .carousel-container-wrapper {
   position: relative;
-  overflow: hidden;
   width: 100%;
+  overflow: hidden;
 }
 
 .carousel-viewport {
@@ -340,9 +348,8 @@ onUnmounted(() => {
 .carousel-container {
   position: relative;
   overflow: hidden;
-
-  user-select: none;
   touch-action: pan-y;
+  user-select: none;
 
   @media (max-width: $breakpoints-l) {
     aspect-ratio: 800 / 500;
@@ -364,10 +371,10 @@ onUnmounted(() => {
 }
 
 .no-images-message {
-  text-align: center;
   padding: 40px;
   font-size: 1.2rem;
   color: theme-color("gray-dark-color");
+  text-align: center;
 
   @media (max-width: $breakpoints-m) {
     padding: 25px;
@@ -384,12 +391,12 @@ onUnmounted(() => {
   position: absolute;
   bottom: 15px;
   left: 50%;
-  transform: translateX(-50%);
-  display: flex;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
   padding: 8px 10px;
+  background-color: rgb(0 0 0 / 30%);
   border-radius: 16px;
+  transform: translateX(-50%);
 
   @media (max-width: $breakpoints-m) {
     bottom: 10px;

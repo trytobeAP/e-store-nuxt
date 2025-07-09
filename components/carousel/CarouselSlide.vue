@@ -57,10 +57,10 @@ const formattedPrice = computed(() => {
 
 <style scoped lang="scss">
 .carousel-slide {
+  position: relative;
   flex-shrink: 0;
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
 }
 
@@ -75,12 +75,11 @@ const formattedPrice = computed(() => {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
+  width: 100%;
+  height: 100%;
   padding: 20px;
 
   @media (max-width: $breakpoints-m) {
@@ -88,37 +87,39 @@ const formattedPrice = computed(() => {
   }
 
   @media (max-width: $breakpoints-s) {
-    padding: 10px;
-
     align-items: flex-end;
     justify-content: flex-start;
+    padding: 10px;
   }
 }
 
 .slide-info {
-  color: theme-color("opposite-color");
   max-width: 50%;
-  text-shadow: -1px -1px 0 theme-color("main-color"),
-    1px -1px 0 theme-color("main-color"), -1px 1px 0 theme-color("main-color"),
+  color: theme-color("opposite-color");
+  text-shadow:
+    -1px -1px 0 theme-color("main-color"),
+    1px -1px 0 theme-color("main-color"),
+    -1px 1px 0 theme-color("main-color"),
     1px 1px 0 theme-color("main-color");
 
   .slide-title {
+    margin-bottom: 0.1em;
     font-size: 2rem;
     font-weight: $fw-medium;
-    margin-bottom: 0.1em;
     line-height: 42px;
   }
 
   .slide-price {
+    margin-bottom: 0.5em;
     font-size: 1.5rem;
     font-weight: $fw-medium;
-    margin-bottom: 0.5em;
   }
 
   @media (max-width: $breakpoints-l) {
     .slide-title {
       font-size: 1.75rem;
     }
+
     .slide-price {
       font-size: 1.25rem;
     }
@@ -127,20 +128,22 @@ const formattedPrice = computed(() => {
   @media (max-width: $breakpoints-m) {
     max-width: 70%;
     line-height: 32px;
+
     .slide-title {
-      font-size: 1.5rem;
       margin-bottom: 0.1em;
+      font-size: 1.5rem;
     }
+
     .slide-price {
-      font-size: 1.1rem;
       margin-bottom: 0.3em;
+      font-size: 1.1rem;
     }
   }
 
   @media (max-width: $breakpoints-s) {
     max-width: 85%;
-    margin-left: 0;
     margin-right: 0;
+    margin-left: 0;
     text-align: left;
 
     .slide-title {
@@ -148,11 +151,13 @@ const formattedPrice = computed(() => {
       width: auto;
       margin-bottom: 0.9em;
     }
+
     .slide-price {
       display: block;
       width: auto;
       margin-bottom: 0.9em;
     }
+
     .slide-view-button {
       display: block;
       width: auto;
@@ -165,22 +170,22 @@ const formattedPrice = computed(() => {
   text-shadow: none;
 
   @media (max-width: $breakpoints-l) {
-    height: 38px;
     width: 140px;
+    height: 38px;
     font-size: 0.9rem;
   }
 
   @media (max-width: $breakpoints-m) {
-    height: 32px;
     width: 120px;
-    font-size: 0.75rem;
+    height: 32px;
     margin-bottom: 2rem;
+    font-size: 0.75rem;
   }
 
   @media (max-width: $breakpoints-s) {
-    height: 32px;
     width: 100%;
     max-width: 120px;
+    height: 32px;
     font-size: 0.8rem;
   }
 }

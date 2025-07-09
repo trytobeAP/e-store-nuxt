@@ -24,12 +24,11 @@ const buttonClasses = computed(() => ({
 
 <style lang="scss" scoped>
 action-btn-primary {
+  width: 288px;
+  height: 32px;
   font-weight: 500;
   color: theme-color("opposite-color");
   background-color: theme-color("main-color");
-
-  height: 32px;
-  width: 288px;
   border: 4px solid black;
   border-radius: 4px;
 
@@ -42,12 +41,11 @@ action-btn-primary {
 }
 
 action-btn-secondary {
+  width: 288px;
+  height: 32px;
   font-weight: 500;
   color: theme-color("main-color");
   background-color: theme-color("opposite-color");
-
-  height: 32px;
-  width: 288px;
   border: 4px solid black;
   border-radius: 4px;
 
@@ -60,20 +58,21 @@ action-btn-secondary {
 }
 
 .info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 52px;
+  padding: 0 1em;
   font-weight: $fw-bold;
   color: theme-color("opposite-color");
+  text-align: center;
   background-color: theme-color("main-color");
-
-  height: 52px;
-  width: 192px;
   border: 2px solid theme-color("opposite-color");
   border-radius: 6px;
-  padding: 0 1em;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 
   &:hover,
   &:focus,
@@ -81,6 +80,7 @@ action-btn-secondary {
     color: theme-color("main-color");
     background-color: theme-color("opposite-color");
   }
+
   &:focus-visible {
     outline: 2px solid theme-color("accent-color");
     outline-offset: 2px;

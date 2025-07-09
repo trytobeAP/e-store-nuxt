@@ -4,7 +4,7 @@ import type { ImageSourceConfig } from "~/types/ImageSourceConfig";
 import type { UseCarouselImagesReturn } from "~/types/UseCarouselImageReturn";
 
 export default function useCarouselImages(
-  config: ImageSourceConfig
+  config: ImageSourceConfig,
 ): UseCarouselImagesReturn {
   const images = ref<CarouselImage[]>([]);
   const isLoading = ref(false);

@@ -6,10 +6,10 @@
 
 <style scoped lang="scss">
 .watch-carousel-container {
-  max-width: 1000px;
   width: 100%;
-  aspect-ratio: 1000 / 600;
+  max-width: 1000px;
   height: auto;
+  aspect-ratio: 1000 / 600;
   margin: 20px auto;
   border-radius: 16px;
 }

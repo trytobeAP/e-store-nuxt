@@ -1,22 +1,22 @@
 <template>
   <form
     class="newsletter-form"
-    @submit.prevent="attemptSubmit"
     novalidate
+    @submit.prevent="attemptSubmit"
   >
     <div class="input-wrapper">
       <input
-        v-model="values.email"
         id="newsletter-email"
+        v-model="values.email"
         type="email"
         name="newsletter-email"
         class="newsletter-input"
         placeholder="Give an email, get the newsletter."
         required
         aria-label="Email for newsletter"
-        @blur="() => validateField('email')"
         :aria-invalid="!!errors.email"
         aria-describedby="newsletter-email-error"
+        @blur="() => validateField('email')"
       />
       <span
         v-if="errors.email"
@@ -65,7 +65,7 @@ const clearStatusMessageTimeout = () => {
 const performSubscription = (formValues: { email: string }) => {
   console.log(
     "Validation passed, attempting subscription for:",
-    formValues.email
+    formValues.email,
   );
   clearStatusMessageTimeout();
 
@@ -103,32 +103,31 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .newsletter-form {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
-  max-width: 400px;
-  min-width: 300px;
   width: 100%;
-  border-bottom: 1px solid theme-color(link-color-light);
+  min-width: 300px;
+  max-width: 400px;
   overflow: visible;
+  border-bottom: 1px solid theme-color(link-color-light);
 }
 
 .input-wrapper {
-  flex-grow: 1;
   position: relative;
+  flex-grow: 1;
   padding-bottom: 10px;
 }
 
 .newsletter-input {
+  display: block;
+  width: 100%;
   font-family: "DM Sans", sans-serif;
   font-size: 1rem;
-  width: 100%;
-  display: block;
-
-  border: none;
+  color: theme-color(opposite-color);
   outline: none;
   background-color: theme-color(main-color);
-  color: theme-color(opposite-color);
+  border: none;
 
   &::placeholder {
     font-family: "DM Sans", sans-serif;
@@ -141,22 +140,22 @@ onUnmounted(() => {
   position: absolute;
   bottom: -30px;
   left: 0;
-  color: theme-color(error-color);
   font-size: 0.8rem;
+  color: theme-color(error-color);
   white-space: nowrap;
 }
 
 .newsletter-submit {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  padding-left: 10px;
   padding-bottom: 10px;
-  border: none;
-  background-color: transparent;
+  padding-left: 10px;
   color: theme-color(link-color-light);
   cursor: pointer;
-  flex-shrink: 0;
+  background-color: transparent;
+  border: none;
 
   &:active {
     filter: brightness(80%);

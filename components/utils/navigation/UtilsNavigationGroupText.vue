@@ -32,8 +32,8 @@ defineProps<Props>();
 <style scoped lang="scss">
 .text-navigation {
   display: inline-flex;
-  align-items: center;
   gap: 40px;
+  align-items: center;
 }
 
 .text-link {

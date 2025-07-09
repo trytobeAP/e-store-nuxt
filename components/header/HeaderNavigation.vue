@@ -37,15 +37,15 @@ const iconNavItems: IconNavItem[] = [
 <style scoped lang="scss">
 .header-navigation-container {
   display: flex;
-  align-items: flex-start;
   gap: 48px;
+  align-items: flex-start;
 }
 
 .separator {
   width: 1px;
   height: 18px;
-  background-color: theme-color("opposite-color");
   margin-top: 4px;
+  background-color: theme-color("opposite-color");
 }
 
 .header-text-nav {

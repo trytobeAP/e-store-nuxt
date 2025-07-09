@@ -14,7 +14,7 @@
       <FooterNavigationLicense />
       <UtilsNavigationGroupIcon
         class="footer-icon-nav"
-        :items="IconNavItems"
+        :items="iconNavItems"
       />
     </div>
   </footer>
@@ -34,7 +34,7 @@ const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
   linkSlug: item.split(" ").join("-"),
 }));
 
-const IconNavItems: IconNavItem[] = [
+const iconNavItems: IconNavItem[] = [
   { linkSlug: "facebook", iconName: "uim:facebook-f" },
   { linkSlug: "instagram", iconName: "mdi:instagram" },
   { linkSlug: "twitter", iconName: "mdi:twitter" },
@@ -50,10 +50,10 @@ const IconNavItems: IconNavItem[] = [
 
 .content > hr.divider {
   width: 100%;
+  height: 1px;
+  margin: 0;
   border: none;
   border-top: 1px solid theme-color(gray-color);
-  margin: 0;
-  height: 1px;
 }
 
 .newsletter-wrapper {

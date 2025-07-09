@@ -1,7 +1,7 @@
 import { reactive, ref, computed } from "vue";
 
 interface ValidationRule {
-  validate: (value: any, allValues: FormValues) => true | string;
+  validate: (value: string | null, allValues: FormValues) => true | string;
 }
 interface FormValues {
   name: string;
@@ -25,10 +25,10 @@ type FormRules = { [K in keyof Partial<FormValues>]: ValidationRule };
 
 export default function useForm(initialValues?: Partial<FormValues>) {
   const activeFieldKeys = new Set<keyof FormValues>(
-    initialValues ? (Object.keys(initialValues) as (keyof FormValues)[]) : []
+    initialValues ? (Object.keys(initialValues) as (keyof FormValues)[]) : [],
   );
 
-  const values = reactive<FormValues>({
+  const defaultValues: FormValues = {
     name: "",
     fullName: "",
     email: "",
@@ -44,17 +44,22 @@ export default function useForm(initialValues?: Partial<FormValues>) {
     streetAddress: "",
     postcode: "",
     city: "",
+  };
+
+  const values = reactive<FormValues>({
+    ...defaultValues,
+    ...initialValues,
   });
-  if (initialValues) {
-    for (const key of activeFieldKeys) {
-      if (initialValues[key] !== undefined) {
-        values[key] = initialValues[key] as any;
-      }
-    }
-  }
 
   const errors = reactive<FormErrors>({});
   const isSubmitting = ref(false);
+
+  const setFieldValue = <K extends keyof FormValues>(
+    key: K,
+    value: FormValues[K],
+  ) => {
+    values[key] = value;
+  };
 
   const rules: FormRules = {
     name: { validate: (value) => (!value ? "Name is required." : true) },
@@ -99,13 +104,13 @@ export default function useForm(initialValues?: Partial<FormValues>) {
         try {
           new URL(value);
           return true;
-        } catch (_) {
+        } catch {
           return "Please enter a valid website URL.";
         }
       },
     },
-    couponCode: { validate: (value) => true },
-    companyName: { validate: (value) => true },
+    couponCode: { validate: (_value) => true },
+    companyName: { validate: (_value) => true },
     country: {
       validate: (value) => (!value ? "Please select a country." : true),
     },
@@ -122,7 +127,7 @@ export default function useForm(initialValues?: Partial<FormValues>) {
   };
 
   const hasErrors = computed(() =>
-    Object.values(errors).some((error) => error != null)
+    Object.values(errors).some((error) => error != null),
   );
   const isValid = computed(() => !hasErrors.value);
 
@@ -158,18 +163,17 @@ export default function useForm(initialValues?: Partial<FormValues>) {
   };
 
   const resetForm = () => {
+    const resetState = { ...defaultValues, ...initialValues };
+
     for (const fieldName of activeFieldKeys) {
-      const defaultValue =
-        initialValues?.[fieldName] ??
-        (typeof values[fieldName] === "string" ? "" : null);
-      values[fieldName] = defaultValue as any;
+      setFieldValue(fieldName, resetState[fieldName]);
       errors[fieldName] = null;
     }
     isSubmitting.value = false;
   };
 
   const submitForm = async (
-    onSubmit: (formValues: FormValues) => Promise<void> | void
+    onSubmit: (formValues: FormValues) => Promise<void> | void,
   ) => {
     if (isSubmitting.value) return;
     const isFormValid = validateForm();
@@ -178,7 +182,18 @@ export default function useForm(initialValues?: Partial<FormValues>) {
       isSubmitting.value = true;
       try {
         const relevantValues = {} as Partial<FormValues>;
-        activeFieldKeys.forEach((key) => (relevantValues[key] = values[key]));
+
+        const setRelevantValue = <K extends keyof FormValues>(
+          key: K,
+          value: FormValues[K],
+        ) => {
+          relevantValues[key] = value;
+        };
+
+        activeFieldKeys.forEach((key) => {
+          setRelevantValue(key, values[key]);
+        });
+
         await onSubmit(relevantValues as FormValues);
       } catch (submitError) {
         console.error("Form submission callback failed:", submitError);

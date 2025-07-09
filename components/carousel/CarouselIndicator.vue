@@ -21,13 +21,15 @@ defineEmits(["select"]);
 .carousel-indicator {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  padding: 0;
+  margin: 0 5px;
+  cursor: pointer;
   background-color: theme-color("gray-color");
   border: 1px solid transparent;
-  margin: 0 5px;
-  padding: 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease,
+  border-radius: 50%;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
     border-color 0.3s ease;
 
   &.is-active {
@@ -49,6 +51,7 @@ defineEmits(["select"]);
     &.is-active {
       transform: scale(1.9);
     }
+
     &:focus-visible {
       outline-offset: 1.5px;
     }
@@ -62,6 +65,7 @@ defineEmits(["select"]);
     &.is-active {
       transform: scale(1.8);
     }
+
     &:focus-visible {
       outline-offset: 1px;
     }

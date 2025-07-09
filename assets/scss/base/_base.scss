@@ -1,8 +1,8 @@
 @use "../variables" as vars;
 
 body {
-  margin: 0;
   padding: 0;
+  margin: 0;
   font-family: "DM Sans", sans-serif;
   background-color: vars.theme-color("body-bg-color");
 }
@@ -14,31 +14,31 @@ a:hover {
 }
 
 h1 {
-  font-weight: vars.$fw-medium;
   font-size: 33px;
+  font-weight: vars.$fw-medium;
 }
 h2 {
-  font-weight: vars.$fw-regular;
   font-size: 26px;
+  font-weight: vars.$fw-regular;
   line-height: 35px;
 }
 h3 {
-  font-weight: vars.$fw-regular;
   font-size: 20px;
+  font-weight: vars.$fw-regular;
   line-height: 26px;
 }
 h4 {
-  font-weight: vars.$fw-medium;
   font-size: 20px;
+  font-weight: vars.$fw-medium;
   line-height: 20px;
 }
 h5 {
-  font-weight: vars.$fw-regular;
   font-size: 16px;
+  font-weight: vars.$fw-regular;
   line-height: 27px;
 }
 
 .body-large {
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
 }

@@ -1,3 +1,4 @@
+import { useRuntimeConfig, useFetch } from "#app";
 import type { UseFetchOptions } from "#app";
 import { defu } from "defu";
 import { unref } from "vue";
@@ -5,7 +6,7 @@ import type { MaybeRef, Ref } from "vue";
 
 export function useApiFetch<T>(
   url: MaybeRef<string | undefined | null>,
-  options: UseFetchOptions<T> = {}
+  options: UseFetchOptions<T> = {},
 ) {
   const config = useRuntimeConfig();
   const defaultApiBaseFromConfig = config.public.apiBase ?? "/";
