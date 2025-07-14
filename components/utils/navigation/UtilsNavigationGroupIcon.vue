@@ -7,8 +7,8 @@
       v-for="item in items"
       :key="item.linkSlug"
       :link="`/${item.linkSlug}`"
-      class="nav-link icon-link"
-      :class="item.classes"
+      class="icon-link-group"
+      :class="[linkClass, 'text-link', item.classes]"
     >
       <Icon
         :name="item.iconName"
@@ -27,9 +27,12 @@ interface IconNavItem {
 
 interface Props {
   items: IconNavItem[];
+  linkClass?: string;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  linkClass: "nav-link",
+});
 </script>
 
 <style scoped lang="scss">
@@ -39,7 +42,7 @@ defineProps<Props>();
   align-items: center;
 }
 
-.icon-link {
+.icon-link-group {
   display: inline-flex;
   align-items: center;
   line-height: 27px;

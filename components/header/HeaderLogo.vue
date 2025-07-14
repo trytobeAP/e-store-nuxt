@@ -7,11 +7,12 @@
 
 <style scoped lang="scss">
 .logo {
-  margin-bottom: 10px;
+  margin-bottom: 0;
   font-family: "Allerta Stencil", sans-serif;
-  font-size: 35px;
-  font-weight: 400;
-  line-height: 40px;
+  font-size: clamp(24px, 8vw, 35px);
+  font-weight: $fw-regular;
+  line-height: 1;
+  word-break: break-all;
 }
 
 .logo-1 {

@@ -26,7 +26,7 @@ const buttonClasses = computed(() => ({
 action-btn-primary {
   width: 288px;
   height: 32px;
-  font-weight: 500;
+  font-weight: $fw-medium;
   color: theme-color("opposite-color");
   background-color: theme-color("main-color");
   border: 4px solid black;
@@ -43,7 +43,7 @@ action-btn-primary {
 action-btn-secondary {
   width: 288px;
   height: 32px;
-  font-weight: 500;
+  font-weight: $fw-medium;
   color: theme-color("main-color");
   background-color: theme-color("opposite-color");
   border: 4px solid black;

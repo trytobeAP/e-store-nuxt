@@ -38,21 +38,44 @@ const iconNavItems: IconNavItem[] = [
 .header-navigation-container {
   display: flex;
   gap: 48px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .separator {
   width: 1px;
   height: 18px;
-  margin-top: 4px;
   background-color: theme-color("opposite-color");
+}
+
+:deep(.nav-link) {
+  position: relative;
+  padding-bottom: 5px;
+  border-bottom: none;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: theme-color("link-color");
+    opacity: 0;
+    transition: none;
+  }
+
+  &.router-link-active::after,
+  &:hover::after,
+  &:active::after {
+    opacity: 1;
+  }
 }
 
 .header-text-nav {
   gap: 64px;
 
   :deep(.text-link) {
-    font-weight: 500;
+    font-weight: $fw-medium;
   }
 }
 

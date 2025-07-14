@@ -2,6 +2,7 @@
   <form
     class="newsletter-form"
     novalidate
+    :style="formStyle"
     @submit.prevent="attemptSubmit"
   >
     <div class="input-wrapper">
@@ -30,7 +31,7 @@
       class="newsletter-submit"
       type="submit"
       aria-label="Subscribe to newsletter"
-      :disabled="isSubmitting"
+      :disabled="isSubmitting || !isAgreementAccepted"
     >
       <Icon
         name="material-symbols:arrow-right-alt-rounded"
@@ -43,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from "vue";
+import { ref, onUnmounted, computed } from "vue";
 import useForm from "~/composables/forms/useForm";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
 
@@ -51,6 +52,21 @@ const { values, errors, isSubmitting, validateField, submitForm, resetForm } =
   useForm({
     email: "",
   });
+
+interface Props {
+  minWidth?: string;
+  maxWidth?: string;
+  isAgreementAccepted?: boolean;
+}
+
+const props = defineProps<Props>();
+
+const formStyle = computed(() => {
+  return {
+    minWidth: props.minWidth ?? "282px",
+    maxWidth: props.maxWidth,
+  };
+});
 
 const statusMessage = ref("");
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -107,8 +123,6 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   width: 100%;
-  min-width: 300px;
-  max-width: 400px;
   overflow: visible;
   border-bottom: 1px solid theme-color(link-color-light);
 }
