@@ -20,8 +20,21 @@
 </template>
 
 <script setup lang="ts">
+type InputType =
+  | "text"
+  | "number"
+  | "password"
+  | "email"
+  | "tel"
+  | "url"
+  | "search"
+  | "date"
+  | "time"
+  | "datetime-local"
+  | "file";
+
 interface Props {
-  type?: string;
+  type?: InputType;
   placeholder?: string;
   iconName?: string;
 }
