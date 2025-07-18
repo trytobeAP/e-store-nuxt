@@ -7,8 +7,7 @@
       v-for="item in items"
       :key="item.linkSlug"
       :link="`/${item.linkSlug}`"
-      class="nav-link text-link"
-      :class="item.classes"
+      :class="[linkClass, 'text-link', item.classes]"
     >
       {{ item.content }}
     </UtilsNavigationItem>
@@ -24,9 +23,12 @@ interface TextNavItem {
 
 interface Props {
   items: TextNavItem[];
+  linkClass?: string;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  linkClass: "nav-link",
+});
 </script>
 
 <style scoped lang="scss">

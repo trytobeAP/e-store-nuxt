@@ -1,59 +1,108 @@
 <template>
-  <footer class="content">
-    <hr class="divider" />
-    <div class="d-flex justify-between footer-row">
-      <UtilsNavigationGroupText
-        class="footer-text-nav"
-        :items="textNavItems"
-      />
-      <div class="newsletter-wrapper">
-        <UtilsNewsletterForm />
+  <footer>
+    <BaseDivider />
+
+    <div class="desktop-footer">
+      <div class="d-flex justify-between footer-row">
+        <UtilsNavigationGroupText
+          class="footer-text-nav"
+          :items="desktopNavItems"
+          link-class="info-link"
+        />
+        <div class="newsletter-wrapper">
+          <UtilsNewsletterForm max-width="100%" />
+        </div>
+      </div>
+      <div class="d-flex justify-between footer-row">
+        <FooterNavigationLicense class="footer-license-desktop" />
+        <UtilsNavigationGroupIcon
+          class="footer-icon-nav"
+          :items="socialItems"
+          link-class="info-link"
+        />
       </div>
     </div>
-    <div class="d-flex justify-between footer-row">
-      <FooterNavigationLicense />
-      <UtilsNavigationGroupIcon
-        class="footer-icon-nav"
-        :items="iconNavItems"
-      />
+
+    <div class="mobile-footer">
+      <div class="footer-section">
+        <UtilsNewsletterForm
+          max-width="400px"
+          :is-agreement-accepted="agreedToTerms"
+        />
+        <BaseCheckbox v-model="agreedToTerms">
+          i agree to the website's terms and conditions
+        </BaseCheckbox>
+      </div>
+
+      <div class="footer-section">
+        <UtilsNavigationGroupText
+          class="footer-nav-mobile"
+          :items="desktopNavItems"
+          link-class="info-link"
+        />
+      </div>
+
+      <div class="footer-section">
+        <FooterSocials />
+      </div>
+
+      <FooterNavigationLicense class="footer-license-mobile" />
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import type { TextNavItem, IconNavItem } from "~/types/NavItems";
+import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
+import FooterSocials from "~/components/footer/FooterSocials.vue";
+import BaseDivider from "~/components/base/BaseDivider.vue";
 
-const initialTextItems = [
+const agreedToTerms = ref(false);
+
+const desktopNavItems: TextNavItem[] = [
   "contact",
   "terms of services",
   "shipping and returns",
-];
-
-const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
+].map((item) => ({
   content: item.toUpperCase(),
   linkSlug: item.split(" ").join("-"),
 }));
 
-const iconNavItems: IconNavItem[] = [
-  { linkSlug: "facebook", iconName: "uim:facebook-f" },
+const socialItems: IconNavItem[] = [
+  { linkSlug: "facebook", iconName: "ri:facebook-fill" },
   { linkSlug: "instagram", iconName: "mdi:instagram" },
   { linkSlug: "twitter", iconName: "mdi:twitter" },
 ];
 </script>
 
 <style scoped lang="scss">
-.content {
+.desktop-footer {
   display: flex;
   flex-direction: column;
   gap: 48px;
+  margin-top: 60px;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    display: none;
+  }
 }
 
-.content > hr.divider {
-  width: 100%;
-  height: 1px;
-  margin: 0;
-  border: none;
-  border-top: 1px solid theme-color(gray-color);
+.mobile-footer {
+  display: none;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 32px;
+  }
+}
+
+.footer-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
 }
 
 .newsletter-wrapper {
@@ -61,31 +110,56 @@ const iconNavItems: IconNavItem[] = [
 }
 
 .footer-text-nav {
+  display: flex;
   gap: 40px;
 
   :deep(.text-link) {
-    font-weight: 400;
-    color: theme-color("link-color-light");
+    font-size: 14px;
+    font-weight: $fw-regular;
 
     &:hover,
     &:focus,
     &:active {
       color: theme-color("link-color");
+    }
+  }
+
+  @media (min-width: $breakpoints-m) and (max-width: ($breakpoints-l - 1px)) {
+    :deep(&.text-navigation) {
+      gap: 16px !important;
+    }
+
+    :deep(.text-link) {
+      font-size: 13px;
+      white-space: nowrap;
     }
   }
 }
 
 .footer-icon-nav {
+  display: flex;
   gap: 30px;
+}
 
-  :deep(.icon-link) {
-    color: theme-color("link-color-light");
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    &:hover,
-    &:focus,
-    &:active {
-      color: theme-color("link-color");
-    }
+.footer-nav-mobile {
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+
+  :deep(.text-link) {
+    font-size: 14px;
+    font-weight: $fw-regular;
   }
+}
+
+.footer-license-mobile {
+  font-size: 14px;
+  text-align: center;
 }
 </style>

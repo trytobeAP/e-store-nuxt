@@ -8,6 +8,14 @@
 
 <style lang="scss">
 .content {
-  margin-top: 64px;
+  margin-top: 16px;
+
+  @media (min-width: $breakpoints-m) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $breakpoints-l) {
+    margin-top: 64px;
+  }
 }
 </style>
