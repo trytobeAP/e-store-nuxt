@@ -78,14 +78,67 @@ const socialItems: IconNavItem[] = [
 
 <style scoped lang="scss">
 .desktop-footer {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 60px;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    display: none;
+  }
 }
 
 .mobile-footer {
+  display: none;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 32px;
+  }
+}
+
+.footer-row {
   display: flex;
-  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.newsletter-wrapper {
+  margin-left: auto;
+}
+
+.footer-text-nav {
+  display: flex;
   gap: 40px;
-  margin-top: 32px;
+
+  :deep(.text-link) {
+    font-size: 14px;
+    font-weight: $fw-regular;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: theme-color("link-color");
+    }
+  }
+
+  @media (min-width: $breakpoints-m) and (max-width: ($breakpoints-l - 1px)) {
+    :deep(&.text-navigation) {
+      gap: 16px !important;
+    }
+
+    :deep(.text-link) {
+      font-size: 13px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.footer-icon-nav {
+  display: flex;
+  gap: 30px;
 }
 
 .footer-section {
@@ -108,68 +161,5 @@ const socialItems: IconNavItem[] = [
 .footer-license-mobile {
   font-size: 14px;
   text-align: center;
-}
-
-@media (min-width: $breakpoints-l) {
-  .desktop-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-    margin-top: 60px;
-  }
-
-  .mobile-footer {
-    display: none;
-  }
-
-  .footer-row {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-  }
-
-  .newsletter-wrapper {
-    margin-left: auto;
-  }
-
-  .footer-text-nav {
-    display: flex;
-    gap: 40px;
-
-    :deep(.text-link) {
-      font-weight: $fw-regular;
-
-      &:hover,
-      &:focus,
-      &:active {
-        color: theme-color("link-color");
-      }
-    }
-  }
-
-  .footer-icon-nav {
-    display: flex;
-    gap: 30px;
-  }
-}
-
-@media (min-width: $breakpoints-m) and (max-width: ($breakpoints-l - 1px)) {
-  .footer-text-nav {
-    :deep(.footer-text-nav.text-navigation) {
-      gap: 16px !important;
-    }
-
-    :deep(.text-link) {
-      font-size: 13px;
-      white-space: nowrap;
-    }
-  }
-}
-
-@media (min-width: $breakpoints-l) {
-  .footer-text-nav :deep(.text-link) {
-    gap: 16px;
-    font-size: 14px;
-  }
 }
 </style>

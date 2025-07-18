@@ -85,17 +85,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 import BaseDivider from "~/components/base/BaseDivider.vue";
 import HeaderLogo from "~/components/header/HeaderLogo.vue";
 import BaseInput from "~/components/base/BaseInput.vue";
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean;
 }>();
 
-defineEmits(["close"]);
+const emit = defineEmits(["close"]);
+
+const mobileBreakpoint = 768;
+
+const handleResize = () => {
+  if (typeof window !== "undefined") {
+    if (props.isOpen && window.innerWidth >= mobileBreakpoint) {
+      emit("close");
+    }
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+});
 
 const searchQuery = ref("");
 

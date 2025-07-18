@@ -46,7 +46,53 @@ defineEmits(["open-sidebar"]);
 }
 
 .desktop-nav {
+  display: flex;
+
+  :deep(.header-navigation-container) {
+    gap: 48px;
+  }
+
+  :deep(.header-text-nav) {
+    gap: 64px;
+  }
+
+  :deep(.header-icon-nav) {
+    gap: 38px;
+  }
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    :deep(.header-navigation-container) {
+      gap: 32px;
+    }
+
+    :deep(.header-text-nav) {
+      gap: 40px;
+    }
+
+    :deep(.header-icon-nav) {
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    display: none;
+  }
+}
+
+.mobile-nav {
   display: none;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    :deep(.nav-link) {
+      padding-bottom: 0;
+      line-height: 1;
+      border-bottom: none;
+    }
+  }
 }
 
 .burger-menu-btn {
@@ -62,62 +108,6 @@ defineEmits(["open-sidebar"]);
 
   &:focus-visible {
     border-radius: 4px;
-  }
-}
-
-.mobile-nav {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-
-  :deep(.nav-link) {
-    padding-bottom: 0;
-    line-height: 1;
-    border-bottom: none;
-  }
-}
-
-@media (min-width: $breakpoints-m) and (max-width: ($breakpoints-l - 1px)) {
-  .desktop-nav {
-    display: flex;
-  }
-
-  .mobile-nav {
-    display: none;
-  }
-
-  .desktop-nav :deep(.header-navigation-container) {
-    gap: 32px;
-  }
-
-  .desktop-nav :deep(.header-text-nav) {
-    gap: 40px;
-  }
-
-  .desktop-nav :deep(.header-icon-nav) {
-    gap: 24px;
-  }
-}
-
-@media (min-width: $breakpoints-l) {
-  .desktop-nav {
-    display: flex;
-  }
-
-  .mobile-nav {
-    display: none;
-  }
-
-  .desktop-nav :deep(.header-navigation-container) {
-    gap: 48px;
-  }
-
-  .desktop-nav :deep(.header-text-nav) {
-    gap: 64px;
-  }
-
-  .desktop-nav :deep(.header-icon-nav) {
-    gap: 38px;
   }
 }
 </style>

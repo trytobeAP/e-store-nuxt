@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <HeaderComponent @open-sidebar="isSidebarOpen = true" />
+    <HeaderComponent @open-sidebar="openSidebar" />
 
     <main>
       <slot />
@@ -10,7 +10,7 @@
 
     <AppSidebar
       :is-open="isSidebarOpen"
-      @close="isSidebarOpen = false"
+      @close="closeSidebar"
     />
   </div>
 </template>
@@ -20,4 +20,11 @@ import { ref } from "vue";
 import AppSidebar from "~/components/layout/AppSidebar.vue";
 
 const isSidebarOpen = ref(false);
+const openSidebar = () => {
+  isSidebarOpen.value = true;
+};
+
+const closeSidebar = () => {
+  isSidebarOpen.value = false;
+};
 </script>

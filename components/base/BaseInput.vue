@@ -11,18 +11,16 @@
       aria-hidden="true"
     />
     <input
-      :value="modelValue"
+      v-model="model"
+      class="base-input"
       :type="type"
       :placeholder="placeholder"
-      class="base-input"
-      @input="onInput"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  modelValue: string | number;
   type?: string;
   placeholder?: string;
   iconName?: string;
@@ -34,12 +32,7 @@ withDefaults(defineProps<Props>(), {
   iconName: "",
 });
 
-const emit = defineEmits(["update:modelValue"]);
-
-const onInput = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  emit("update:modelValue", target.value);
-};
+const model = defineModel<string | number>();
 </script>
 
 <style scoped lang="scss">

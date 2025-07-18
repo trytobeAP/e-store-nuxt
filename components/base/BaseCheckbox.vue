@@ -1,10 +1,9 @@
 <template>
   <label class="checkbox-wrapper">
     <input
+      v-model="model"
       type="checkbox"
-      :checked="modelValue"
       class="checkbox-input"
-      @change="onChange"
     />
     <span class="checkbox-box" />
     <span class="checkbox-label">
@@ -14,18 +13,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  modelValue: boolean;
-}
-
-defineProps<Props>();
-
-const emit = defineEmits(["update:modelValue"]);
-
-const onChange = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  emit("update:modelValue", target.checked);
-};
+const model = defineModel<boolean>();
 </script>
 
 <style scoped lang="scss">
