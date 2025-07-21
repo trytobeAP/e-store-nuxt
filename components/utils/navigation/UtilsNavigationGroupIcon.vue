@@ -6,8 +6,8 @@
     <UtilsNavigationItem
       v-for="item in items"
       :key="item.linkSlug"
-      :link="`/${item.linkSlug}`"
       class="icon-link-group"
+      :link="item.linkSlug"
       :class="[linkClass, 'text-link', item.classes]"
     >
       <Icon

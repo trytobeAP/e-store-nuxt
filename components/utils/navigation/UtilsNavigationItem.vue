@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="link"
+    :to="resolvedLink"
     class="item"
   >
     <slot />
@@ -8,8 +8,25 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ link?: string }>(), {
+import { computed } from "vue";
+
+const props = withDefaults(defineProps<{ link?: string }>(), {
   link: "/",
+});
+
+const resolvedLink = computed(() => {
+  if (!props.link) {
+    return "/";
+  }
+
+  const isExternal =
+    props.link.startsWith("http") || props.link.startsWith("//");
+
+  if (isExternal) {
+    return props.link;
+  }
+
+  return props.link.startsWith("/") ? props.link : `/${props.link}`;
 });
 </script>
 
