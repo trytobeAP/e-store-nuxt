@@ -31,6 +31,6 @@ const closeSidebar = () => {
 
 <style lang="scss" scoped>
 .page-contant-slot {
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
 }
 </style>

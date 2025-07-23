@@ -373,7 +373,7 @@ onUnmounted(() => {
 .no-images-message {
   padding: 40px;
   font-size: 1.2rem;
-  color: theme-color("gray-dark-color");
+  color: vars.theme-color("gray-dark-color");
   text-align: center;
 
   @media (max-width: vars.$breakpoints-m) {

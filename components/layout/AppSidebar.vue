@@ -168,7 +168,7 @@ const secondaryNavItems: IconNavItem[] = [
   width: 100%;
   height: 100%;
   padding: 24px;
-  background-color: theme-color("body-bg-color");
+  background-color: vars.theme-color("body-bg-color");
 }
 
 .sidebar-header {
@@ -194,7 +194,7 @@ const secondaryNavItems: IconNavItem[] = [
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
 }
 
 .close-btn {
@@ -222,7 +222,7 @@ const secondaryNavItems: IconNavItem[] = [
   align-items: center;
   font-size: 18px;
   font-weight: vars.$fw-medium;
-  color: theme-color("link-color");
+  color: vars.theme-color("link-color");
   text-decoration: none;
 }
 

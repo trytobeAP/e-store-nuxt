@@ -100,7 +100,7 @@ defineEmits(["open-sidebar"]);
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
   cursor: pointer;
   outline: none;
   background-color: transparent;

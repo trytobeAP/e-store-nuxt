@@ -16,10 +16,10 @@
 }
 
 .logo-1 {
-  color: theme-color("accent-color");
+  color: vars.theme-color("accent-color");
 }
 
 .logo-2 {
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
 }
 </style>

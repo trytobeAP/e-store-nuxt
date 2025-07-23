@@ -37,7 +37,7 @@ const model = defineModel<boolean>();
   flex-shrink: 0;
   width: 14px;
   height: 14px;
-  border: 1px solid theme-color("gray-dark-color");
+  border: 1px solid vars.theme-color("gray-dark-color");
   border-radius: 2px;
 }
 
@@ -47,13 +47,13 @@ const model = defineModel<boolean>();
   width: 5px;
   height: 10px;
   content: "";
-  border: solid theme-color("opposite-color");
+  border: solid vars.theme-color("opposite-color");
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 
 .checkbox-label {
   font-size: 14px;
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
 }
 </style>

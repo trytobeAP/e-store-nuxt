@@ -24,7 +24,7 @@ defineEmits(["select"]);
   padding: 0;
   margin: 0 5px;
   cursor: pointer;
-  background-color: theme-color("gray-color");
+  background-color: vars.theme-color("gray-color");
   border: 1px solid transparent;
   border-radius: 50%;
   transition:
@@ -34,12 +34,12 @@ defineEmits(["select"]);
 
   &.is-active {
     background-color: transparent;
-    border-color: theme-color("gray-color");
+    border-color: vars.theme-color("gray-color");
     transform: scale(2);
   }
 
   &:focus-visible {
-    outline: 2px solid theme-color("gray-color");
+    outline: 2px solid vars.theme-color("gray-color");
     outline-offset: 2px;
   }
 

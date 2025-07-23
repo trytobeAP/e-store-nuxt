@@ -44,7 +44,7 @@ const iconNavItems: IconNavItem[] = [
 .separator {
   width: 1px;
   height: 18px;
-  background-color: theme-color("opposite-color");
+  background-color: vars.theme-color("opposite-color");
 }
 
 :deep(.nav-link) {
@@ -59,7 +59,7 @@ const iconNavItems: IconNavItem[] = [
     width: 100%;
     height: 2px;
     content: "";
-    background-color: theme-color("link-color");
+    background-color: vars.theme-color("link-color");
     opacity: 0;
     transition: none;
   }

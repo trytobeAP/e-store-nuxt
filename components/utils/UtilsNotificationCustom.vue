@@ -27,8 +27,8 @@ defineProps<{
   max-width: 300px;
   padding: 10px 20px;
   font-size: 0.9rem;
-  color: theme-color(main-color);
-  background-color: theme-color(opposite-color);
+  color: vars.theme-color(main-color);
+  background-color: vars.theme-color(opposite-color);
   border-radius: 5px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
