@@ -70,9 +70,9 @@ const desktopNavItems: TextNavItem[] = [
 }));
 
 const socialItems: IconNavItem[] = [
-  { linkSlug: "facebook", iconName: "ri:facebook-fill" },
-  { linkSlug: "instagram", iconName: "mdi:instagram" },
-  { linkSlug: "twitter", iconName: "mdi:twitter" },
+  { linkSlug: "https://facebook.com", iconName: "ri:facebook-fill" },
+  { linkSlug: "https://instagram.com", iconName: "mdi:instagram" },
+  { linkSlug: "https://twitter.com", iconName: "mdi:twitter" },
 ];
 </script>
 

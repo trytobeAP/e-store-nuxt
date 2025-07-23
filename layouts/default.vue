@@ -2,7 +2,7 @@
   <div class="container">
     <HeaderComponent @open-sidebar="openSidebar" />
 
-    <main>
+    <main class="page-contant-slot">
       <slot />
     </main>
 
@@ -28,3 +28,9 @@ const closeSidebar = () => {
   isSidebarOpen.value = false;
 };
 </script>
+
+<style lang="scss" scoped>
+.page-contant-slot {
+  color: theme-color("opposite-color");
+}
+</style>
