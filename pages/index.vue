@@ -28,7 +28,7 @@ const handleSearchClick = () => {
   display: none;
 }
 
-@media (max-width: ($breakpoints-m - 1px)) {
+@media (max-width: (vars.$breakpoints-m - 1px)) {
   .mobile-search-container {
     display: block;
   }

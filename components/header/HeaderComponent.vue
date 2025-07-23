@@ -60,7 +60,7 @@ defineEmits(["open-sidebar"]);
     gap: 38px;
   }
 
-  @media (max-width: ($breakpoints-l - 1px)) {
+  @media (max-width: (vars.$breakpoints-l - 1px)) {
     :deep(.header-navigation-container) {
       gap: 32px;
     }
@@ -74,7 +74,7 @@ defineEmits(["open-sidebar"]);
     }
   }
 
-  @media (max-width: ($breakpoints-m - 1px)) {
+  @media (max-width: (vars.$breakpoints-m - 1px)) {
     display: none;
   }
 }
@@ -82,7 +82,7 @@ defineEmits(["open-sidebar"]);
 .mobile-nav {
   display: none;
 
-  @media (max-width: ($breakpoints-m - 1px)) {
+  @media (max-width: (vars.$breakpoints-m - 1px)) {
     display: flex;
     gap: 16px;
     align-items: center;

@@ -43,7 +43,7 @@ defineEmits(["select"]);
     outline-offset: 2px;
   }
 
-  @media (max-width: $breakpoints-m) {
+  @media (max-width: vars.$breakpoints-m) {
     width: 7px;
     height: 7px;
     margin: 0 4px;
@@ -57,7 +57,7 @@ defineEmits(["select"]);
     }
   }
 
-  @media (max-width: $breakpoints-s) {
+  @media (max-width: vars.$breakpoints-s) {
     width: 6px;
     height: 6px;
     margin: 0 3px;

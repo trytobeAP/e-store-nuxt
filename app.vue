@@ -10,11 +10,11 @@
 .content {
   margin-top: 16px;
 
-  @media (min-width: $breakpoints-m) {
+  @media (min-width: vars.$breakpoints-m) {
     margin-top: 32px;
   }
 
-  @media (min-width: $breakpoints-l) {
+  @media (min-width: vars.$breakpoints-l) {
     margin-top: 64px;
   }
 }

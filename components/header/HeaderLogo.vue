@@ -10,7 +10,7 @@
   margin-bottom: 0;
   font-family: "Allerta Stencil", sans-serif;
   font-size: clamp(24px, 8vw, 35px);
-  font-weight: $fw-regular;
+  font-weight: vars.$fw-regular;
   line-height: 1;
   word-break: break-all;
 }
