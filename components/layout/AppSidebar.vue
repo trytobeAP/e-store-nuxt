@@ -221,7 +221,7 @@ const secondaryNavItems: IconNavItem[] = [
   gap: 12px;
   align-items: center;
   font-size: 18px;
-  font-weight: $fw-medium;
+  font-weight: vars.$fw-medium;
   color: theme-color("link-color");
   text-decoration: none;
 }

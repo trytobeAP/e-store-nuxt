@@ -75,7 +75,7 @@ const iconNavItems: IconNavItem[] = [
   gap: 64px;
 
   :deep(.text-link) {
-    font-weight: $fw-medium;
+    font-weight: vars.$fw-medium;
   }
 }
 

@@ -83,7 +83,7 @@ const socialItems: IconNavItem[] = [
   gap: 48px;
   margin-top: 60px;
 
-  @media (max-width: ($breakpoints-l - 1px)) {
+  @media (max-width: (vars.$breakpoints-l - 1px)) {
     display: none;
   }
 }
@@ -91,7 +91,7 @@ const socialItems: IconNavItem[] = [
 .mobile-footer {
   display: none;
 
-  @media (max-width: ($breakpoints-l - 1px)) {
+  @media (max-width: (vars.$breakpoints-l - 1px)) {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -115,7 +115,7 @@ const socialItems: IconNavItem[] = [
 
   :deep(.text-link) {
     font-size: 14px;
-    font-weight: $fw-regular;
+    font-weight: vars.$fw-regular;
 
     &:hover,
     &:focus,
@@ -124,7 +124,7 @@ const socialItems: IconNavItem[] = [
     }
   }
 
-  @media (min-width: $breakpoints-m) and (max-width: ($breakpoints-l - 1px)) {
+  @media (min-width: vars.$breakpoints-m) and (max-width: (vars.$breakpoints-l - 1px)) {
     :deep(&.text-navigation) {
       gap: 16px !important;
     }
@@ -154,7 +154,7 @@ const socialItems: IconNavItem[] = [
 
   :deep(.text-link) {
     font-size: 14px;
-    font-weight: $fw-regular;
+    font-weight: vars.$fw-regular;
   }
 }
 

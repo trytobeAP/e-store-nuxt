@@ -82,11 +82,11 @@ const formattedPrice = computed(() => {
   height: 100%;
   padding: 20px;
 
-  @media (max-width: $breakpoints-m) {
+  @media (max-width: vars.$breakpoints-m) {
     padding: 10px;
   }
 
-  @media (max-width: $breakpoints-s) {
+  @media (max-width: vars.$breakpoints-s) {
     align-items: flex-end;
     justify-content: flex-start;
     padding: 10px;
@@ -105,17 +105,17 @@ const formattedPrice = computed(() => {
   .slide-title {
     margin-bottom: 0.1em;
     font-size: 2rem;
-    font-weight: $fw-medium;
+    font-weight: vars.$fw-medium;
     line-height: 42px;
   }
 
   .slide-price {
     margin-bottom: 0.5em;
     font-size: 1.5rem;
-    font-weight: $fw-medium;
+    font-weight: vars.$fw-medium;
   }
 
-  @media (max-width: $breakpoints-l) {
+  @media (max-width: vars.$breakpoints-l) {
     .slide-title {
       font-size: 1.75rem;
     }
@@ -125,7 +125,7 @@ const formattedPrice = computed(() => {
     }
   }
 
-  @media (max-width: $breakpoints-m) {
+  @media (max-width: vars.$breakpoints-m) {
     max-width: 70%;
     line-height: 32px;
 
@@ -140,7 +140,7 @@ const formattedPrice = computed(() => {
     }
   }
 
-  @media (max-width: $breakpoints-s) {
+  @media (max-width: vars.$breakpoints-s) {
     max-width: 85%;
     margin-right: 0;
     margin-left: 0;
@@ -169,20 +169,20 @@ const formattedPrice = computed(() => {
 .slide-view-button {
   text-shadow: none;
 
-  @media (max-width: $breakpoints-l) {
+  @media (max-width: vars.$breakpoints-l) {
     width: 140px;
     height: 38px;
     font-size: 0.9rem;
   }
 
-  @media (max-width: $breakpoints-m) {
+  @media (max-width: vars.$breakpoints-m) {
     width: 120px;
     height: 32px;
     margin-bottom: 2rem;
     font-size: 0.75rem;
   }
 
-  @media (max-width: $breakpoints-s) {
+  @media (max-width: vars.$breakpoints-s) {
     width: 100%;
     max-width: 120px;
     height: 32px;

@@ -28,7 +28,7 @@ const socialItems: IconNavItem[] = [
 
 .socials-label {
   font-size: 16px;
-  font-weight: $fw-medium;
+  font-weight: vars.$fw-medium;
   color: theme-color("opposite-color");
 }
 
