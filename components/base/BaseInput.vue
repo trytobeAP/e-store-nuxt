@@ -60,19 +60,19 @@ const model = defineModel<string | number>();
   padding: 0 16px;
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
-  color: theme-color("opposite-color");
-  background-color: theme-color("gray-light-color");
+  color: vars.theme-color("opposite-color");
+  background-color: vars.theme-color("gray-light-color");
   border: 1px solid transparent;
   border-radius: 8px;
   transition: border-color 0.2s ease;
 
   &::placeholder {
-    color: theme-color("gray-dark-color");
+    color: vars.theme-color("gray-dark-color");
   }
 
   &:focus {
     outline: none;
-    border-color: theme-color("accent-color");
+    border-color: vars.theme-color("accent-color");
   }
 }
 
@@ -84,7 +84,7 @@ const model = defineModel<string | number>();
   position: absolute;
   top: 50%;
   left: 14px;
-  color: theme-color("gray-dark-color");
+  color: vars.theme-color("gray-dark-color");
   pointer-events: none;
   transform: translateY(-50%);
 }

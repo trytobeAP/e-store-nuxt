@@ -95,12 +95,12 @@ const formattedPrice = computed(() => {
 
 .slide-info {
   max-width: 50%;
-  color: theme-color("opposite-color");
+  color: vars.theme-color("opposite-color");
   text-shadow:
-    -1px -1px 0 theme-color("main-color"),
-    1px -1px 0 theme-color("main-color"),
-    -1px 1px 0 theme-color("main-color"),
-    1px 1px 0 theme-color("main-color");
+    -1px -1px 0 vars.theme-color("main-color"),
+    1px -1px 0 vars.theme-color("main-color"),
+    -1px 1px 0 vars.theme-color("main-color"),
+    1px 1px 0 vars.theme-color("main-color");
 
   .slide-title {
     margin-bottom: 0.1em;

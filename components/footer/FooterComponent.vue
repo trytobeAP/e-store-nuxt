@@ -120,7 +120,7 @@ const socialItems: IconNavItem[] = [
     &:hover,
     &:focus,
     &:active {
-      color: theme-color("link-color");
+      color: vars.theme-color("link-color");
     }
   }
 
