@@ -15,24 +15,17 @@ const props = withDefaults(defineProps<{ link?: string }>(), {
 });
 
 const resolvedLink = computed(() => {
-  if (!props.link) {
-    return "/";
-  }
+  const isExternal = props.link.startsWith("http");
 
-  const isExternal =
-    props.link.startsWith("http") || props.link.startsWith("//");
-
-  if (isExternal) {
+  if (isExternal || props.link.startsWith("/")) {
     return props.link;
   }
-
-  return props.link.startsWith("/") ? props.link : `/${props.link}`;
+  return `/${props.link}`;
 });
 </script>
 
 <style scoped lang="scss">
 .item {
-  size: 20px;
   align-items: center;
   line-height: 27px;
 }
