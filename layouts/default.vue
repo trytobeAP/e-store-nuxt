@@ -28,9 +28,3 @@ const closeSidebar = () => {
   isSidebarOpen.value = false;
 };
 </script>
-
-<style lang="scss" scoped>
-.page-contant-slot {
-  color: vars.theme-color("opposite-color");
-}
-</style>
