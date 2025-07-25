@@ -351,19 +351,19 @@ onUnmounted(() => {
   touch-action: pan-y;
   user-select: none;
 
-  @media (max-width: vars.$breakpoints-l) {
+  @media (max-width: $breakpoints-l) {
     aspect-ratio: 800 / 500;
     margin: 15px auto;
     border-radius: 12px;
   }
 
-  @media (max-width: vars.$breakpoints-m) {
+  @media (max-width: $breakpoints-m) {
     aspect-ratio: 600 / 500;
     margin: 15px auto;
     border-radius: 10px;
   }
 
-  @media (max-width: vars.$breakpoints-s) {
+  @media (max-width: $breakpoints-s) {
     aspect-ratio: 288 / 354;
     margin: 10px auto;
     border-radius: 8px;
@@ -373,15 +373,15 @@ onUnmounted(() => {
 .no-images-message {
   padding: 40px;
   font-size: 1.2rem;
-  color: vars.theme-color("gray-dark-color");
+  color: theme-color("gray-dark-color");
   text-align: center;
 
-  @media (max-width: vars.$breakpoints-m) {
+  @media (max-width: $breakpoints-m) {
     padding: 25px;
     font-size: 1.1rem;
   }
 
-  @media (max-width: vars.$breakpoints-s) {
+  @media (max-width: $breakpoints-s) {
     padding: 15px;
     font-size: 1rem;
   }
@@ -398,11 +398,11 @@ onUnmounted(() => {
   border-radius: 16px;
   transform: translateX(-50%);
 
-  @media (max-width: vars.$breakpoints-m) {
+  @media (max-width: $breakpoints-m) {
     bottom: 10px;
   }
 
-  @media (max-width: vars.$breakpoints-s) {
+  @media (max-width: $breakpoints-s) {
     bottom: 8px;
   }
 }

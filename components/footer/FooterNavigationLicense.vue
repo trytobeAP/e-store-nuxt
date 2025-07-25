@@ -19,6 +19,6 @@
 
 <style scoped lang="scss">
 span {
-  color: vars.theme-color("opposite-color");
+  color: theme-color("opposite-color");
 }
 </style>

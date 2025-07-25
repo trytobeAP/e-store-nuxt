@@ -28,13 +28,13 @@ const socialItems: IconNavItem[] = [
 
 .socials-label {
   font-size: 16px;
-  font-weight: vars.$fw-medium;
-  color: vars.theme-color("opposite-color");
+  font-weight: $fw-medium;
+  color: theme-color("opposite-color");
 }
 
 .socials-line {
   width: 40px;
   height: 1px;
-  background-color: vars.theme-color("gray-dark-color");
+  background-color: theme-color("gray-dark-color");
 }
 </style>

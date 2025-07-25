@@ -26,34 +26,34 @@ const buttonClasses = computed(() => ({
 action-btn-primary {
   width: 288px;
   height: 32px;
-  font-weight: vars.$fw-medium;
-  color: vars.theme-color("opposite-color");
-  background-color: vars.theme-color("main-color");
+  font-weight: $fw-medium;
+  color: theme-color("opposite-color");
+  background-color: theme-color("main-color");
   border: 4px solid black;
   border-radius: 4px;
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("main-color");
-    background-color: vars.theme-color("opposite-color");
+    color: theme-color("main-color");
+    background-color: theme-color("opposite-color");
   }
 }
 
 action-btn-secondary {
   width: 288px;
   height: 32px;
-  font-weight: vars.$fw-medium;
-  color: vars.theme-color("main-color");
-  background-color: vars.theme-color("opposite-color");
+  font-weight: $fw-medium;
+  color: theme-color("main-color");
+  background-color: theme-color("opposite-color");
   border: 4px solid black;
   border-radius: 4px;
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("opposite-color");
-    background-color: vars.theme-color("main-color");
+    color: theme-color("opposite-color");
+    background-color: theme-color("main-color");
   }
 }
 
@@ -64,11 +64,11 @@ action-btn-secondary {
   width: 192px;
   height: 52px;
   padding: 0 1em;
-  font-weight: vars.$fw-bold;
-  color: vars.theme-color("opposite-color");
+  font-weight: $fw-bold;
+  color: theme-color("opposite-color");
   text-align: center;
-  background-color: vars.theme-color("main-color");
-  border: 2px solid vars.theme-color("opposite-color");
+  background-color: theme-color("main-color");
+  border: 2px solid theme-color("opposite-color");
   border-radius: 6px;
   transition:
     color 0.2s ease,
@@ -77,12 +77,12 @@ action-btn-secondary {
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("main-color");
-    background-color: vars.theme-color("opposite-color");
+    color: theme-color("main-color");
+    background-color: theme-color("opposite-color");
   }
 
   &:focus-visible {
-    outline: 2px solid vars.theme-color("accent-color");
+    outline: 2px solid theme-color("accent-color");
     outline-offset: 2px;
   }
 }
