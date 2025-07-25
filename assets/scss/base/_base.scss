@@ -1,5 +1,3 @@
-@use "../variables" as vars;
-
 *,
 *::before,
 *::after {
@@ -10,37 +8,37 @@ body {
   padding: 0;
   margin: 0;
   font-family: "DM Sans", sans-serif;
-  background-color: vars.theme-color("body-bg-color");
+  background-color: theme-color("body-bg-color");
 }
 
 a,
 a:hover {
-  color: vars.theme-color("link-color");
+  color: theme-color("link-color");
   text-decoration: none;
 }
 
 h1 {
   font-size: 33px;
-  font-weight: vars.$fw-medium;
+  font-weight: $fw-medium;
 }
 h2 {
   font-size: 26px;
-  font-weight: vars.$fw-regular;
+  font-weight: $fw-regular;
   line-height: 35px;
 }
 h3 {
   font-size: 20px;
-  font-weight: vars.$fw-regular;
+  font-weight: $fw-regular;
   line-height: 26px;
 }
 h4 {
   font-size: 20px;
-  font-weight: vars.$fw-medium;
+  font-weight: $fw-medium;
   line-height: 20px;
 }
 h5 {
   font-size: 16px;
-  font-weight: vars.$fw-regular;
+  font-weight: $fw-regular;
   line-height: 27px;
 }
 
