@@ -1,66 +1,64 @@
-@use "../variables" as vars;
-
 .nav-link {
   display: inline-block;
 
   padding-bottom: 27px;
-  font-weight: vars.$fw-medium;
-  color: vars.theme-color("link-color");
+  font-weight: $fw-medium;
+  color: theme-color("link-color");
   text-decoration: none;
   border-bottom: 2px solid transparent;
 
   &.router-link-active,
   &:hover,
   &:active {
-    border-bottom-color: vars.theme-color("link-color");
+    border-bottom-color: theme-color("link-color");
   }
 
   &:focus-visible {
-    outline: 2px solid vars.theme-color("link-color");
+    outline: 2px solid theme-color("link-color");
     outline-offset: 2px;
   }
 }
 
 .social-link,
 .info-link {
-  font-weight: vars.$fw-regular;
-  color: vars.theme-color("link-color-light");
+  font-weight: $fw-regular;
+  color: theme-color("link-color-light");
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("link-color");
+    color: theme-color("link-color");
   }
 }
 
 .help-link {
-  font-weight: vars.$fw-regular;
-  color: vars.theme-color("link-color");
+  font-weight: $fw-regular;
+  color: theme-color("link-color");
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("link-color-light");
+    color: theme-color("link-color-light");
   }
 }
 
 .more-link {
-  font-weight: vars.$fw-bold;
-  color: vars.theme-color("accent-color");
+  font-weight: $fw-bold;
+  color: theme-color("accent-color");
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("link-color");
+    color: theme-color("link-color");
   }
 }
 
 .icon-link {
-  color: vars.theme-color("link-color-light");
+  color: theme-color("link-color-light");
 
   &:hover,
   &:focus,
   &:active {
-    color: vars.theme-color("link-color");
+    color: theme-color("link-color");
   }
 }

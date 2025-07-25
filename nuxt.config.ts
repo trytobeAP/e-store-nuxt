@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           // This injects ONLY definitions into component scopes
-          additionalData: `@use "~/assets/scss/_globals.scss" as *;`,
+          additionalData: `@import "~/assets/scss/_variables.scss";`,
         },
       },
     },

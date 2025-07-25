@@ -1,20 +1,18 @@
-@use "../variables.scss" as vars;
-
 .container {
   width: 100%;
   max-width: 346px;
   padding: 0 16px;
   margin: 0 auto;
 
-  @media (min-width: vars.$breakpoints-m) {
+  @media (min-width: $breakpoints-m) {
     max-width: 696px;
     padding: 0 36px;
   }
-  @media (min-width: vars.$breakpoints-l) {
+  @media (min-width: $breakpoints-l) {
     max-width: 936px;
     padding: 0 36px;
   }
-  @media (min-width: vars.$breakpoints-xl) {
+  @media (min-width: $breakpoints-xl) {
     max-width: 1216px;
     padding: 0 112px;
   }
