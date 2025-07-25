@@ -8,6 +8,6 @@
   height: 1px;
   margin: 0;
   border: none;
-  border-top: 1px solid vars.theme-color("gray-color");
+  border-top: 1px solid theme-color("gray-color");
 }
 </style>

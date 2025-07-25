@@ -124,7 +124,7 @@ onUnmounted(() => {
   align-items: center;
   width: 100%;
   overflow: visible;
-  border-bottom: 1px solid vars.theme-color(link-color-light);
+  border-bottom: 1px solid theme-color(link-color-light);
 }
 
 .input-wrapper {
@@ -138,14 +138,14 @@ onUnmounted(() => {
   width: 100%;
   font-family: "DM Sans", sans-serif;
   font-size: 1rem;
-  color: vars.theme-color(opposite-color);
+  color: theme-color(opposite-color);
   outline: none;
-  background-color: vars.theme-color(main-color);
+  background-color: theme-color(main-color);
   border: none;
 
   &::placeholder {
     font-family: "DM Sans", sans-serif;
-    color: vars.theme-color(gray-dark-color);
+    color: theme-color(gray-dark-color);
     opacity: 0.8;
   }
 }
@@ -155,7 +155,7 @@ onUnmounted(() => {
   bottom: -30px;
   left: 0;
   font-size: 0.8rem;
-  color: vars.theme-color(error-color);
+  color: theme-color(error-color);
   white-space: nowrap;
 }
 
@@ -166,7 +166,7 @@ onUnmounted(() => {
   justify-content: center;
   padding-bottom: 10px;
   padding-left: 10px;
-  color: vars.theme-color(link-color-light);
+  color: theme-color(link-color-light);
   cursor: pointer;
   background-color: transparent;
   border: none;

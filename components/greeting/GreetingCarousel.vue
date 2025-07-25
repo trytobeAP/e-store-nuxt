@@ -45,7 +45,7 @@ onMounted(() => {
 .greeting-error {
   padding: 40px;
   font-size: 1.2rem;
-  color: vars.theme-color("gray-dark-color");
+  color: theme-color("gray-dark-color");
   text-align: center;
 }
 </style>

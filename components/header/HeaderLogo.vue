@@ -10,16 +10,16 @@
   margin-bottom: 0;
   font-family: "Allerta Stencil", sans-serif;
   font-size: clamp(24px, 8vw, 35px);
-  font-weight: vars.$fw-regular;
+  font-weight: $fw-regular;
   line-height: 1;
   word-break: break-all;
 }
 
 .logo-1 {
-  color: vars.theme-color("accent-color");
+  color: theme-color("accent-color");
 }
 
 .logo-2 {
-  color: vars.theme-color("opposite-color");
+  color: theme-color("opposite-color");
 }
 </style>
