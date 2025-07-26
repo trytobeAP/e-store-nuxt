@@ -7,6 +7,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
 .content {
   margin-top: 16px;
 
