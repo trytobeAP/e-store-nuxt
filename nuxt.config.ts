@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
@@ -13,8 +12,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          // This injects ONLY definitions into component scopes
-          additionalData: `@import "~/assets/scss/_variables.scss";\n`,
+          additionalData: `@use "~/assets/scss/_globals" as *;`,
         },
       },
     },
