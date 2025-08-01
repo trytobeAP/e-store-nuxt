@@ -21,7 +21,6 @@ $light-theme: (
   link-color-light: #707070,
   main-color: #ffffff,
   opposite-color: #000000,
-  body-bg-color: #ffffff,
 );
 
 $dark-theme: (
@@ -36,11 +35,20 @@ $dark-theme: (
   link-color-light: #707070,
   main-color: #000000,
   opposite-color: #ffffff,
-  body-bg-color: #000000,
 );
 
-$current-theme: $dark-theme;
+:root {
+  @each $name, $color in $light-theme {
+    --color-#{$name}: #{$color};
+  }
+}
+
+html[data-theme="dark"] {
+  @each $name, $color in $dark-theme {
+    --color-#{$name}: #{$color};
+  }
+}
 
 @function theme-color($color-name) {
-  @return map.get($current-theme, $color-name);
+  @return var(--color-#{$color-name});
 }

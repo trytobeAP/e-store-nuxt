@@ -8,7 +8,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: "DM Sans", sans-serif;
-  background-color: theme-color("body-bg-color");
+  background-color: theme-color("main-color");
+}
+
+.body-no-scroll {
+  overflow: hidden;
 }
 
 a,
