@@ -1,12 +1,11 @@
-import { useState, watchEffect } from "#imports";
+import { useState } from "#imports";
+import type { ThemeState } from "~/types/ThemeState";
 
 export const useTheme = () => {
-  const theme = useState<"light" | "dark">("theme", () => "light");
+  const theme = useState<ThemeState>("theme", () => "light");
 
-  const setTheme = (newTheme: "light" | "dark") => {
-    if (process.client) {
-      localStorage.setItem("theme", newTheme);
-    }
+  const setTheme = (newTheme: ThemeState) => {
+    localStorage.setItem("theme", newTheme);
     theme.value = newTheme;
   };
 
@@ -14,19 +13,6 @@ export const useTheme = () => {
     const newTheme = theme.value === "light" ? "dark" : "light";
     setTheme(newTheme);
   };
-
-  watchEffect(() => {
-    if (process.client) {
-      document.body.setAttribute("data-theme", theme.value);
-    }
-  });
-
-  if (process.client) {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (savedTheme && ["light", "dark"].includes(savedTheme)) {
-      theme.value = savedTheme;
-    }
-  }
 
   return {
     theme,

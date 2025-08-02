@@ -6,12 +6,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useTheme } from "~/composables/useTheme";
-
-useTheme();
-</script>
-
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
