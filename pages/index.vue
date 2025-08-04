@@ -42,7 +42,6 @@ const handleSearchClick = () => {
   width: 100%;
   max-width: 1000px;
   height: auto;
-  aspect-ratio: 1000 / 600;
   margin: 16px auto;
   border-radius: 16px;
 }

@@ -5,8 +5,10 @@ import type { ThemeState } from "~/types/ThemeState";
 export default defineNuxtPlugin(() => {
   const theme = useState<ThemeState>("theme");
 
+  const themesVariants = ["light", "dark"];
+
   const savedTheme = localStorage.getItem("theme") as ThemeState | null;
-  if (savedTheme && ["light", "dark"].includes(savedTheme)) {
+  if (savedTheme && themesVariants.includes(savedTheme)) {
     theme.value = savedTheme;
   }
 

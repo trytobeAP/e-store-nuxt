@@ -1,14 +1,16 @@
 <template>
-  <BaseButton
-    variant="toggle"
-    aria-label="Переключить тему"
-    @click="toggleTheme"
-  >
-    <Icon
-      :name="themeIcon"
-      size="16"
-    />
-  </BaseButton>
+  <ClientOnly>
+    <BaseButton
+      variant="toggle"
+      aria-label="Переключить тему"
+      @click="toggleTheme"
+    >
+      <Icon
+        :name="themeIcon"
+        size="16"
+      />
+    </BaseButton>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

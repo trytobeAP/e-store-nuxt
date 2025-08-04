@@ -30,6 +30,7 @@
           v-for="(image, indexValue) in images"
           :key="image.id"
           :image="image"
+          :is-active="indexValue === currentSlideIndex"
           :aria-label="
             image.alt || `Slide ${indexValue + 1} of ${images.length}`
           "
@@ -245,10 +246,6 @@ watch(
         ) {
           currentSlideIndex.value = targetSlide;
         }
-      } else {
-        console.warn(
-          "Carousel: props.images watcher - viewportWidth not yet known. Slide index will be set once width is available.",
-        );
       }
       startAutoplay();
     } else {
@@ -337,7 +334,25 @@ onUnmounted(() => {
 .carousel-container-wrapper {
   position: relative;
   width: 100%;
+  aspect-ratio: 1000 / 600;
   overflow: hidden;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    aspect-ratio: 800 / 500;
+  }
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    aspect-ratio: 600 / 500;
+  }
+
+  @media (max-width: ($breakpoints-s - 1px)) {
+    aspect-ratio: 288 / 354;
+  }
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
 }
 
 .carousel-viewport {
