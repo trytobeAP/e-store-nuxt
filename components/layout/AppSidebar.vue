@@ -168,7 +168,7 @@ const secondaryNavItems: IconNavItem[] = [
   width: 100%;
   height: 100%;
   padding: 24px;
-  background-color: theme-color("body-bg-color");
+  background-color: theme-color("main-color");
 }
 
 .sidebar-header {

@@ -28,12 +28,7 @@
 import { onMounted } from "vue";
 import useCarouselImages from "~/composables/carousel/useCarouselImages";
 
-const { images, isLoading, error, fetchImages } = useCarouselImages({
-  totalImages: 10,
-  category: "watch",
-  baseUrl: "https://via.assets.so/",
-  params: "q=95&w=1000&h=600",
-});
+const { images, isLoading, error, fetchImages } = useCarouselImages();
 
 onMounted(() => {
   fetchImages();

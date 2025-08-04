@@ -18,8 +18,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AppSidebar from "~/components/layout/AppSidebar.vue";
+import { useBodyScrollLock } from "~/composables/useBodyScrollLock";
 
 const isSidebarOpen = ref(false);
+
+useBodyScrollLock(isSidebarOpen);
+
 const openSidebar = () => {
   isSidebarOpen.value = true;
 };

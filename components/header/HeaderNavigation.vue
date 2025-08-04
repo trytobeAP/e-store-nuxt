@@ -10,6 +10,9 @@
         class="header-icon-nav"
         :items="iconNavItems"
       />
+      <div class="theme-switcher-wrapper">
+        <ThemeSwitcher />
+      </div>
     </span>
   </nav>
 </template>
@@ -37,8 +40,24 @@ const iconNavItems: IconNavItem[] = [
 <style scoped lang="scss">
 .header-navigation-container {
   display: flex;
-  gap: 48px;
+  gap: 30px;
   align-items: center;
+}
+
+.theme-switcher-wrapper {
+  position: relative;
+  padding-bottom: 27px;
+  border-bottom: 2px solid transparent;
+}
+
+:deep(.toggle-btn) {
+  position: absolute;
+  top: -4px;
+  left: -32px;
+
+  @media (min-width: $breakpoints-m) {
+    left: 16px;
+  }
 }
 
 .separator {

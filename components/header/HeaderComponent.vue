@@ -8,6 +8,7 @@
       <HeaderNavigation class="desktop-nav" />
 
       <div class="mobile-nav">
+        <ThemeSwitcher />
         <UtilsNavigationItem
           link="/cart"
           class="nav-link icon-link"
@@ -30,6 +31,7 @@
         </button>
       </div>
     </div>
+    <BaseDivider />
   </header>
 </template>
 
