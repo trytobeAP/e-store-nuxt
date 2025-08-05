@@ -8,6 +8,13 @@ export default defineNuxtConfig({
       title: "SHOPEE",
       charset: "utf-8",
       viewport: "width=device-width, initial-scale-1",
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon.ico",
+        },
+      ],
       script: [
         {
           innerHTML: `
