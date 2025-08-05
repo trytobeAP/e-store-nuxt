@@ -4,10 +4,13 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   app: {
+    baseURL: "/e-store-nuxt/",
     head: {
       title: "SHOPEE",
       charset: "utf-8",
-      viewport: "width=device-width, initial-scale-1",
+      meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+      ],
       link: [
         {
           rel: "icon",
