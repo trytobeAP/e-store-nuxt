@@ -10,20 +10,18 @@
       :link="item.linkSlug"
       :class="[linkClass, 'text-link', item.classes]"
     >
-      <Icon
-        :name="item.iconName"
-        size="24"
-      />
+      <ClientOnly>
+        <Icon
+          :name="item.iconName"
+          size="24"
+        />
+      </ClientOnly>
     </UtilsNavigationItem>
   </span>
 </template>
 
 <script setup lang="ts">
-interface IconNavItem {
-  linkSlug: string;
-  iconName: string;
-  classes?: string | string[] | Record<string, boolean>;
-}
+import type { IconNavItem } from "~/types/NavItems";
 
 interface Props {
   items: IconNavItem[];

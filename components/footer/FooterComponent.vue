@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <BaseDivider />
+    <BaseDivider class="footer-divider" />
 
     <div class="desktop-footer">
       <div class="d-flex justify-between footer-row">
@@ -10,11 +10,14 @@
           link-class="info-link"
         />
         <div class="newsletter-wrapper">
-          <UtilsNewsletterForm max-width="100%" />
+          <ClientOnly>
+            <UtilsNewsletterForm max-width="100%" />
+          </ClientOnly>
         </div>
       </div>
       <div class="d-flex justify-between footer-row">
         <FooterNavigationLicense class="footer-license-desktop" />
+
         <UtilsNavigationGroupIcon
           class="footer-icon-nav"
           :items="socialItems"
@@ -25,10 +28,13 @@
 
     <div class="mobile-footer">
       <div class="footer-section">
-        <UtilsNewsletterForm
-          max-width="400px"
-          :is-agreement-accepted="agreedToTerms"
-        />
+        <ClientOnly>
+          <UtilsNewsletterForm
+            max-width="400px"
+            :is-agreement-accepted="agreedToTerms"
+          />
+        </ClientOnly>
+
         <BaseCheckbox v-model="agreedToTerms">
           i agree to the website's terms and conditions
         </BaseCheckbox>
@@ -77,6 +83,10 @@ const socialItems: IconNavItem[] = [
 </script>
 
 <style scoped lang="scss">
+.footer-divider {
+  margin-top: 40px;
+}
+
 .desktop-footer {
   display: flex;
   flex-direction: column;

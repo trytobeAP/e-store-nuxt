@@ -33,14 +33,20 @@
       aria-label="Subscribe to newsletter"
       :disabled="isSubmitting || !isAgreementAccepted"
     >
-      <Icon
-        name="material-symbols:arrow-right-alt-rounded"
-        size="24"
-      />
+      <ClientOnly>
+        <Icon
+          name="material-symbols:arrow-right-alt-rounded"
+          size="24"
+        />
+      </ClientOnly>
     </button>
   </form>
 
-  <UtilsNotificationCustom :message="statusMessage" />
+  <UtilsNotificationCustom
+    :message="statusMessage"
+    :type="notificationType"
+    mode="fixed"
+  />
 </template>
 
 <script setup lang="ts">
@@ -69,6 +75,7 @@ const formStyle = computed(() => {
 });
 
 const statusMessage = ref("");
+const notificationType = ref<"success" | "error" | "info">("info");
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -90,19 +97,23 @@ const performSubscription = (formValues: { email: string }) => {
   switch (result) {
     case "success":
       statusMessage.value = `Success! ${formValues.email} added.`;
+      notificationType.value = "success";
       resetForm();
       break;
     case "duplicate":
       statusMessage.value = `${formValues.email} is already subscribed!`;
+      notificationType.value = "error";
       break;
     case "error":
       statusMessage.value = "Could not save email. Please try again later.";
+      notificationType.value = "error";
       break;
   }
 
   if (statusMessage.value) {
     statusMessageTimeoutId = setTimeout(() => {
       statusMessage.value = "";
+      notificationType.value = "info";
       statusMessageTimeoutId = null;
     }, 3000);
   }

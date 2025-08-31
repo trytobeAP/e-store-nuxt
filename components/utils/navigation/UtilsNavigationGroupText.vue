@@ -15,11 +15,7 @@
 </template>
 
 <script setup lang="ts">
-interface TextNavItem {
-  linkSlug: string;
-  content: string;
-  classes?: string | string[] | Record<string, boolean>;
-}
+import type { TextNavItem } from "~/types/NavItems";
 
 interface Props {
   items: TextNavItem[];

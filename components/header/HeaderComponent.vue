@@ -13,10 +13,12 @@
           link="/cart"
           class="nav-link icon-link"
         >
-          <Icon
-            name="material-symbols:shopping-cart-outline"
-            size="24"
-          />
+          <ClientOnly>
+            <Icon
+              name="material-symbols:shopping-cart"
+              size="24"
+            />
+          </ClientOnly>
         </UtilsNavigationItem>
 
         <button
@@ -24,10 +26,12 @@
           aria-label="Открыть меню"
           @click="$emit('open-sidebar')"
         >
-          <Icon
-            name="mdi:menu"
-            size="24"
-          />
+          <ClientOnly>
+            <Icon
+              name="mdi:menu"
+              size="24"
+            />
+          </ClientOnly>
         </button>
       </div>
     </div>

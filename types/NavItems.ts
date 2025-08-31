@@ -1,6 +1,7 @@
 interface TextNavItem {
   linkSlug: string;
   content: string;
+  classes?: string | string[] | Record<string, boolean>;
 }
 
 interface IconNavItem {

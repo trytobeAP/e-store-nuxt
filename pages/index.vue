@@ -4,7 +4,7 @@
       <BaseInput
         v-model="searchQuery"
         placeholder="Search"
-        icon-name="material-symbols:search-rounded"
+        icon-name="material-symbols:search"
         readonly
         @click="handleSearchClick"
       />

@@ -1,10 +1,13 @@
 import { defineNuxtConfig } from "nuxt/config";
 
+const repositoryName = "e-store-nuxt";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   app: {
-    baseURL: "/e-store-nuxt/",
+    baseURL:
+      process.env.NODE_ENV === "production" ? `/${repositoryName}/` : "/",
     head: {
       title: "SHOPEE",
       charset: "utf-8",
@@ -68,6 +71,6 @@ export default defineNuxtConfig({
     },
   },
   icon: {
-    mode: "svg",
+    collections: ["mdi", "material-symbols", "majesticons", "ri", "fa6-solid"],
   },
 });

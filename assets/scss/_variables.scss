@@ -5,6 +5,13 @@ $breakpoints-l: 1024px;
 $breakpoints-m: 768px;
 $breakpoints-s: 375px;
 
+:root {
+  --breakpoint-xl: #{$breakpoints-xl};
+  --breakpoint-l: #{$breakpoints-l};
+  --breakpoint-m: #{$breakpoints-m};
+  --breakpoint-s: #{$breakpoints-s};
+}
+
 $fw-regular: 400;
 $fw-medium: 500;
 $fw-bold: 700;
@@ -16,6 +23,7 @@ $light-theme: (
   gray-dark-color: #707070,
   gray-color: #d8d8d8,
   gray-light-color: #efefef,
+  gray-theme-complimentary-color: #d8d8d8,
   error-color: #d82700,
   link-color: #000000,
   link-color-light: #707070,
@@ -30,6 +38,7 @@ $dark-theme: (
   gray-dark-color: #707070,
   gray-color: #d8d8d8,
   gray-light-color: #efefef,
+  gray-theme-complimentary-color: #3d3d3d,
   error-color: #d82700,
   link-color: #ffffff,
   link-color-light: #707070,

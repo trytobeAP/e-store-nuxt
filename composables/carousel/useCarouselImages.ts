@@ -38,7 +38,7 @@ export default function useCarouselImages(): UseCarouselImagesReturn {
           id: itemSlug,
           src: imageUrl,
           alt: `Image of ${itemName}`,
-          name: itemName,
+          title: itemName,
           price: itemPrice,
           productLink: `/products/${itemSlug}`,
         });

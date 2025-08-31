@@ -11,7 +11,9 @@
         :items="iconNavItems"
       />
       <div class="theme-switcher-wrapper">
-        <ThemeSwitcher />
+        <ClientOnly>
+          <ThemeSwitcher />
+        </ClientOnly>
       </div>
     </span>
   </nav>
@@ -31,9 +33,9 @@ const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
 }));
 
 const iconNavItems: IconNavItem[] = [
-  { linkSlug: "search", iconName: "material-symbols:search-rounded" },
-  { linkSlug: "cart", iconName: "material-symbols:shopping-cart-outline" },
-  { linkSlug: "account", iconName: "material-symbols:person-outline" },
+  { linkSlug: "search", iconName: "material-symbols:search" },
+  { linkSlug: "cart", iconName: "material-symbols:shopping-cart" },
+  { linkSlug: "account", iconName: "material-symbols:person" },
 ];
 </script>
 
