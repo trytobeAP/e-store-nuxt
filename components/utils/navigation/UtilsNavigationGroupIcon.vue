@@ -10,12 +10,10 @@
       :link="item.linkSlug"
       :class="[linkClass, 'text-link', item.classes]"
     >
-      <ClientOnly>
-        <Icon
-          :name="item.iconName"
-          size="24"
-        />
-      </ClientOnly>
+      <Icon
+        :name="item.iconName"
+        size="24"
+      />
     </UtilsNavigationItem>
   </span>
 </template>

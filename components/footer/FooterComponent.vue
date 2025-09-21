@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <BaseDivider class="footer-divider" />
+    <BaseDivider class="footer-divider desktop-only-divider" />
 
     <div class="desktop-footer">
       <div class="d-flex justify-between footer-row">
@@ -10,9 +10,7 @@
           link-class="info-link"
         />
         <div class="newsletter-wrapper">
-          <ClientOnly>
-            <UtilsNewsletterForm max-width="100%" />
-          </ClientOnly>
+          <UtilsNewsletterForm max-width="100%" />
         </div>
       </div>
       <div class="d-flex justify-between footer-row">
@@ -20,22 +18,20 @@
 
         <UtilsNavigationGroupIcon
           class="footer-icon-nav"
-          :items="socialItems"
           link-class="info-link"
+          :items="socialItems"
         />
       </div>
     </div>
 
     <div class="mobile-footer">
       <div class="footer-section">
-        <ClientOnly>
-          <UtilsNewsletterForm
-            max-width="400px"
-            :is-agreement-accepted="agreedToTerms"
-          />
-        </ClientOnly>
+        <UtilsNewsletterForm
+          max-width="400px"
+          :is-agreement-accepted="isAgreedToTerms"
+        />
 
-        <BaseCheckbox v-model="agreedToTerms">
+        <BaseCheckbox v-model="isAgreedToTerms">
           i agree to the website's terms and conditions
         </BaseCheckbox>
       </div>
@@ -43,8 +39,8 @@
       <div class="footer-section">
         <UtilsNavigationGroupText
           class="footer-nav-mobile"
-          :items="desktopNavItems"
           link-class="info-link"
+          :items="desktopNavItems"
         />
       </div>
 
@@ -59,12 +55,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import FooterSocials from "~/components/footer/FooterSocials.vue";
 import BaseDivider from "~/components/base/BaseDivider.vue";
+import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 
-const agreedToTerms = ref(false);
+const isAgreedToTerms = ref(false);
 
 const desktopNavItems: TextNavItem[] = [
   "contact",
@@ -85,6 +81,14 @@ const socialItems: IconNavItem[] = [
 <style scoped lang="scss">
 .footer-divider {
   margin-top: 40px;
+}
+
+.desktop-only-divider {
+  display: block;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    display: none;
+  }
 }
 
 .desktop-footer {

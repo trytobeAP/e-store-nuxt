@@ -3,20 +3,16 @@
     <div class="error-layout">
       <div class="error-content">
         <div class="builder-animation">
-          <ClientOnly>
-            <Icon
-              name="fa6-solid:person-digging"
-              class="builder-icon"
-            />
-          </ClientOnly>
+          <Icon
+            name="fa6-solid:person-digging"
+            class="builder-icon"
+          />
         </div>
         <div class="hammer-animation">
-          <ClientOnly>
-            <Icon
-              name="mdi:hammer-wrench"
-              class="hammer-icon"
-            />
-          </ClientOnly>
+          <Icon
+            name="mdi:hammer-wrench"
+            class="hammer-icon"
+          />
         </div>
         <h1 class="error-code">
           {{ error.statusCode }}

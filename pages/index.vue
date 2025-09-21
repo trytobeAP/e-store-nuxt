@@ -10,6 +10,8 @@
       />
     </div>
     <GreetingCarousel class="watch-carousel-container" />
+
+    <ProductLatests />
   </div>
 </template>
 

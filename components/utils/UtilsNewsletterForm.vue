@@ -33,12 +33,10 @@
       aria-label="Subscribe to newsletter"
       :disabled="isSubmitting || !isAgreementAccepted"
     >
-      <ClientOnly>
-        <Icon
-          name="material-symbols:arrow-right-alt-rounded"
-          size="24"
-        />
-      </ClientOnly>
+      <Icon
+        name="local-custom:arrow-right"
+        size="7"
+      />
     </button>
   </form>
 
@@ -53,6 +51,7 @@
 import { ref, onUnmounted, computed } from "vue";
 import useForm from "~/composables/forms/useForm";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
+import { NotificationTypeEnum } from "~/types/notification";
 
 const { values, errors, isSubmitting, validateField, submitForm, resetForm } =
   useForm({
@@ -75,7 +74,7 @@ const formStyle = computed(() => {
 });
 
 const statusMessage = ref("");
-const notificationType = ref<"success" | "error" | "info">("info");
+const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.Info);
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -97,23 +96,23 @@ const performSubscription = (formValues: { email: string }) => {
   switch (result) {
     case "success":
       statusMessage.value = `Success! ${formValues.email} added.`;
-      notificationType.value = "success";
+      notificationType.value = NotificationTypeEnum.Success;
       resetForm();
       break;
     case "duplicate":
       statusMessage.value = `${formValues.email} is already subscribed!`;
-      notificationType.value = "error";
+      notificationType.value = NotificationTypeEnum.Error;
       break;
     case "error":
       statusMessage.value = "Could not save email. Please try again later.";
-      notificationType.value = "error";
+      notificationType.value = NotificationTypeEnum.Error;
       break;
   }
 
   if (statusMessage.value) {
     statusMessageTimeoutId = setTimeout(() => {
       statusMessage.value = "";
-      notificationType.value = "info";
+      notificationType.value = NotificationTypeEnum.Info;
       statusMessageTimeoutId = null;
     }, 3000);
   }

@@ -13,12 +13,10 @@
           link="/cart"
           class="nav-link icon-link"
         >
-          <ClientOnly>
-            <Icon
-              name="material-symbols:shopping-cart"
-              size="24"
-            />
-          </ClientOnly>
+          <Icon
+            name="local-custom:cart"
+            size="24"
+          />
         </UtilsNavigationItem>
 
         <button
@@ -26,16 +24,14 @@
           aria-label="Открыть меню"
           @click="$emit('open-sidebar')"
         >
-          <ClientOnly>
-            <Icon
-              name="mdi:menu"
-              size="24"
-            />
-          </ClientOnly>
+          <Icon
+            name="local-custom:burger-menu"
+            size="24"
+          />
         </button>
       </div>
     </div>
-    <BaseDivider />
+    <BaseDivider class="desktop-only-divider" />
   </header>
 </template>
 
@@ -96,6 +92,7 @@ defineEmits(["open-sidebar"]);
     :deep(.nav-link) {
       padding-bottom: 0;
       line-height: 1;
+      color: theme-color("opposite-color");
       border-bottom: none;
     }
   }
@@ -114,6 +111,14 @@ defineEmits(["open-sidebar"]);
 
   &:focus-visible {
     border-radius: 4px;
+  }
+}
+
+.desktop-only-divider {
+  display: block;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    display: none;
   }
 }
 </style>

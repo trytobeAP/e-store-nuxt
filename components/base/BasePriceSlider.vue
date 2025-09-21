@@ -7,12 +7,20 @@
 
     <div class="slider-label">
       <span>Price: ${{ currentValues[0] }} - ${{ currentValues[1] }}</span>
+
+      <button
+        v-if="isResettable"
+        class="reset-button"
+        @click="resetSlider"
+      >
+        Reset
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import noUiSlider from "nouislider";
 import type { API as NoUiSliderAPI } from "nouislider";
 
@@ -21,12 +29,10 @@ const props = withDefaults(
     min?: number;
     max?: number;
     modelValue: [number, number];
-    showFilterButton?: boolean;
   }>(),
   {
     min: 0,
     max: 1500,
-    showFilterButton: false,
   },
 );
 const emit = defineEmits(["update:modelValue"]);
@@ -34,6 +40,16 @@ const emit = defineEmits(["update:modelValue"]);
 const sliderRef = ref<HTMLElement | null>(null);
 const sliderInstance = ref<NoUiSliderAPI | null>(null);
 const currentValues = ref<[number, number]>([...props.modelValue]);
+
+const isResettable = computed(() => {
+  return props.modelValue[0] > props.min || props.modelValue[1] < props.max;
+});
+
+const resetSlider = () => {
+  if (sliderInstance.value) {
+    sliderInstance.value.set([props.min, props.max]);
+  }
+};
 
 onMounted(() => {
   if (!sliderRef.value) return;
@@ -58,6 +74,35 @@ onMounted(() => {
     emit("update:modelValue", currentValues.value);
   });
 });
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (JSON.stringify(newValue) !== JSON.stringify(currentValues.value)) {
+      if (sliderInstance.value) {
+        sliderInstance.value.set(newValue);
+      }
+    }
+  },
+  { deep: true },
+);
+
+watch(
+  () => props.max,
+  (newMax) => {
+    if (sliderInstance.value && newMax !== undefined) {
+      sliderInstance.value.updateOptions(
+        {
+          range: {
+            min: props.min,
+            max: newMax,
+          },
+        },
+        false,
+      );
+    }
+  },
+);
 
 onUnmounted(() => {
   if (sliderInstance.value) {
@@ -107,16 +152,25 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
+  font-family: "DM Sans", sans-serif;
   font-size: 14px;
   color: theme-color("gray-dark-color");
 }
 
-.filter-button {
+.reset-button {
+  padding: 0;
+  font-family: "DM Sans", sans-serif;
   font-size: 14px;
-  font-weight: $fw-bold;
+  font-weight: $fw-regular;
+  line-height: 22px;
   color: theme-color("accent-color");
   cursor: pointer;
   background: none;
   border: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 </style>

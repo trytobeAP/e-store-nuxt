@@ -25,8 +25,10 @@ $light-theme: (
   gray-light-color: #efefef,
   gray-theme-complimentary-color: #d8d8d8,
   error-color: #d82700,
+  sale-color: #d82700,
   link-color: #000000,
   link-color-light: #707070,
+  toggle-background-color: #707070,
   main-color: #ffffff,
   opposite-color: #000000,
 );
@@ -40,8 +42,10 @@ $dark-theme: (
   gray-light-color: #efefef,
   gray-theme-complimentary-color: #3d3d3d,
   error-color: #d82700,
+  sale-color: #d82700,
   link-color: #ffffff,
   link-color-light: #707070,
+  toggle-background-color: #3d3d3d,
   main-color: #000000,
   opposite-color: #ffffff,
 );

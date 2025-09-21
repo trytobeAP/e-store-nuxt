@@ -4,9 +4,7 @@
       class="mobile-filters-trigger"
       @click="openMobileFilters"
     >
-      <ClientOnly>
-        <Icon name="majesticons:adjustments-line" />
-      </ClientOnly>
+      <Icon name="local-custom:filter" />
       <span>Filters</span>
     </button>
 
@@ -15,6 +13,7 @@
         :model-value="modelValue"
         :category-options="categoryOptions"
         :sort-options="sortOptions"
+        :max-price="maxPrice"
         @update:model-value="onDesktopFiltersUpdate"
       />
     </div>
@@ -30,6 +29,7 @@
         :model-value="localFilters"
         :category-options="categoryOptions"
         :sort-options="sortOptions"
+        :max-price="maxPrice"
         @update:model-value="onMobileFiltersUpdate"
       />
     </BaseSidebar>
@@ -46,6 +46,7 @@ const props = defineProps<{
   modelValue: Filters;
   categoryOptions: SelectOption[];
   sortOptions: SelectOption[];
+  maxPrice: number;
 }>();
 
 const emit = defineEmits<{
@@ -56,13 +57,13 @@ const sidebar = createSidebarState();
 
 const localFilters = ref<Filters>({ ...props.modelValue });
 
-function onDesktopFiltersUpdate(newFilters: Filters) {
+const onDesktopFiltersUpdate = (newFilters: Filters) => {
   emit("update:modelValue", newFilters);
-}
+};
 
-function onMobileFiltersUpdate(newFilters: Filters) {
+const onMobileFiltersUpdate = (newFilters: Filters) => {
   localFilters.value = newFilters;
-}
+};
 
 const openMobileFilters = () => {
   localFilters.value = { ...props.modelValue };
@@ -93,9 +94,12 @@ watch(
     display: flex;
     gap: 8px;
     align-items: center;
-    margin-bottom: 24px;
-    font-size: 16px;
-    font-weight: $fw-bold;
+    padding-left: 0;
+    margin-bottom: 16px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: $fw-regular;
+    line-height: 20px;
     color: theme-color("accent-color");
     cursor: pointer;
     background: none;

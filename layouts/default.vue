@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <HeaderComponent @open-sidebar="mainMenuSidebar.open()" />
+    <HeaderComponent @open-sidebar="openSidebar" />
 
     <main class="page-contant-slot">
       <slot />
@@ -9,8 +9,8 @@
     <FooterComponent />
 
     <AppSidebar
-      :is-open="mainMenuSidebar.isOpen.value"
-      @close="mainMenuSidebar.close()"
+      :is-open="isSidebarOpen"
+      @close="closeSidebar"
     />
   </div>
 </template>
@@ -20,9 +20,13 @@ import AppSidebar from "~/components/layout/AppSidebar.vue";
 import { useBodyScrollLock } from "~/composables/useBodyScrollLock";
 import { createSidebarState } from "~/composables/useSidebar";
 
-const mainMenuSidebar = createSidebarState();
+const {
+  isOpen: isSidebarOpen,
+  open: openSidebar,
+  close: closeSidebar,
+} = createSidebarState();
 
-useBodyScrollLock(mainMenuSidebar.isOpen);
+useBodyScrollLock(isSidebarOpen);
 </script>
 
 <style lang="scss" scoped>

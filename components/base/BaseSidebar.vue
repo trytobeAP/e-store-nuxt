@@ -37,18 +37,16 @@
           <div class="header-actions">
             <slot name="headerActions" />
 
-            <button
-              class="action-icon close-btn"
+            <BaseButton
+              variant="plain"
               aria-label="Close menu"
               @click="$emit('close')"
             >
-              <ClientOnly>
-                <Icon
-                  name="mdi:close"
-                  size="28"
-                />
-              </ClientOnly>
-            </button>
+              <Icon
+                name="local-custom:cross-thin"
+                size="24"
+              />
+            </BaseButton>
           </div>
         </div>
 
@@ -124,12 +122,15 @@ const titleComponent = computed(() => (props.showLogo ? "div" : "h3"));
   justify-content: space-between;
   width: 100%;
   padding: 24px;
-  border-bottom: 1px solid theme-color("gray-light-color");
 }
 
 .panel-title {
   margin: 0;
+  font-family: "Allerta Stencil", sans-serif;
   font-size: 24px;
+  font-weight: $fw-regular;
+  line-height: 40px;
+  color: theme-color("opposite-color");
 
   a {
     color: inherit;

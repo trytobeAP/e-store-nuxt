@@ -8,11 +8,13 @@
 import { computed } from "vue";
 
 interface Props {
-  variant?: "primary" | "secondary" | "info" | "toggle";
+  variant?: "primary" | "secondary" | "info" | "toggle" | "plain";
+  isActive?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
+  isActive: false,
 });
 
 const buttonClasses = computed(() => ({
@@ -20,6 +22,8 @@ const buttonClasses = computed(() => ({
   "action-btn-secondary": props.variant === "secondary",
   "info-btn": props.variant === "info",
   "toggle-btn": props.variant === "toggle",
+  "plain-btn": props.variant === "plain",
+  "is-active": props.isActive,
 }));
 </script>
 
@@ -116,5 +120,28 @@ const buttonClasses = computed(() => ({
   background-color: theme-color("gray-light-color");
   border: none;
   border-radius: 50%;
+}
+
+.plain-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin: -4px;
+  color: theme-color("opposite-color");
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 5%;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgb(128 128 128 / 20%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid theme-color("accent-color");
+    outline-offset: 1px;
+  }
 }
 </style>

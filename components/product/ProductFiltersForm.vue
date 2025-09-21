@@ -4,13 +4,15 @@
       <BaseInput
         v-model="localSearchQuery"
         placeholder="Search..."
+        variant="line"
         clearable
-        icon-name="mdi:magnify"
+        icon-name="local-custom:search"
+        :iconColor="computedInputIconColor"
         icon-position="left"
       />
     </div>
 
-    <div class="filter-group">
+    <div class="filter-group category-group">
       <BaseSelect
         :model-value="modelValue.category"
         placeholder="Category"
@@ -21,7 +23,7 @@
       />
     </div>
 
-    <div class="filter-group">
+    <div class="filter-group sort-by-group">
       <BaseSelect
         :model-value="modelValue.sortBy"
         placeholder="Sort By"
@@ -32,11 +34,11 @@
       />
     </div>
 
-    <div class="filter-group">
+    <div class="filter-group price-slider-group">
       <BasePriceSlider
         :model-value="modelValue.priceRange"
         :min="0"
-        :max="1500"
+        :max="maxPrice"
         @update:model-value="debouncedPriceEmit.call($event)"
       />
     </div>
@@ -59,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onUnmounted } from "vue";
+import { ref, watch, computed, onUnmounted } from "vue";
 import { debounce } from "~/utils/debounce";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
@@ -68,11 +70,16 @@ const props = defineProps<{
   modelValue: Filters;
   categoryOptions: SelectOption[];
   sortOptions: SelectOption[];
+  maxPrice: number;
 }>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: Filters): void;
 }>();
+
+const localSearchQuery = ref(props.modelValue.searchQuery);
+
+const computedInputIconColor = computed(() => "var(--color-opposite-color)");
 
 function updateField<K extends keyof Filters>(key: K, value: Filters[K]) {
   const newFilters = {
@@ -82,25 +89,23 @@ function updateField<K extends keyof Filters>(key: K, value: Filters[K]) {
   emit("update:modelValue", newFilters);
 }
 
-const localSearchQuery = ref(props.modelValue.searchQuery);
-
-const debouncedSearchEmit = debounce((newValue: string) => {
-  updateField("searchQuery", newValue);
+const debouncedSearchEmit = debounce((query: string) => {
+  updateField("searchQuery", query);
 }, 500);
+
+watch(localSearchQuery, (newQuery) => {
+  debouncedSearchEmit.call(newQuery);
+});
 
 const debouncedPriceEmit = debounce((newRange: [number, number]) => {
   updateField("priceRange", newRange);
 }, 500);
 
-watch(localSearchQuery, (newValue) => {
-  debouncedSearchEmit.call(newValue);
-});
-
 watch(
   () => props.modelValue.searchQuery,
-  (newPropValue) => {
-    if (localSearchQuery.value !== newPropValue) {
-      localSearchQuery.value = newPropValue;
+  (newValue) => {
+    if (newValue !== localSearchQuery.value) {
+      localSearchQuery.value = newValue;
     }
   },
 );
@@ -118,8 +123,24 @@ onUnmounted(() => {
   gap: 8px;
 }
 
-div > .filter-group:not(:first-child) {
-  margin-top: 24px;
+.category-group {
+  margin-top: 40px;
+}
+
+.sort-by-group {
+  margin-top: 16px;
+}
+
+.price-slider-group {
+  margin-top: 40px;
+}
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  padding-top: 10px;
+  margin-top: 40px;
 }
 
 .search-group {
@@ -133,12 +154,5 @@ div > .filter-group:not(:first-child) {
     pointer-events: none;
     transform: translateY(-50%);
   }
-}
-
-.toggle-group {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 10px;
 }
 </style>

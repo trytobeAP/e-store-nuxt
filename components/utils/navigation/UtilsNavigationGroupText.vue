@@ -36,6 +36,7 @@ withDefaults(defineProps<Props>(), {
 
 .text-link {
   font-size: 16px;
+  font-weight: var(--text-nav-font-weight, #{$fw-medium});
   line-height: 27px;
 }
 </style>

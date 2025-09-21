@@ -1,7 +1,7 @@
 import { useBreakpoints } from "@vueuse/core";
 
 function getCssVarPx(name: string): number {
-  if (process.client) {
+  if (import.meta.client) {
     try {
       const value = getComputedStyle(document.documentElement).getPropertyValue(
         name,

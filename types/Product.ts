@@ -12,6 +12,8 @@ interface Product {
   category: string;
   image: string;
   rating?: ProductRating;
+  oldPrice?: number;
+  discountPercentage?: number;
 
   onSale?: boolean;
   inStock?: boolean;

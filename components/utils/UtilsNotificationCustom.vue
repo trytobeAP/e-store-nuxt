@@ -7,12 +7,10 @@
         :class="notificationClasses"
         role="alert"
       >
-        <ClientOnly>
-          <Icon
-            :name="iconName"
-            class="notification-icon"
-          />
-        </ClientOnly>
+        <Icon
+          :name="iconName"
+          class="notification-icon"
+        />
         <span class="notification-text">{{ message }}</span>
       </div>
     </Transition>
@@ -21,18 +19,19 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-
-type NotificationType = "error" | "success" | "info";
-type NotificationMode = "fixed" | "inline";
+import {
+  NotificationTypeEnum,
+  type NotificationMode,
+} from "~/types/notification";
 
 const props = withDefaults(
   defineProps<{
     message: string;
-    type?: NotificationType;
+    type?: NotificationTypeEnum;
     mode?: NotificationMode;
   }>(),
   {
-    type: "info",
+    type: NotificationTypeEnum.Info,
     mode: "fixed",
   },
 );
@@ -45,11 +44,10 @@ const notificationClasses = computed(() => ({
 
 const iconName = computed(() => {
   switch (props.type) {
-    case "error":
+    case NotificationTypeEnum.Error:
       return "mdi:alert-circle-outline";
-    case "success":
+    case NotificationTypeEnum.Success:
       return "mdi:check-circle-outline";
-    case "info":
     default:
       return "mdi:information-outline";
   }

@@ -17,16 +17,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import ProductCard from "./ProductCard.vue";
 import BasePagination from "~/components/base/BasePagination.vue";
 import type { Product } from "~/types/Product";
 
 const props = defineProps<{
   products: Product[];
+  currentPage: number;
 }>();
 
-const currentPage = ref(1);
+const emit = defineEmits<{
+  (e: "page-changed", page: number): void;
+}>();
+
 const itemsPerPage = 6;
 
 const totalPages = computed(() => {
@@ -34,13 +38,13 @@ const totalPages = computed(() => {
 });
 
 const displayedProducts = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
+  const start = (props.currentPage - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   return props.products.slice(start, end);
 });
 
 const updatePage = (newPage: number) => {
-  currentPage.value = newPage;
+  emit("page-changed", newPage);
 };
 </script>
 
@@ -52,11 +56,17 @@ const updatePage = (newPage: number) => {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 70px 24px;
+  align-items: stretch;
 
   @media (max-width: ($breakpoints-l - 1px)) {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px 16px;
+  }
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    padding-top: 0;
   }
 }
 

@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxtjs/google-fonts",
   ],
-  css: ["~/assets/scss/main.scss"],
+  css: ["~/assets/scss/main.scss", "nouislider/dist/nouislider.css"],
   googleFonts: {
     display: "swap",
     families: {
@@ -72,5 +72,11 @@ export default defineNuxtConfig({
   },
   icon: {
     collections: ["mdi", "material-symbols", "majesticons", "ri", "fa6-solid"],
+    customCollections: [
+      {
+        prefix: "local-custom",
+        dir: "./assets/icons",
+      },
+    ],
   },
 });

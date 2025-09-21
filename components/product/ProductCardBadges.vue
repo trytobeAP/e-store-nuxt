@@ -1,26 +1,26 @@
 <template>
-  <div>
-    <div
-      v-if="onSale && inStock"
-      class="sale-badge"
-    >
-      On Sale
-    </div>
+  <div
+    v-if="onSale && discountPercentage"
+    class="sale-badge"
+  >
+    -{{ discountPercentage }}%
+  </div>
 
-    <div
-      v-if="!inStock"
-      class="badge-overlay"
-    >
-      <span class="sold-out-badge">Sold Out</span>
-    </div>
+  <div
+    v-if="!inStock"
+    class="badge-overlay"
+  >
+    <span class="sold-out-badge">Sold Out</span>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface Props {
   onSale?: boolean;
   inStock?: boolean;
-}>();
+  discountPercentage?: number;
+}
+defineProps<Props>();
 </script>
 
 <style scoped lang="scss">
@@ -29,10 +29,11 @@ defineProps<{
   top: 16px;
   left: 16px;
   z-index: 1;
-  padding: 6px 12px;
+  padding: 2px 6px;
+  font-family: "DM Sans", sans-serif;
   font-size: 12px;
-  font-weight: $fw-bold;
-  line-height: 1;
+  font-weight: $fw-regular;
+  line-height: 20px;
   color: theme-color("white-color");
   background-color: theme-color("accent-color");
   border-radius: 4px;
@@ -56,11 +57,16 @@ defineProps<{
 }
 
 .sold-out-badge {
-  padding: 8px 16px;
-  font-weight: $fw-bold;
-  color: theme-color("opposite-color");
-  background-color: theme-color("main-color");
-  border: 1px solid theme-color("opposite-color");
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 2px 6px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: $fw-regular;
+  line-height: 20px;
+  color: theme-color("white-color");
+  background-color: theme-color("accent-color");
   border-radius: 4px;
 }
 </style>

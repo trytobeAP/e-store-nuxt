@@ -10,7 +10,7 @@ export const createSidebarState = () => {
   const toggle = () => (isOpen.value = !isOpen.value);
 
   watch(isOpen, (isNowOpen) => {
-    if (process.client) {
+    if (import.meta.client) {
       document.body.classList.toggle("body-no-scroll", isNowOpen);
     }
   });

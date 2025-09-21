@@ -1,7 +1,11 @@
 <template>
-  <label class="toggle-wrapper">
+  <label
+    class="toggle-wrapper"
+    :for="id"
+  >
     <span class="toggle-label"><slot /></span>
     <input
+      :id="id"
       v-model="model"
       type="checkbox"
       class="toggle-input"
@@ -13,7 +17,11 @@
 </template>
 
 <script setup lang="ts">
+import { useId } from "#imports";
+
 const model = defineModel<boolean>();
+
+const id = useId();
 </script>
 
 <style scoped lang="scss">
@@ -36,20 +44,20 @@ const model = defineModel<boolean>();
 
 .toggle-switch-bg {
   position: relative;
-  width: 50px;
-  height: 28px;
-  background-color: theme-color("gray-color");
+  width: 33px;
+  height: 20px;
+  background-color: theme-color("toggle-background-color");
   border-radius: 14px;
   transition: background-color 0.2s ease;
 }
 
 .toggle-switch-handle {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 24px;
-  height: 24px;
-  background-color: theme-color("white-color");
+  top: 20%;
+  left: 10%;
+  width: 12px;
+  height: 12px;
+  background-color: theme-color("main-color");
   border-radius: 50%;
   transition: transform 0.2s ease;
 }
@@ -59,6 +67,6 @@ const model = defineModel<boolean>();
 }
 
 .toggle-input:checked + .toggle-switch-bg .toggle-switch-handle {
-  transform: translateX(22px);
+  transform: translateX(14px);
 }
 </style>

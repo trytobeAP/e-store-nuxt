@@ -1,5 +1,5 @@
 <template>
-  <div class="container product-page">
+  <div class="product-page">
     <div v-if="pending">Loading product...</div>
     <div v-else-if="error">
       <h2>Error. Product not found</h2>

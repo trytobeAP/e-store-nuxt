@@ -1,7 +1,7 @@
 <template>
   <div
     class="input-wrapper"
-    :class="[`icon-position-${iconPosition}`]"
+    :class="[`variant-${variant}`, `icon-position-${iconPosition}`]"
   >
     <input
       v-model="model"
@@ -9,28 +9,21 @@
       :type="type"
       :placeholder="placeholder"
     />
-    <ClientOnly>
-      <button
-        v-if="showClearIcon"
-        class="icon-btn clear-btn"
-        @click="clearInput"
-      >
-        <Icon
-          name="mdi:close"
-          size="20"
-        />
-      </button>
 
-      <span
-        v-else-if="iconName"
-        class="icon-btn default-icon"
-      >
-        <Icon
-          :name="iconName"
-          size="24"
-        />
-      </span>
-    </ClientOnly>
+    <component
+      :is="isButton ? 'button' : 'span'"
+      class="icon-container"
+      :class="{ 'clear-btn': isButton }"
+      :aria-label="isButton ? 'Clear input' : undefined"
+      :style="iconStyle"
+      @click="isButton ? clearInput() : null"
+    >
+      <Icon
+        v-if="currentIconName"
+        :name="currentIconName"
+        :size="isButton ? 20 : 24"
+      />
+    </component>
   </div>
 </template>
 
@@ -53,26 +46,38 @@ type InputType =
 interface Props {
   type?: InputType;
   placeholder?: string;
+  variant?: "default" | "line";
   iconName?: string;
   iconPosition?: "left" | "right";
+  iconColor?: string;
   clearable?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   placeholder: "",
+  variant: "default",
   iconName: "",
-  clearable: false,
   iconPosition: "left",
+  iconColor: undefined,
+  clearable: false,
 });
 
 const model = defineModel<string | number>();
 
-function clearInput() {
+const clearInput = () => {
   model.value = typeof model.value === "number" ? 0 : "";
-}
+};
 
-const showClearIcon = computed(() => props.clearable && model.value);
+const isButton = computed(() => props.clearable && !!model.value);
+
+const currentIconName = computed(() => {
+  return isButton.value ? "mdi:close" : props.iconName;
+});
+
+const iconStyle = computed(() => {
+  return props.iconColor ? { color: props.iconColor } : {};
+});
 </script>
 
 <style scoped lang="scss">
@@ -84,15 +89,11 @@ const showClearIcon = computed(() => props.clearable && model.value);
 .base-input {
   width: 100%;
   height: 48px;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding: 0 16px;
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
-  color: theme-color("gray-dark-color");
-  background-color: theme-color("gray-light-color");
-  border: 1px solid transparent;
-  border-radius: 8px;
-  transition: border-color 0.2s ease;
+  color: theme-color("opposite-color");
+  transition: all 0.2s ease;
 
   &::placeholder {
     color: theme-color("gray-dark-color");
@@ -100,47 +101,71 @@ const showClearIcon = computed(() => props.clearable && model.value);
 
   &:focus {
     outline: none;
-    border-color: theme-color("accent-color");
   }
 }
 
-.icon-position-left .base-input {
-  padding-left: 48px;
+.variant-line .base-input {
+  height: 40px;
+  padding: 0 32px 0 8px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid theme-color("gray-color");
+  border-radius: 0;
 }
 
-.icon-position-right .base-input {
-  padding-right: 48px;
+.variant-default .base-input {
+  padding: 0 48px;
+  background-color: theme-color("gray-light-color");
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  [data-theme="dark"] & {
+    background-color: theme-color("gray-theme-complimentary-color");
+  }
 }
 
-.icon-btn {
+.variant-default .base-input:focus {
+  border-color: theme-color("opposite-color");
+}
+
+.variant-line .base-input:focus {
+  border-bottom-color: theme-color("opposite-color");
+}
+
+.icon-container {
   position: absolute;
   top: 50%;
-  z-index: 2;
   display: flex;
   align-items: center;
+  padding: 0;
   color: theme-color("gray-dark-color");
+  background: none;
+  border: none;
   transform: translateY(-50%);
 }
 
-.icon-position-left .icon-btn {
+.variant-default .icon-container {
   left: 14px;
 }
 
-.icon-position-right .icon-btn {
-  right: 12px;
+.variant-line .icon-container {
+  right: 0;
 }
 
-.default-icon {
+.icon-container.clear-btn {
+  cursor: pointer;
+}
+
+.variant-default .icon-container.clear-btn {
+  right: 14px;
+  left: auto;
+}
+
+.icon-container:not(.clear-btn) {
   pointer-events: none;
 }
 
-.clear-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-
-  &:hover {
-    color: theme-color("accent-color");
-  }
+.icon-container.clear-btn:hover {
+  color: theme-color("opposite-color");
 }
 </style>

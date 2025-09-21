@@ -4,16 +4,14 @@
     class="pagination"
   >
     <button
-      :disabled="currentPage === 1"
+      v-if="currentPage > 1"
       class="page-btn"
       @click="changePage(currentPage - 1)"
     >
-      <ClientOnly>
-        <Icon
-          name="mdi:chevron-left"
-          size="20"
-        />
-      </ClientOnly>
+      <Icon
+        name="local-custom:arrow-corner-left"
+        size="12"
+      />
     </button>
 
     <button
@@ -27,13 +25,13 @@
     </button>
 
     <button
-      :disabled="currentPage === totalPages"
+      v-if="currentPage < totalPages"
       class="page-btn"
       @click="changePage(currentPage + 1)"
     >
       <Icon
-        name="mdi:chevron-right"
-        size="20"
+        name="local-custom:arrow-corner-right"
+        size="14"
       />
     </button>
   </div>
@@ -58,7 +56,7 @@ const pages = computed(() => {
 });
 
 const changePage = (page: number | string) => {
-  if (typeof page === "number" && page !== props.currentPage) {
+  if (page !== props.currentPage) {
     emit("page-changed", page);
   }
 };
@@ -67,7 +65,7 @@ const changePage = (page: number | string) => {
 <style scoped lang="scss">
 .pagination {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
   justify-content: center;
   margin-top: 86px;
@@ -95,14 +93,24 @@ const changePage = (page: number | string) => {
   justify-content: center;
   width: 44px;
   height: 44px;
-  font-size: 16px;
-  font-weight: $fw-medium;
+  font-size: 14px;
+  font-weight: $fw-regular;
+  line-height: 22px;
   color: theme-color("opposite-color");
   cursor: pointer;
   background-color: theme-color("main-color");
-  border: 1px solid theme-color("gray-color");
+  border: 1px solid theme-color("gray-theme-complimentary-color");
   border-radius: 4px;
   transition: all 0.2s ease;
+
+  &:disabled {
+    color: theme-color("gray-theme-complimentary-color");
+    cursor: not-allowed;
+
+    :deep(svg) {
+      fill: theme-color("gray-theme-complimentary-color");
+    }
+  }
 
   &:hover:not(:disabled) {
     border-color: theme-color("opposite-color");
@@ -112,11 +120,10 @@ const changePage = (page: number | string) => {
     color: theme-color("main-color");
     background-color: theme-color("opposite-color");
     border-color: theme-color("opposite-color");
-  }
 
-  &:disabled:not(.is-active) {
-    color: theme-color("gray-color");
-    cursor: not-allowed;
+    :deep(svg) {
+      fill: theme-color("main-color");
+    }
   }
 }
 </style>

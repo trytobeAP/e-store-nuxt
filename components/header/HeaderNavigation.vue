@@ -11,9 +11,7 @@
         :items="iconNavItems"
       />
       <div class="theme-switcher-wrapper">
-        <ClientOnly>
-          <ThemeSwitcher />
-        </ClientOnly>
+        <ThemeSwitcher />
       </div>
     </span>
   </nav>
@@ -33,9 +31,9 @@ const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
 }));
 
 const iconNavItems: IconNavItem[] = [
-  { linkSlug: "search", iconName: "material-symbols:search" },
-  { linkSlug: "cart", iconName: "material-symbols:shopping-cart" },
-  { linkSlug: "account", iconName: "material-symbols:person" },
+  { linkSlug: "search", iconName: "local-custom:search" },
+  { linkSlug: "cart", iconName: "local-custom:cart" },
+  { linkSlug: "account", iconName: "local-custom:account" },
 ];
 </script>
 
@@ -95,9 +93,7 @@ const iconNavItems: IconNavItem[] = [
 .header-text-nav {
   gap: 64px;
 
-  :deep(.text-link) {
-    font-weight: $fw-medium;
-  }
+  --text-nav-font-weight: #{$fw-regular};
 }
 
 .header-icon-nav {
