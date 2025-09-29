@@ -31,7 +31,7 @@ const props = withDefaults(
     mode?: NotificationMode;
   }>(),
   {
-    type: NotificationTypeEnum.Info,
+    type: NotificationTypeEnum.INFO,
     mode: "fixed",
   },
 );
@@ -44,9 +44,9 @@ const notificationClasses = computed(() => ({
 
 const iconName = computed(() => {
   switch (props.type) {
-    case NotificationTypeEnum.Error:
+    case NotificationTypeEnum.ERROR:
       return "mdi:alert-circle-outline";
-    case NotificationTypeEnum.Success:
+    case NotificationTypeEnum.SUCCESS:
       return "mdi:check-circle-outline";
     default:
       return "mdi:information-outline";

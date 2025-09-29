@@ -121,7 +121,7 @@ const titleComponent = computed(() => (props.showLogo ? "div" : "h3"));
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 24px;
+  padding: 24px 24px 32px;
 }
 
 .panel-title {
@@ -158,7 +158,7 @@ const titleComponent = computed(() => (props.showLogo ? "div" : "h3"));
 
 .sidebar-content-wrapper {
   flex-grow: 1;
-  padding: 24px;
+  padding: 0 24px 24px;
   overflow-y: auto;
 }
 

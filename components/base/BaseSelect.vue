@@ -6,13 +6,13 @@
   >
     <button
       class="select-trigger"
-      :class="{ 'has-value': !!modelValue }"
+      :class="{ 'has-value': !!model }"
       @click="toggleDropdown"
     >
       {{ selectedLabel }}
       <span class="icon-wrapper">
         <span
-          v-if="clearable && modelValue"
+          v-if="clearable && model"
           class="icon-btn clear-btn"
           @click.stop="clearSelection"
         >
@@ -42,7 +42,7 @@
           v-for="option in options"
           :key="option.value"
           class="select-option"
-          :class="{ 'is-selected': modelValue === option.value }"
+          :class="{ 'is-selected': model === option.value }"
           @click="selectOption(option)"
         >
           {{ option.label }}
@@ -65,9 +65,10 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string | number | null): void;
   (e: "clear"): void;
 }>();
+
+const model = defineModel<string | number | null>();
 
 const isOpen = ref(false);
 const selectWrapper = ref(null);
@@ -79,17 +80,18 @@ const toggleDropdown = () => {
 };
 
 const selectOption = (option: SelectOption) => {
-  emit("update:modelValue", option.value);
+  model.value = option.value;
   isOpen.value = false;
 };
 
 const clearSelection = () => {
+  model.value = null;
   emit("clear");
   isOpen.value = false;
 };
 
 const selectedLabel = computed(() => {
-  const selected = props.options.find((opt) => opt.value === props.modelValue);
+  const selected = props.options.find((opt) => opt.value === model.value);
   return selected ? selected.label : props.placeholder || "Select...";
 });
 </script>

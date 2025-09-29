@@ -8,7 +8,7 @@
       :key="item.linkSlug"
       class="icon-link-group"
       :link="item.linkSlug"
-      :class="[linkClass, 'text-link', item.classes]"
+      :class="[linkClass, 'text-link']"
     >
       <Icon
         :name="item.iconName"

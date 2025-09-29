@@ -85,7 +85,8 @@ const addToCart = () => {
 .product-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .card-link {
@@ -102,13 +103,24 @@ const addToCart = () => {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  margin-top: 24px;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    margin-top: 12px;
+  }
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    margin-top: 6px;
+  }
 }
 
 .image-wrapper {
   position: relative;
+  flex-shrink: 0;
   width: 100%;
   aspect-ratio: 1 / 1;
-  margin-bottom: 6px;
+  margin-right: auto;
+  margin-left: auto;
   overflow: hidden;
   background-color: theme-color("gray-light-color");
   border-radius: 8px;
@@ -143,6 +155,7 @@ const addToCart = () => {
 
 .price-container {
   display: flex;
+  flex-shrink: 0;
   gap: 8px;
   align-items: baseline;
   margin-top: auto;

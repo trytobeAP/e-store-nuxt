@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="filters-form-wrapper">
     <div class="filter-group search-group">
       <BaseInput
         v-model="localSearchQuery"
@@ -117,22 +117,16 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+.filters-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .filter-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.category-group {
-  margin-top: 40px;
-}
-
-.sort-by-group {
-  margin-top: 16px;
-}
-
-.price-slider-group {
-  margin-top: 40px;
 }
 
 .toggle-group {
@@ -140,7 +134,6 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 42px;
   padding-top: 10px;
-  margin-top: 40px;
 }
 
 .search-group {

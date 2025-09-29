@@ -23,7 +23,6 @@ const buttonClasses = computed(() => ({
   "info-btn": props.variant === "info",
   "toggle-btn": props.variant === "toggle",
   "plain-btn": props.variant === "plain",
-  "is-active": props.isActive,
 }));
 </script>
 

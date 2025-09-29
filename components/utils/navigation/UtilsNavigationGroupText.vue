@@ -7,7 +7,7 @@
       v-for="item in items"
       :key="item.linkSlug"
       :link="`/${item.linkSlug}`"
-      :class="[linkClass, 'text-link', item.classes]"
+      :class="[linkClass, 'text-link']"
     >
       {{ item.content }}
     </UtilsNavigationItem>

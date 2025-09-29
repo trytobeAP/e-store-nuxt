@@ -74,7 +74,7 @@ const formStyle = computed(() => {
 });
 
 const statusMessage = ref("");
-const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.Info);
+const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.INFO);
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -96,23 +96,23 @@ const performSubscription = (formValues: { email: string }) => {
   switch (result) {
     case "success":
       statusMessage.value = `Success! ${formValues.email} added.`;
-      notificationType.value = NotificationTypeEnum.Success;
+      notificationType.value = NotificationTypeEnum.SUCCESS;
       resetForm();
       break;
     case "duplicate":
       statusMessage.value = `${formValues.email} is already subscribed!`;
-      notificationType.value = NotificationTypeEnum.Error;
+      notificationType.value = NotificationTypeEnum.ERROR;
       break;
     case "error":
       statusMessage.value = "Could not save email. Please try again later.";
-      notificationType.value = NotificationTypeEnum.Error;
+      notificationType.value = NotificationTypeEnum.ERROR;
       break;
   }
 
   if (statusMessage.value) {
     statusMessageTimeoutId = setTimeout(() => {
       statusMessage.value = "";
-      notificationType.value = NotificationTypeEnum.Info;
+      notificationType.value = NotificationTypeEnum.INFO;
       statusMessageTimeoutId = null;
     }, 3000);
   }

@@ -1,7 +1,7 @@
 export enum NotificationTypeEnum {
-  Error = "error",
-  Success = "success",
-  Info = "info",
+  ERROR = "error",
+  SUCCESS = "success",
+  INFO = "info",
 }
 
 export type NotificationMode = "fixed" | "inline";

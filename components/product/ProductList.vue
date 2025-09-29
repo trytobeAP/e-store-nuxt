@@ -5,6 +5,7 @@
         v-for="product in displayedProducts"
         :key="product.id"
         :product="product"
+        class="product-grid-item"
       />
     </div>
     <BasePagination
@@ -53,21 +54,23 @@ const updatePage = (newPage: number) => {
   width: 100%;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 70px 24px;
-  align-items: stretch;
+.product-grid-item {
+  margin: 0 12px 70px;
+
+  @media (min-width: $breakpoints-l) {
+    width: calc(100% / 3 - 24px);
+  }
 
   @media (max-width: ($breakpoints-l - 1px)) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 16px;
+    width: calc(100% / 2 - 24px);
+    margin-bottom: 40px;
   }
+}
 
-  @media (max-width: ($breakpoints-m - 1px)) {
-    padding-top: 0;
-  }
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
 }
 
 .pagination-container {

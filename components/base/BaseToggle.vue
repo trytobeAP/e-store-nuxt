@@ -49,17 +49,28 @@ const id = useId();
   background-color: theme-color("toggle-background-color");
   border-radius: 14px;
   transition: background-color 0.2s ease;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    width: 42px;
+    height: 25px;
+  }
 }
 
 .toggle-switch-handle {
   position: absolute;
   top: 20%;
-  left: 10%;
+  left: 12%;
   width: 12px;
   height: 12px;
   background-color: theme-color("main-color");
   border-radius: 50%;
   transition: transform 0.2s ease;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    left: 12%;
+    width: 15px;
+    height: 15px;
+  }
 }
 
 .toggle-input:checked + .toggle-switch-bg {
@@ -67,6 +78,10 @@ const id = useId();
 }
 
 .toggle-input:checked + .toggle-switch-bg .toggle-switch-handle {
-  transform: translateX(14px);
+  transform: translateX(13px);
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    transform: translateX(17px);
+  }
 }
 </style>

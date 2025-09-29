@@ -6,10 +6,10 @@
     />
 
     <div class="slider-label">
-      <span>Price: ${{ currentValues[0] }} - ${{ currentValues[1] }}</span>
+      <span>Price: ${{ modelValue[0] }} - ${{ modelValue[1] }}</span>
 
       <button
-        v-if="isResettable"
+        v-if="isNotEmpty"
         class="reset-button"
         @click="resetSlider"
       >
@@ -39,9 +39,8 @@ const emit = defineEmits(["update:modelValue"]);
 
 const sliderRef = ref<HTMLElement | null>(null);
 const sliderInstance = ref<NoUiSliderAPI | null>(null);
-const currentValues = ref<[number, number]>([...props.modelValue]);
 
-const isResettable = computed(() => {
+const isNotEmpty = computed(() => {
   return props.modelValue[0] > props.min || props.modelValue[1] < props.max;
 });
 
@@ -69,19 +68,19 @@ onMounted(() => {
   });
 
   sliderInstance.value.on("update", (values) => {
-    const [minVal, maxVal] = values.map(Number);
-    currentValues.value = [minVal, maxVal];
-    emit("update:modelValue", currentValues.value);
+    const [minVal, maxVal] = values.map(Number) as [number, number];
+    emit("update:modelValue", [minVal, maxVal]);
   });
 });
 
 watch(
   () => props.modelValue,
-  (newValue) => {
-    if (JSON.stringify(newValue) !== JSON.stringify(currentValues.value)) {
-      if (sliderInstance.value) {
-        sliderInstance.value.set(newValue);
-      }
+  (newValue, oldValue) => {
+    if (
+      sliderInstance.value &&
+      JSON.stringify(newValue) !== JSON.stringify(oldValue)
+    ) {
+      sliderInstance.value.set(newValue);
     }
   },
   { deep: true },

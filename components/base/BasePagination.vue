@@ -55,7 +55,7 @@ const pages = computed(() => {
   return pageNumbers;
 });
 
-const changePage = (page: number | string) => {
+const changePage = (page: number) => {
   if (page !== props.currentPage) {
     emit("page-changed", page);
   }

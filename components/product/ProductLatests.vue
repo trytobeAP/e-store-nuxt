@@ -1,36 +1,28 @@
 <template>
   <section class="featured-products-section">
-    <ClientOnly>
-      <h1 class="page-title"> {{ pageTitle }} </h1>
-    </ClientOnly>
+    <h1 class="page-title"> {{ pageTitle }} </h1>
 
-    <div
+    <ProductSkeletonList
       v-if="pending"
-      class="product-grid"
-    >
-      <ProductCardSkeleton
-        v-for="n in 6"
-        :key="`skel-${n}`"
-      />
-    </div>
-
+      :items-count="6"
+    />
     <UtilsNotificationCustom
       v-else-if="error"
       class="error-message"
       mode="inline"
-      :type="NotificationTypeEnum.Error"
+      :type="NotificationTypeEnum.ERROR"
       :message="errorMessage"
       :minWidth="288"
     />
-
     <div
-      v-else-if="randomProducts.length > 0"
+      v-else
       class="product-grid"
     >
       <ProductCard
         v-for="product in randomProducts"
         :key="product.id"
         :product="product"
+        class="product-grid-item"
       />
     </div>
   </section>
@@ -41,9 +33,6 @@ import { computed } from "vue";
 import { NotificationTypeEnum } from "~/types/notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
-import ProductCard from "~/components/product/ProductCard.vue";
-import ProductCardSkeleton from "~/components/product/ProductCardSkeleton.vue";
-
 const {
   data: allProducts,
   pending,
@@ -90,11 +79,9 @@ const errorMessage = computed(
 }
 
 .featured-products-section {
-  margin-top: 64px;
-  margin-bottom: 64px;
+  padding-top: 64px;
 
   @media (max-width: ($breakpoints-m - 1px)) {
-    margin-top: 48px;
     margin-bottom: 48px;
   }
 }
@@ -112,18 +99,21 @@ const errorMessage = computed(
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 70px 24px;
-  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
+}
 
-  @media (max-width: ($breakpoints-l - 1px)) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 16px;
+.product-grid-item {
+  margin: 0 12px 70px;
+
+  @media (min-width: $breakpoints-l) {
+    width: calc(100% / 3 - 24px);
   }
 
-  @media (max-width: ($breakpoints-m - 1px)) {
-    grid-template-columns: repeat(2, 1fr);
+  @media (max-width: ($breakpoints-l - 1px)) {
+    width: calc(100% / 2 - 24px);
+    margin-bottom: 40px;
   }
 }
 

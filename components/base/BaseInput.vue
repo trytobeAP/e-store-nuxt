@@ -11,17 +11,17 @@
     />
 
     <component
-      :is="isButton ? 'button' : 'span'"
+      :is="iconAsButton ? 'button' : 'span'"
       class="icon-container"
-      :class="{ 'clear-btn': isButton }"
-      :aria-label="isButton ? 'Clear input' : undefined"
+      :class="{ 'clear-btn': iconAsButton }"
+      :aria-label="iconAsButton ? 'Clear input' : undefined"
       :style="iconStyle"
-      @click="isButton ? clearInput() : null"
+      @click="iconAsButton ? clearInput() : null"
     >
       <Icon
         v-if="currentIconName"
         :name="currentIconName"
-        :size="isButton ? 20 : 24"
+        :size="iconAsButton ? 20 : 24"
       />
     </component>
   </div>
@@ -69,10 +69,10 @@ const clearInput = () => {
   model.value = typeof model.value === "number" ? 0 : "";
 };
 
-const isButton = computed(() => props.clearable && !!model.value);
+const iconAsButton = computed(() => props.clearable && !!model.value);
 
 const currentIconName = computed(() => {
-  return isButton.value ? "mdi:close" : props.iconName;
+  return iconAsButton.value ? "mdi:close" : props.iconName;
 });
 
 const iconStyle = computed(() => {

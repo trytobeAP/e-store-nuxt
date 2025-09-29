@@ -30,21 +30,16 @@
       />
 
       <div class="shop-products">
-        <div
+        <ProductSkeletonList
           v-if="pending"
-          class="product-grid"
-        >
-          <ProductCardSkeleton
-            v-for="n in 6"
-            :key="`skel-${n}`"
-          />
-        </div>
+          :items-count="6"
+        />
 
         <UtilsNotificationCustom
           v-else-if="error"
           class="error-message"
           mode="inline"
-          :type="NotificationTypeEnum.Error"
+          :type="NotificationTypeEnum.ERROR"
           :message="errorMessage"
           :minWidth="288"
         />
@@ -106,11 +101,12 @@ const {
   error,
 } = useProducts({ server: false, lazy: true });
 
-const priceSliderMinPrice = 0;
+const PRICE_SLIDER_MIN_PRICE = 0;
+const PRICE_SLIDER_MAX_PRICE = 1500;
 
 const maxProductPrice = computed(() => {
   if (!allProducts.value || allProducts.value.length === 0) {
-    return 1500;
+    return PRICE_SLIDER_MAX_PRICE;
   }
   const max = Math.max(...allProducts.value.map((p) => p.price));
   return Math.ceil(max / 100) * 100;
@@ -124,7 +120,7 @@ const activeFilters = computed<Filters>({
       category: validateOptionQuery(query.category, categoryOptions, null),
       sortBy: validateOptionQuery(query.sortBy, sortOptions, null),
       priceRange: [
-        validateNumberQuery(query.minPrice, priceSliderMinPrice),
+        validateNumberQuery(query.minPrice, PRICE_SLIDER_MIN_PRICE),
         Math.min(
           validateNumberQuery(query.maxPrice, maxProductPrice.value),
           maxProductPrice.value,
@@ -151,7 +147,7 @@ const activeFilters = computed<Filters>({
     if (newFilters.searchQuery) query.searchQuery = newFilters.searchQuery;
     if (newFilters.category) query.category = newFilters.category;
     if (newFilters.sortBy) query.sortBy = newFilters.sortBy;
-    if (newFilters.priceRange[0] > priceSliderMinPrice)
+    if (newFilters.priceRange[0] > PRICE_SLIDER_MIN_PRICE)
       query.minPrice = String(newFilters.priceRange[0]);
     if (newFilters.priceRange[1] < maxProductPrice.value)
       query.maxPrice = String(newFilters.priceRange[1]);
@@ -164,7 +160,7 @@ const activeFilters = computed<Filters>({
   },
 });
 
-const currentPage = computed<number>({
+const currentPage = computed({
   get() {
     return validateNumberQuery(route.query.page, 1);
   },
@@ -255,11 +251,12 @@ const errorMessage = computed(
 
 <style lang="scss" scoped>
 .page-title {
+  width: 252px;
   margin-top: 96px;
   margin-bottom: 38px;
   font-family: "DM Sans", sans-serif;
   font-size: 33px;
-  font-weight: $fw-bold;
+  font-weight: $fw-medium;
   line-height: 43px;
   text-align: start;
 
@@ -277,30 +274,41 @@ const errorMessage = computed(
 }
 
 .shop-layout {
-  display: grid;
-  grid-template-columns: 262px 1fr;
+  display: flex;
+  flex-direction: row;
   gap: 48px;
   align-items: start;
 
   @media (max-width: ($breakpoints-m - 1px)) {
-    display: flex;
     flex-direction: column;
     gap: 0;
   }
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  gap: 70px 24px;
-  align-items: start;
-
-  @media (max-width: ($breakpoints-l - 1px)) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 16px;
-  }
+.shop-products {
+  flex: 1;
+  width: 100%;
+  margin: 0 -12px;
 }
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+// :deep(.shop-grid-item) {
+//   margin: 0 12px 70px;
+
+//   @media (min-width: $breakpoints-l) {
+//     width: calc(100% / 3 - 24px);
+//   }
+
+//   @media (max-width: ($breakpoints-l - 1px)) {
+//     width: calc(100% / 2 - 24px);
+//     margin-bottom: 40px;
+//   }
+// }
 
 .error-message {
   margin: 40px 0;
