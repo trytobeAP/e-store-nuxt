@@ -19,11 +19,10 @@ const categoryName = "watch";
 
 export default function useCarouselImages(): UseCarouselImagesReturn {
   const images = ref<CarouselImage[]>([]);
-  const isLoading = ref(false);
+  const isLoading = ref(true);
   const error = ref<string | null>(null);
 
   const fetchImages = async () => {
-    isLoading.value = true;
     error.value = null;
     const fetched: CarouselImage[] = [];
 

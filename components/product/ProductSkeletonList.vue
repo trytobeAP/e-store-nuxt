@@ -20,17 +20,30 @@ withDefaults(defineProps<{ itemsCount?: number }>(), {
 .product-grid {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -12px;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    gap: 24px;
+  }
+
+  @media (min-width: $breakpoints-m) {
+    margin: 0 -12px;
+  }
 }
 
 .product-grid-item {
-  margin: 0 12px 70px;
+  @media (max-width: ($breakpoints-m - 1px)) {
+    width: calc(50% - 12px);
+  }
+
+  @media (min-width: $breakpoints-m) {
+    margin: 0 12px 70px;
+  }
 
   @media (min-width: $breakpoints-l) {
     width: calc(100% / 3 - 24px);
   }
 
-  @media (max-width: ($breakpoints-l - 1px)) {
+  @media (max-width: ($breakpoints-l - 1px)) and (min-width: $breakpoints-m) {
     width: calc(100% / 2 - 24px);
     margin-bottom: 40px;
   }

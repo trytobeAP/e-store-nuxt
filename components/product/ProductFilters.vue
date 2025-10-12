@@ -88,22 +88,30 @@ watch(
 
 <style scoped lang="scss">
 .mobile-filters-trigger {
-  display: none;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-left: 0;
+  margin-bottom: 16px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: $fw-regular;
+  line-height: 20px;
+  color: theme-color("accent-color");
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  @media (min-width: ($breakpoints-m)) {
+    display: none;
+  }
 
   @media (max-width: ($breakpoints-m - 1px)) {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding-left: 0;
-    margin-bottom: 16px;
-    font-family: "DM Sans", sans-serif;
+    font-size: 20px;
+  }
+
+  @media (max-width: ($breakpoints-s - 1px)) {
     font-size: 12px;
-    font-weight: $fw-regular;
-    line-height: 20px;
-    color: theme-color("accent-color");
-    cursor: pointer;
-    background: none;
-    border: none;
   }
 }
 

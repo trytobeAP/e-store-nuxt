@@ -1,6 +1,6 @@
 <template>
   <section class="featured-products-section">
-    <h1 class="page-title"> {{ pageTitle }} </h1>
+    <h1 class="page-title"> Shop The Latest </h1>
 
     <ProductSkeletonList
       v-if="pending"
@@ -41,11 +41,6 @@ const {
 
 const { isMobile } = useAppBreakpoints();
 
-const pageTitle = computed(() => {
-  if (isMobile.value) return `Shop`;
-  return `Shop The Latest`;
-});
-
 const randomProducts = computed(() => {
   if (!allProducts.value || allProducts.value.length === 0) {
     return [];
@@ -70,11 +65,20 @@ const errorMessage = computed(
 .page-title {
   margin-top: 96px;
   margin-bottom: 38px;
+  font-size: 33px;
+  font-style: $fw-medium;
   text-align: start;
 
   @media (max-width: ($breakpoints-m - 1px)) {
     margin-top: 24px;
     margin-bottom: 16px;
+    font-size: 24px;
+    font-style: $fw-medium;
+  }
+
+  @media (max-width: ($breakpoints-s - 1px)) {
+    font-size: 16px;
+    font-style: $fw-regular;
   }
 }
 
@@ -82,6 +86,7 @@ const errorMessage = computed(
   padding-top: 64px;
 
   @media (max-width: ($breakpoints-m - 1px)) {
+    padding-top: 48px;
     margin-bottom: 48px;
   }
 }

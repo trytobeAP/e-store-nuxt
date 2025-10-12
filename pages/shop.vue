@@ -261,6 +261,14 @@ const errorMessage = computed(
   text-align: start;
 
   @media (max-width: ($breakpoints-m - 1px)) {
+    margin-top: 36px;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: $fw-regular;
+    line-height: 30px;
+  }
+
+  @media (max-width: ($breakpoints-s - 1px)) {
     margin-top: 24px;
     margin-bottom: 16px;
     font-size: 20px;
@@ -288,7 +296,10 @@ const errorMessage = computed(
 .shop-products {
   flex: 1;
   width: 100%;
-  margin: 0 -12px;
+
+  @media (min-width: $breakpoints-m) {
+    margin: 0 -12px;
+  }
 }
 
 .product-grid {
@@ -296,19 +307,6 @@ const errorMessage = computed(
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-
-// :deep(.shop-grid-item) {
-//   margin: 0 12px 70px;
-
-//   @media (min-width: $breakpoints-l) {
-//     width: calc(100% / 3 - 24px);
-//   }
-
-//   @media (max-width: ($breakpoints-l - 1px)) {
-//     width: calc(100% / 2 - 24px);
-//     margin-bottom: 40px;
-//   }
-// }
 
 .error-message {
   margin: 40px 0;
