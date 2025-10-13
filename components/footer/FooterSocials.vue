@@ -3,8 +3,8 @@
     <span class="socials-label">Follow us</span>
     <div class="socials-line" />
     <UtilsNavigationGroupIcon
-      :items="socialItems"
       link-class="social-link"
+      :items="socialItems"
     />
   </div>
 </template>
@@ -13,9 +13,9 @@
 import type { IconNavItem } from "~/types/NavItems";
 
 const socialItems: IconNavItem[] = [
-  { linkSlug: "https://facebook.com", iconName: "ri:facebook-fill" },
-  { linkSlug: "https://instagram.com", iconName: "mdi:instagram" },
-  { linkSlug: "https://twitter.com", iconName: "mdi:twitter" },
+  { linkSlug: "https://facebook.com", iconName: "local-custom:facebook" },
+  { linkSlug: "https://instagram.com", iconName: "local-custom:instagram" },
+  { linkSlug: "https://twitter.com", iconName: "local-custom:twitter" },
 ];
 </script>
 

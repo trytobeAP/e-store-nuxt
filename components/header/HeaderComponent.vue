@@ -14,7 +14,7 @@
           class="nav-link icon-link"
         >
           <Icon
-            name="material-symbols:shopping-cart-outline"
+            name="local-custom:cart"
             size="24"
           />
         </UtilsNavigationItem>
@@ -25,13 +25,12 @@
           @click="$emit('open-sidebar')"
         >
           <Icon
-            name="mdi:menu"
+            name="local-custom:burger-menu"
             size="24"
           />
         </button>
       </div>
     </div>
-    <BaseDivider />
   </header>
 </template>
 
@@ -92,6 +91,7 @@ defineEmits(["open-sidebar"]);
     :deep(.nav-link) {
       padding-bottom: 0;
       line-height: 1;
+      color: theme-color("opposite-color");
       border-bottom: none;
     }
   }

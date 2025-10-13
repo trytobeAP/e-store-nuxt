@@ -16,21 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import AppSidebar from "~/components/layout/AppSidebar.vue";
 import { useBodyScrollLock } from "~/composables/useBodyScrollLock";
+import { createSidebarState } from "~/composables/useSidebar";
 
-const isSidebarOpen = ref(false);
+const {
+  isOpen: isSidebarOpen,
+  open: openSidebar,
+  close: closeSidebar,
+} = createSidebarState();
 
 useBodyScrollLock(isSidebarOpen);
-
-const openSidebar = () => {
-  isSidebarOpen.value = true;
-};
-
-const closeSidebar = () => {
-  isSidebarOpen.value = false;
-};
 </script>
 
 <style lang="scss" scoped>

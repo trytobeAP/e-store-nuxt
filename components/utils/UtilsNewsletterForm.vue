@@ -34,19 +34,24 @@
       :disabled="isSubmitting || !isAgreementAccepted"
     >
       <Icon
-        name="material-symbols:arrow-right-alt-rounded"
-        size="24"
+        name="local-custom:arrow-right"
+        size="7"
       />
     </button>
   </form>
 
-  <UtilsNotificationCustom :message="statusMessage" />
+  <UtilsNotificationCustom
+    :message="statusMessage"
+    :type="notificationType"
+    mode="fixed"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, onUnmounted, computed } from "vue";
 import useForm from "~/composables/forms/useForm";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
+import { NotificationTypeEnum } from "~/types/notification";
 
 const { values, errors, isSubmitting, validateField, submitForm, resetForm } =
   useForm({
@@ -69,6 +74,7 @@ const formStyle = computed(() => {
 });
 
 const statusMessage = ref("");
+const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.INFO);
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -90,19 +96,23 @@ const performSubscription = (formValues: { email: string }) => {
   switch (result) {
     case "success":
       statusMessage.value = `Success! ${formValues.email} added.`;
+      notificationType.value = NotificationTypeEnum.SUCCESS;
       resetForm();
       break;
     case "duplicate":
       statusMessage.value = `${formValues.email} is already subscribed!`;
+      notificationType.value = NotificationTypeEnum.ERROR;
       break;
     case "error":
       statusMessage.value = "Could not save email. Please try again later.";
+      notificationType.value = NotificationTypeEnum.ERROR;
       break;
   }
 
   if (statusMessage.value) {
     statusMessageTimeoutId = setTimeout(() => {
       statusMessage.value = "";
+      notificationType.value = NotificationTypeEnum.INFO;
       statusMessageTimeoutId = null;
     }, 3000);
   }

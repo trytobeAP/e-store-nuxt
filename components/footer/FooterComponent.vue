@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <BaseDivider />
+    <BaseDivider class="footer-divider desktop-only-divider" />
 
     <div class="desktop-footer">
       <div class="d-flex justify-between footer-row">
@@ -15,10 +15,11 @@
       </div>
       <div class="d-flex justify-between footer-row">
         <FooterNavigationLicense class="footer-license-desktop" />
+
         <UtilsNavigationGroupIcon
           class="footer-icon-nav"
-          :items="socialItems"
           link-class="info-link"
+          :items="socialItems"
         />
       </div>
     </div>
@@ -27,9 +28,10 @@
       <div class="footer-section">
         <UtilsNewsletterForm
           max-width="400px"
-          :is-agreement-accepted="agreedToTerms"
+          :is-agreement-accepted="isAgreedToTerms"
         />
-        <BaseCheckbox v-model="agreedToTerms">
+
+        <BaseCheckbox v-model="isAgreedToTerms">
           i agree to the website's terms and conditions
         </BaseCheckbox>
       </div>
@@ -37,8 +39,8 @@
       <div class="footer-section">
         <UtilsNavigationGroupText
           class="footer-nav-mobile"
-          :items="desktopNavItems"
           link-class="info-link"
+          :items="desktopNavItems"
         />
       </div>
 
@@ -53,12 +55,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import FooterSocials from "~/components/footer/FooterSocials.vue";
 import BaseDivider from "~/components/base/BaseDivider.vue";
+import type { TextNavItem, IconNavItem } from "~/types/NavItems";
 
-const agreedToTerms = ref(false);
+const isAgreedToTerms = ref(false);
 
 const desktopNavItems: TextNavItem[] = [
   "contact",
@@ -77,6 +79,18 @@ const socialItems: IconNavItem[] = [
 </script>
 
 <style scoped lang="scss">
+.footer-divider {
+  margin-top: 40px;
+}
+
+.desktop-only-divider {
+  display: block;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    display: none;
+  }
+}
+
 .desktop-footer {
   display: flex;
   flex-direction: column;

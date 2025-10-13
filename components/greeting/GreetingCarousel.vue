@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div
-      v-if="isLoading"
-      class="greeting-loading"
-    >
-      Loading greetings...
-    </div>
+    <CarouselSkeleton v-if="isLoading" />
+
     <div
       v-else-if="error"
       class="greeting-error"
@@ -36,7 +32,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.greeting-loading,
 .greeting-error {
   padding: 40px;
   font-size: 1.2rem;

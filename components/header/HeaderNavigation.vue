@@ -31,9 +31,9 @@ const textNavItems: TextNavItem[] = initialTextItems.map((item) => ({
 }));
 
 const iconNavItems: IconNavItem[] = [
-  { linkSlug: "search", iconName: "material-symbols:search-rounded" },
-  { linkSlug: "cart", iconName: "material-symbols:shopping-cart-outline" },
-  { linkSlug: "account", iconName: "material-symbols:person-outline" },
+  { linkSlug: "search", iconName: "local-custom:search" },
+  { linkSlug: "cart", iconName: "local-custom:cart" },
+  { linkSlug: "account", iconName: "local-custom:account" },
 ];
 </script>
 
@@ -93,9 +93,7 @@ const iconNavItems: IconNavItem[] = [
 .header-text-nav {
   gap: 64px;
 
-  :deep(.text-link) {
-    font-weight: $fw-medium;
-  }
+  --text-nav-font-weight: #{$fw-regular};
 }
 
 .header-icon-nav {

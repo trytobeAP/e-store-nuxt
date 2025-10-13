@@ -8,7 +8,7 @@
       :key="item.linkSlug"
       class="icon-link-group"
       :link="item.linkSlug"
-      :class="[linkClass, 'text-link', item.classes]"
+      :class="[linkClass, 'text-link']"
     >
       <Icon
         :name="item.iconName"
@@ -19,11 +19,7 @@
 </template>
 
 <script setup lang="ts">
-interface IconNavItem {
-  linkSlug: string;
-  iconName: string;
-  classes?: string | string[] | Record<string, boolean>;
-}
+import type { IconNavItem } from "~/types/NavItems";
 
 interface Props {
   items: IconNavItem[];

@@ -17,10 +17,10 @@
     >
       <div class="slide-info">
         <h3
-          v-if="image.name"
+          v-if="image.title"
           class="slide-title"
         >
-          {{ image.name }}
+          {{ image.title }}
         </h3>
         <p
           v-if="image.price"

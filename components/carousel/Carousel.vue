@@ -336,6 +336,7 @@ onUnmounted(() => {
   width: 100%;
   aspect-ratio: 1000 / 600;
   overflow: hidden;
+  border-radius: 16px;
 
   @media (max-width: ($breakpoints-l - 1px)) {
     aspect-ratio: 800 / 500;

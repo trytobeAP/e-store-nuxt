@@ -4,12 +4,16 @@
       <BaseInput
         v-model="searchQuery"
         placeholder="Search"
-        icon-name="material-symbols:search-rounded"
+        icon-name="material-symbols:search"
         readonly
         @click="handleSearchClick"
       />
     </div>
-    <GreetingCarousel class="watch-carousel-container" />
+
+    <div class="home-content-wrapper">
+      <GreetingCarousel />
+      <ProductLatests />
+    </div>
   </div>
 </template>
 
@@ -31,6 +35,7 @@ const handleSearchClick = () => {
 @media (max-width: ($breakpoints-m - 1px)) {
   .mobile-search-container {
     display: block;
+    margin-bottom: 24px;
   }
 }
 
@@ -38,11 +43,9 @@ const handleSearchClick = () => {
   cursor: pointer;
 }
 
-.watch-carousel-container {
-  width: 100%;
+.home-content-wrapper {
   max-width: 1000px;
-  height: auto;
-  margin: 16px auto;
-  border-radius: 16px;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>

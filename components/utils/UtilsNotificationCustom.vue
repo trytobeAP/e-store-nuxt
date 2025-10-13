@@ -3,34 +3,106 @@
     <Transition name="fade">
       <div
         v-if="message"
-        class="custom-notification"
+        class="notification"
+        :class="notificationClasses"
         role="alert"
       >
-        {{ message }}
+        <Icon
+          :name="iconName"
+          class="notification-icon"
+        />
+        <span class="notification-text">{{ message }}</span>
       </div>
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  message: string;
-}>();
+import { computed } from "vue";
+import {
+  NotificationTypeEnum,
+  type NotificationMode,
+} from "~/types/notification";
+
+const props = withDefaults(
+  defineProps<{
+    message: string;
+    type?: NotificationTypeEnum;
+    mode?: NotificationMode;
+  }>(),
+  {
+    type: NotificationTypeEnum.INFO,
+    mode: "fixed",
+  },
+);
+
+const notificationClasses = computed(() => ({
+  "is-fixed": props.mode === "fixed",
+  "is-inline": props.mode === "inline",
+  [`type--${props.type}`]: true,
+}));
+
+const iconName = computed(() => {
+  switch (props.type) {
+    case NotificationTypeEnum.ERROR:
+      return "mdi:alert-circle-outline";
+    case NotificationTypeEnum.SUCCESS:
+      return "mdi:check-circle-outline";
+    default:
+      return "mdi:information-outline";
+  }
+});
 </script>
 
 <style scoped lang="scss">
-.custom-notification {
+.notification {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.notification-icon {
+  flex-shrink: 0;
+  font-size: 24px;
+}
+
+.is-fixed {
   position: fixed;
   bottom: 20px;
   left: 20px;
   z-index: 1000;
-  max-width: 300px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  color: theme-color(main-color);
-  background-color: theme-color(opposite-color);
-  border-radius: 5px;
+  max-width: 320px;
+  color: theme-color("main-color");
+  background-color: theme-color("opposite-color");
+  border-color: theme-color("opposite-color");
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.is-inline {
+  box-sizing: border-box;
+}
+
+.type--error {
+  color: theme-color("error-color");
+  background-color: rgb(216 39 0 / 10%);
+  border-color: theme-color("error-color");
+}
+
+.type--success {
+  color: green;
+  background-color: rgb(0 128 0 / 10%);
+  border-color: green;
+}
+
+.type--info {
+  color: #3498db;
+  background-color: rgb(52 152 219 / 10%);
+  border-color: #3498db;
 }
 
 .fade-enter-active,

@@ -2,7 +2,7 @@ interface CarouselImage {
   id: number | string;
   src: string;
   alt?: string;
-  name?: string;
+  title?: string;
   price?: number;
   productLink?: string;
 }

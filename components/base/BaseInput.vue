@@ -1,25 +1,35 @@
 <template>
   <div
     class="input-wrapper"
-    :class="{ 'has-icon': !!iconName }"
+    :class="[`variant-${variant}`, `icon-position-${iconPosition}`]"
   >
-    <Icon
-      v-if="iconName"
-      :name="iconName"
-      size="24"
-      class="input-icon"
-      aria-hidden="true"
-    />
     <input
       v-model="model"
       class="base-input"
       :type="type"
       :placeholder="placeholder"
     />
+
+    <component
+      :is="iconAsButton ? 'button' : 'span'"
+      class="icon-container"
+      :class="{ 'clear-btn': iconAsButton }"
+      :aria-label="iconAsButton ? 'Clear input' : undefined"
+      :style="iconStyle"
+      @click="iconAsButton ? clearInput() : null"
+    >
+      <Icon
+        v-if="currentIconName"
+        :name="currentIconName"
+        :size="iconAsButton ? 20 : 24"
+      />
+    </component>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 type InputType =
   | "text"
   | "number"
@@ -36,16 +46,38 @@ type InputType =
 interface Props {
   type?: InputType;
   placeholder?: string;
+  variant?: "default" | "line";
   iconName?: string;
+  iconPosition?: "left" | "right";
+  iconColor?: string;
+  clearable?: boolean;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   type: "text",
   placeholder: "",
+  variant: "default",
   iconName: "",
+  iconPosition: "left",
+  iconColor: undefined,
+  clearable: false,
 });
 
 const model = defineModel<string | number>();
+
+const clearInput = () => {
+  model.value = typeof model.value === "number" ? 0 : "";
+};
+
+const iconAsButton = computed(() => props.clearable && !!model.value);
+
+const currentIconName = computed(() => {
+  return iconAsButton.value ? "mdi:close" : props.iconName;
+});
+
+const iconStyle = computed(() => {
+  return props.iconColor ? { color: props.iconColor } : {};
+});
 </script>
 
 <style scoped lang="scss">
@@ -61,10 +93,7 @@ const model = defineModel<string | number>();
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
   color: theme-color("opposite-color");
-  background-color: theme-color("gray-light-color");
-  border: 1px solid transparent;
-  border-radius: 8px;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
 
   &::placeholder {
     color: theme-color("gray-dark-color");
@@ -72,20 +101,71 @@ const model = defineModel<string | number>();
 
   &:focus {
     outline: none;
-    border-color: theme-color("accent-color");
   }
 }
 
-.input-wrapper.has-icon .base-input {
-  padding-left: 48px;
+.variant-line .base-input {
+  height: 40px;
+  padding: 0 32px 0 8px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid theme-color("gray-color");
+  border-radius: 0;
 }
 
-.input-icon {
+.variant-default .base-input {
+  padding: 0 48px;
+  background-color: theme-color("gray-light-color");
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  [data-theme="dark"] & {
+    background-color: theme-color("gray-theme-complimentary-color");
+  }
+}
+
+.variant-default .base-input:focus {
+  border-color: theme-color("opposite-color");
+}
+
+.variant-line .base-input:focus {
+  border-bottom-color: theme-color("opposite-color");
+}
+
+.icon-container {
   position: absolute;
   top: 50%;
-  left: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0;
   color: theme-color("gray-dark-color");
-  pointer-events: none;
+  background: none;
+  border: none;
   transform: translateY(-50%);
+}
+
+.variant-default .icon-container {
+  left: 14px;
+}
+
+.variant-line .icon-container {
+  right: 0;
+}
+
+.icon-container.clear-btn {
+  cursor: pointer;
+}
+
+.variant-default .icon-container.clear-btn {
+  right: 14px;
+  left: auto;
+}
+
+.icon-container:not(.clear-btn) {
+  pointer-events: none;
+}
+
+.icon-container.clear-btn:hover {
+  color: theme-color("opposite-color");
 }
 </style>

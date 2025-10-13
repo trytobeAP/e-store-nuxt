@@ -2,10 +2,10 @@ import type { UseFetchOptions } from "#app";
 import { computed, unref } from "vue";
 import type { MaybeRef } from "vue";
 import { defu } from "defu";
-import { useApiFetch, type ApiResponse } from "~/composables/core/useApiFetch";
+import { useApiFetch } from "~/composables/core/useApiFetch";
 import type { Product } from "~/types/Product";
 
-type ProductApiResponse = ApiResponse<Product>;
+type ProductApiResponse = Product;
 
 export function useProduct(
   productId: MaybeRef<string | number | undefined | null>,
@@ -23,11 +23,10 @@ export function useProduct(
 
   const defaults: UseFetchOptions<ProductApiResponse> = {
     key: key.value ?? undefined,
+    immediate: false,
   };
 
   const mergedOptions = defu(options, defaults);
 
-  const fetchResult = useApiFetch<ProductApiResponse>(url, mergedOptions);
-
-  return fetchResult;
+  return useApiFetch<ProductApiResponse>(url, mergedOptions);
 }
