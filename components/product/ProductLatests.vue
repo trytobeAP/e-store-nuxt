@@ -2,29 +2,34 @@
   <section class="featured-products-section">
     <h1 class="page-title"> Shop The Latest </h1>
 
-    <ProductSkeletonList
-      v-if="pending"
-      :items-count="6"
-    />
-    <UtilsNotificationCustom
-      v-else-if="error"
-      class="error-message"
-      mode="inline"
-      :type="NotificationTypeEnum.ERROR"
-      :message="errorMessage"
-      :minWidth="288"
-    />
-    <div
-      v-else
-      class="product-grid"
-    >
-      <ProductCard
-        v-for="product in randomProducts"
-        :key="product.id"
-        :product="product"
-        class="product-grid-item"
+    <ClientOnly>
+      <ProductSkeletonList
+        v-if="pending"
+        :items-count="6"
       />
-    </div>
+      <UtilsNotificationCustom
+        v-else-if="error"
+        class="error-message"
+        mode="inline"
+        :type="NotificationTypeEnum.ERROR"
+        :message="errorMessage"
+        :minWidth="288"
+      />
+      <div
+        v-else
+        class="product-grid"
+      >
+        <ProductCard
+          v-for="product in randomProducts"
+          :key="product.id"
+          :product="product"
+          class="product-grid-item"
+        />
+      </div>
+      <template #fallback>
+        <ProductSkeletonList :items-count="6" />
+      </template>
+    </ClientOnly>
   </section>
 </template>
 
@@ -103,22 +108,35 @@ const errorMessage = computed(
   }
 }
 
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -12px;
-}
-
 .product-grid-item {
-  margin: 0 12px 70px;
+  @media (max-width: ($breakpoints-m - 1px)) {
+    width: calc(50% - 12px);
+  }
+
+  @media (min-width: $breakpoints-m) {
+    margin: 0 12px 70px;
+  }
 
   @media (min-width: $breakpoints-l) {
     width: calc(100% / 3 - 24px);
   }
 
-  @media (max-width: ($breakpoints-l - 1px)) {
+  @media (max-width: ($breakpoints-l - 1px)) and (min-width: $breakpoints-m) {
     width: calc(100% / 2 - 24px);
     margin-bottom: 40px;
+  }
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: ($breakpoints-m - 1px)) {
+    gap: 24px;
+  }
+
+  @media (min-width: $breakpoints-m) {
+    margin: 0 -12px;
   }
 }
 

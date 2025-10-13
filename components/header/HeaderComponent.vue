@@ -31,7 +31,6 @@
         </button>
       </div>
     </div>
-    <BaseDivider class="desktop-only-divider" />
   </header>
 </template>
 
@@ -111,14 +110,6 @@ defineEmits(["open-sidebar"]);
 
   &:focus-visible {
     border-radius: 4px;
-  }
-}
-
-.desktop-only-divider {
-  display: block;
-
-  @media (max-width: ($breakpoints-m - 1px)) {
-    display: none;
   }
 }
 </style>

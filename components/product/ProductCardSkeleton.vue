@@ -30,7 +30,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   margin-bottom: 24px;
-  border-radius: 4px;
+  border-radius: 8px;
   animation: pulse-bg 1.5s infinite ease-in-out;
 }
 

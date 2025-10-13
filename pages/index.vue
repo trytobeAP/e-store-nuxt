@@ -11,13 +11,8 @@
     </div>
 
     <div class="home-content-wrapper">
-      <ClientOnly>
-        <GreetingCarousel />
-        <ProductLatests />
-        <template #fallback>
-          <ProductLatestsFallback />
-        </template>
-      </ClientOnly>
+      <GreetingCarousel />
+      <ProductLatests />
     </div>
   </div>
 </template>
