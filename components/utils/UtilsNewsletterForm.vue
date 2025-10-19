@@ -7,21 +7,21 @@
   >
     <div class="input-wrapper">
       <input
-        id="newsletter-email"
+        :id="uniqueId"
         v-model="values.email"
-        type="email"
-        name="newsletter-email"
         class="newsletter-input"
+        type="email"
         placeholder="Give an email, get the newsletter."
         required
         aria-label="Email for newsletter"
+        :name="uniqueId"
         :aria-invalid="!!errors.email"
-        aria-describedby="newsletter-email-error"
+        :aria-describedby="errorId"
         @blur="() => validateField('email')"
       />
       <span
         v-if="errors.email"
-        id="newsletter-email-error"
+        :id="errorId"
         class="validation-error-message"
       >
         {{ errors.email }}
@@ -49,9 +49,10 @@
 
 <script setup lang="ts">
 import { ref, onUnmounted, computed } from "vue";
+import { useId } from "#imports";
 import useForm from "~/composables/forms/useForm";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
-import { NotificationTypeEnum } from "~/types/notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 
 const { values, errors, isSubmitting, validateField, submitForm, resetForm } =
   useForm({
@@ -65,6 +66,9 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const uniqueId = useId();
+const errorId = computed(() => `${uniqueId}-error`);
 
 const formStyle = computed(() => {
   return {
@@ -176,6 +180,7 @@ onUnmounted(() => {
   justify-content: center;
   padding-bottom: 10px;
   padding-left: 10px;
+  font-size: 12px;
   color: theme-color(link-color-light);
   cursor: pointer;
   background-color: transparent;

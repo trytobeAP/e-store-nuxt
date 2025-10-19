@@ -51,6 +51,7 @@ interface Props {
   iconPosition?: "left" | "right";
   iconColor?: string;
   clearable?: boolean;
+  clearIconName?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -61,6 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
   iconPosition: "left",
   iconColor: undefined,
   clearable: false,
+  clearIconName: "mdi:close",
 });
 
 const model = defineModel<string | number>();
@@ -72,7 +74,7 @@ const clearInput = () => {
 const iconAsButton = computed(() => props.clearable && !!model.value);
 
 const currentIconName = computed(() => {
-  return iconAsButton.value ? "mdi:close" : props.iconName;
+  return iconAsButton.value ? props.clearIconName : props.iconName;
 });
 
 const iconStyle = computed(() => {

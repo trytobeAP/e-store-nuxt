@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from "vue";
 import { useRoute, useRouter } from "#app";
-import { NotificationTypeEnum } from "~/types/notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
 import { debounce } from "~/utils/debounce";

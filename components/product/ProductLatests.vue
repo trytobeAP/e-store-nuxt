@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { NotificationTypeEnum } from "~/types/notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
 const {

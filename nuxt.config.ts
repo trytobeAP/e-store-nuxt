@@ -57,6 +57,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/fonts",
     "@nuxtjs/google-fonts",
+    "@pinia/nuxt",
   ],
   css: ["~/assets/scss/main.scss", "nouislider/dist/nouislider.css"],
   googleFonts: {

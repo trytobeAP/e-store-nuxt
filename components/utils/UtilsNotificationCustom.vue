@@ -22,7 +22,7 @@ import { computed } from "vue";
 import {
   NotificationTypeEnum,
   type NotificationMode,
-} from "~/types/notification";
+} from "~/types/Notification";
 
 const props = withDefaults(
   defineProps<{
