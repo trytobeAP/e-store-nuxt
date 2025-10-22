@@ -9,8 +9,8 @@
       />
 
       <div class="account-page__form">
-        <AuthLoginForm v-if="activeTab === 'login'" />
-        <AuthRegisterForm v-if="activeTab === 'register'" />
+        <AuthLoginForm v-if="activeTab === AuthTabs.LOGIN" />
+        <AuthRegisterForm v-if="activeTab === AuthTabs.REGISTER" />
       </div>
     </div>
   </div>
@@ -19,13 +19,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { definePageMeta } from "#imports";
-import type { AuthTab } from "~/types/AuthTab";
+import { AuthTabs } from "~/types/AuthTabs";
 
 definePageMeta({
   middleware: "guest",
 });
 
-const activeTab = ref<AuthTab>("login");
+const activeTab = ref<AuthTabs>(AuthTabs.LOGIN);
 </script>
 
 <style scoped lang="scss">

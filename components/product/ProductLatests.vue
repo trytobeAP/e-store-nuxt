@@ -46,6 +46,9 @@ const {
 
 const { isMobile } = useAppBreakpoints();
 
+const errorMessage =
+  "Oops! We couldn't load the products. Please check your connection and try again later.";
+
 const randomProducts = computed(() => {
   if (!allProducts.value || allProducts.value.length === 0) {
     return [];
@@ -59,11 +62,6 @@ const randomProducts = computed(() => {
 
   return productsShuffled.slice(0, numberOfProducts);
 });
-
-const errorMessage = computed(
-  () =>
-    "Oops! We couldn't load the products. Please check your connection and try again later.",
-);
 </script>
 
 <style scoped lang="scss">

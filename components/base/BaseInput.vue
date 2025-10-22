@@ -15,7 +15,6 @@
       class="icon-container"
       :class="{ 'clear-btn': iconAsButton }"
       :aria-label="iconAsButton ? 'Clear input' : undefined"
-      :style="iconStyle"
       @click="iconAsButton ? clearInput() : null"
     >
       <Icon
@@ -49,7 +48,6 @@ interface Props {
   variant?: "default" | "line";
   iconName?: string;
   iconPosition?: "left" | "right";
-  iconColor?: string;
   clearable?: boolean;
   clearIconName?: string;
 }
@@ -60,7 +58,6 @@ const props = withDefaults(defineProps<Props>(), {
   variant: "default",
   iconName: "",
   iconPosition: "left",
-  iconColor: undefined,
   clearable: false,
   clearIconName: "mdi:close",
 });
@@ -75,10 +72,6 @@ const iconAsButton = computed(() => props.clearable && !!model.value);
 
 const currentIconName = computed(() => {
   return iconAsButton.value ? props.clearIconName : props.iconName;
-});
-
-const iconStyle = computed(() => {
-  return props.iconColor ? { color: props.iconColor } : {};
 });
 </script>
 
@@ -140,7 +133,7 @@ const iconStyle = computed(() => {
   display: flex;
   align-items: center;
   padding: 0;
-  color: theme-color("gray-dark-color");
+  color: theme-color("gray-theme-complimentary-color");
   background: none;
   border: none;
   transform: translateY(-50%);

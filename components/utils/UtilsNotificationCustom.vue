@@ -1,19 +1,45 @@
 <template>
-  <div>
-    <Transition name="fade">
+  <Transition name="slide-down">
+    <div
+      v-if="message && mode === 'fixed'"
+      class="notification-wrapper-fixed"
+      role="alert"
+    >
       <div
-        v-if="message"
         class="notification"
         :class="notificationClasses"
-        role="alert"
       >
-        <Icon
-          :name="iconName"
-          class="notification-icon"
-        />
-        <span class="notification-text">{{ message }}</span>
+        <div class="notification__content">
+          <Icon
+            :name="iconName"
+            class="notification__icon"
+          />
+          <span class="notification__text">{{ message }}</span>
+        </div>
+        <NuxtLink
+          v-if="actionLink"
+          :to="actionLink"
+          class="notification__action-link"
+        >
+          {{ actionText }}
+        </NuxtLink>
       </div>
-    </Transition>
+    </div>
+  </Transition>
+
+  <div
+    v-if="message && mode === 'inline'"
+    class="notification notification--inline"
+    :class="notificationClasses"
+    role="alert"
+  >
+    <div class="notification__content">
+      <Icon
+        :name="iconName"
+        class="notification__icon"
+      />
+      <span class="notification__text">{{ message }}</span>
+    </div>
   </div>
 </template>
 
@@ -29,16 +55,18 @@ const props = withDefaults(
     message: string;
     type?: NotificationTypeEnum;
     mode?: NotificationMode;
+    actionLink?: string;
+    actionText?: string;
   }>(),
   {
     type: NotificationTypeEnum.INFO,
     mode: "fixed",
+    actionLink: "",
+    actionText: "VIEW",
   },
 );
 
 const notificationClasses = computed(() => ({
-  "is-fixed": props.mode === "fixed",
-  "is-inline": props.mode === "inline",
   [`type--${props.type}`]: true,
 }));
 
@@ -55,63 +83,101 @@ const iconName = computed(() => {
 </script>
 
 <style scoped lang="scss">
+.notification-wrapper-fixed {
+  position: fixed;
+  top: 16px;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
 .notification {
   display: flex;
-  gap: 12px;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1248px;
+  padding: 18px 24px;
+  margin: 0 24px;
+  pointer-events: auto;
+  background-color: theme-color("notification-bg-color");
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+}
+
+.notification--inline {
   max-width: 100%;
   padding: 12px 16px;
+  margin: 0;
   font-size: 1rem;
   border: 1px solid;
   border-radius: 8px;
+  box-shadow: none;
+
+  &.type--error {
+    color: theme-color("error-color");
+    background-color: rgb(216 39 0 / 10%);
+    border-color: theme-color("error-color");
+  }
+
+  &.type--success {
+    color: green;
+    background-color: rgb(0 128 0 / 10%);
+    border-color: green;
+  }
 }
 
-.notification-icon {
+.notification__content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.notification__icon {
   flex-shrink: 0;
   font-size: 24px;
 }
 
-.is-fixed {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-  max-width: 320px;
-  color: theme-color("main-color");
-  background-color: theme-color("opposite-color");
-  border-color: theme-color("opposite-color");
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+.notification__text {
+  font-size: 14px;
+  color: theme-color("opposite-color");
 }
 
-.is-inline {
-  box-sizing: border-box;
+.notification--inline .notification__text {
+  color: inherit;
 }
 
-.type--error {
+.notification__action-link {
+  font-size: 14px;
+  font-weight: $fw-bold;
+  color: theme-color("accent-color");
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.type--success .notification__icon {
+  color: theme-color("accent-color");
+}
+
+.type--error .notification__icon {
   color: theme-color("error-color");
-  background-color: rgb(216 39 0 / 10%);
-  border-color: theme-color("error-color");
 }
 
-.type--success {
-  color: green;
-  background-color: rgb(0 128 0 / 10%);
-  border-color: green;
+.notification--inline.type--error .notification__icon {
+  color: inherit;
 }
 
-.type--info {
-  color: #3498db;
-  background-color: rgb(52 152 219 / 10%);
-  border-color: #3498db;
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
+.slide-down-enter-from,
+.slide-down-leave-to {
   opacity: 0;
+  transform: translateY(calc(-100% - 16px));
 }
 </style>

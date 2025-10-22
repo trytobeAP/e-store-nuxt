@@ -61,27 +61,37 @@ const iconNavItemsBeforeAccount: IconNavItem[] = [
 const logoutInitiated = ref(false);
 let logoutTimer: ReturnType<typeof setTimeout> | null = null;
 
+const handleGuestClick = () => {
+  router.push("/account");
+};
+
+const handleFirstAuthClick = () => {
+  authStore.logout();
+  logoutInitiated.value = true;
+  logoutTimer = setTimeout(() => {
+    logoutInitiated.value = false;
+  }, 3000);
+};
+
+const handleSecondAuthClick = () => {
+  if (logoutTimer) {
+    clearTimeout(logoutTimer);
+    logoutTimer = null;
+  }
+  logoutInitiated.value = false;
+  router.push("/account");
+};
+
 const handleAccountClick = () => {
   if (!authStore.isAuthenticated) {
-    router.push("/account");
+    handleGuestClick();
     return;
   }
 
   if (logoutInitiated.value) {
-    router.push("/account");
-
-    logoutInitiated.value = false;
-    if (logoutTimer) {
-      clearTimeout(logoutTimer);
-    }
+    handleSecondAuthClick();
   } else {
-    authStore.logout();
-
-    logoutInitiated.value = true;
-
-    logoutTimer = setTimeout(() => {
-      logoutInitiated.value = false;
-    }, 3000);
+    handleFirstAuthClick();
   }
 };
 

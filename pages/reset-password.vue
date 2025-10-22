@@ -15,21 +15,14 @@
 
       <AuthResetPasswordForm @success="handleFormSuccess" />
     </div>
-
-    <UtilsNotificationCustom
-      v-if="notificationMessage"
-      :message="notificationMessage"
-      :type="notificationType"
-      mode="fixed"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from "vue";
-import { useAppBreakpoints } from "#imports";
+import { computed } from "vue";
+import { definePageMeta, useAppBreakpoints } from "#imports";
 import { NotificationTypeEnum } from "~/types/Notification";
-import { definePageMeta } from "#imports";
+import { useNotification } from "~/composables/useNotification";
 
 definePageMeta({
   middleware: "guest",
@@ -42,26 +35,14 @@ const pageTitle = computed(() => {
   return `Have you Forgotten Your Password\u00A0?`;
 });
 
-const notificationMessage = ref("");
-const notificationType = ref<NotificationTypeEnum>(
-  NotificationTypeEnum.SUCCESS,
-);
-let notificationTimeoutId: ReturnType<typeof setTimeout> | null = null;
+const { showNotification } = useNotification();
 
 const handleFormSuccess = () => {
-  notificationMessage.value = "We've sent a password reset link to your email.";
-  notificationType.value = NotificationTypeEnum.SUCCESS;
-
-  notificationTimeoutId = setTimeout(() => {
-    notificationMessage.value = "";
-  }, 5000);
+  showNotification(
+    "We've sent a password reset link to your email.",
+    NotificationTypeEnum.SUCCESS,
+  );
 };
-
-onUnmounted(() => {
-  if (notificationTimeoutId) {
-    clearTimeout(notificationTimeoutId);
-  }
-});
 </script>
 
 <style scoped lang="scss">

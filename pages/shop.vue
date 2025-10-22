@@ -58,7 +58,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from "vue";
 import { useRoute, useRouter } from "#app";
-import { NotificationTypeEnum } from "~/types/Notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
 import { debounce } from "~/utils/debounce";
@@ -68,6 +67,7 @@ import {
   validateStringQuery,
   validateBooleanQuery,
 } from "~/utils/queryValidators";
+import { NotificationTypeEnum } from "~/types/Notification";
 import type { LocationQueryRaw } from "vue-router";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
@@ -76,6 +76,9 @@ const { isMobile } = useAppBreakpoints();
 
 const route = useRoute();
 const router = useRouter();
+
+const errorMessage =
+  "Oops! We couldn't load the products. Please check your connection and try again later.";
 
 const pageTitle = computed(() => {
   if (isMobile.value) return `Shop`;
@@ -242,11 +245,6 @@ const filteredProducts = computed(() => {
 
   return tempProducts;
 });
-
-const errorMessage = computed(
-  () =>
-    "Oops! We couldn't load the products. Please check your connection and try again later.",
-);
 </script>
 
 <style lang="scss" scoped>

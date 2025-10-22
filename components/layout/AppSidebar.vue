@@ -66,7 +66,7 @@
         v-else
         :link="authAction.link!"
         class="sidebar-link"
-        @click="handleAuthActionClick"
+        @click="handleAuthLinkClick"
       >
         <Icon
           :name="authAction.icon"
@@ -79,10 +79,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "~/stores/auth";
 import type { TextNavItem } from "~/types/NavItems";
+import {
+  UNAUTHORIZED_ACTION,
+  AUTHORIZED_ACTION,
+} from "~/constants/AuthActions";
 
 defineProps<{ isOpen: boolean }>();
 
@@ -93,31 +97,21 @@ const emit = defineEmits<{
 const router = useRouter();
 const authStore = useAuthStore();
 
-const authAction = computed(() => {
-  if (authStore.isAuthenticated) {
-    return {
-      isLink: false,
-      text: "Log Out",
-      icon: "local-custom:logout",
-    };
-  } else {
-    return {
-      isLink: true,
-      text: "Log In",
-      icon: "local-custom:account",
-      link: "/account",
-    };
-  }
-});
+const authAction = computed(() =>
+  authStore.isAuthenticated ? AUTHORIZED_ACTION : UNAUTHORIZED_ACTION,
+);
 
-const handleAuthActionClick = () => {
-  if (authAction.value.isLink) {
-    emit("close");
-  } else {
-    authStore.logout();
-    router.push("/account");
-    emit("close");
-  }
+const handleAuthLinkClick = () => {
+  emit("close");
+};
+
+const handleAuthActionClick = async () => {
+  authStore.logout();
+
+  emit("close");
+
+  await nextTick();
+  router.push("/account");
 };
 
 const searchQuery = ref("");

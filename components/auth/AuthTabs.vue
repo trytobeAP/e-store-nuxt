@@ -2,15 +2,17 @@
   <div class="auth-tabs">
     <button
       class="auth-tabs__button"
-      :class="{ 'auth-tabs__button--active': activeTab === 'login' }"
-      @click="setActiveTab('login')"
+      :class="{ 'auth-tabs__button--active': activeTab === AuthTabs.LOGIN }"
+      @click="setActiveTab(AuthTabs.LOGIN)"
     >
       Sign in
     </button>
     <button
       class="auth-tabs__button"
-      :class="{ 'auth-tabs__button--active': activeTab === 'register' }"
-      @click="setActiveTab('register')"
+      :class="{
+        'auth-tabs__button--active': activeTab === AuthTabs.REGISTER,
+      }"
+      @click="setActiveTab(AuthTabs.REGISTER)"
     >
       Register
     </button>
@@ -18,17 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import type { AuthTab } from "~/types/AuthTab";
+import { AuthTabs } from "~/types/AuthTabs";
 
 defineProps<{
-  activeTab: AuthTab;
+  activeTab: AuthTabs;
 }>();
 
 const emit = defineEmits<{
-  (e: "update:activeTab", value: AuthTab): void;
+  (e: "update:activeTab", value: AuthTabs): void;
 }>();
 
-const setActiveTab = (tab: AuthTab) => {
+const setActiveTab = (tab: AuthTabs) => {
   emit("update:activeTab", tab);
 };
 </script>

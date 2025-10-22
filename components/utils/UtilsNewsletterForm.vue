@@ -39,18 +39,13 @@
       />
     </button>
   </form>
-
-  <UtilsNotificationCustom
-    :message="statusMessage"
-    :type="notificationType"
-    mode="fixed"
-  />
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted, computed } from "vue";
+import { computed, onUnmounted } from "vue";
 import { useId } from "#imports";
 import useForm from "~/composables/forms/useForm";
+import { useNotification } from "~/composables/useNotification";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
 import { NotificationTypeEnum } from "~/types/Notification";
 
@@ -77,8 +72,8 @@ const formStyle = computed(() => {
   };
 });
 
-const statusMessage = ref("");
-const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.INFO);
+const { showNotification } = useNotification();
+
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -89,36 +84,28 @@ const clearStatusMessageTimeout = () => {
 };
 
 const performSubscription = (formValues: { email: string }) => {
-  console.log(
-    "Validation passed, attempting subscription for:",
-    formValues.email,
-  );
-  clearStatusMessageTimeout();
-
   const result = addEmailToNewsletter(formValues.email);
 
   switch (result) {
     case "success":
-      statusMessage.value = `Success! ${formValues.email} added.`;
-      notificationType.value = NotificationTypeEnum.SUCCESS;
+      showNotification(
+        `Success! ${formValues.email} added.`,
+        NotificationTypeEnum.SUCCESS,
+      );
       resetForm();
       break;
     case "duplicate":
-      statusMessage.value = `${formValues.email} is already subscribed!`;
-      notificationType.value = NotificationTypeEnum.ERROR;
+      showNotification(
+        `${formValues.email} is already subscribed!`,
+        NotificationTypeEnum.ERROR,
+      );
       break;
     case "error":
-      statusMessage.value = "Could not save email. Please try again later.";
-      notificationType.value = NotificationTypeEnum.ERROR;
+      showNotification(
+        "Could not save email. Please try again later.",
+        NotificationTypeEnum.ERROR,
+      );
       break;
-  }
-
-  if (statusMessage.value) {
-    statusMessageTimeoutId = setTimeout(() => {
-      statusMessage.value = "";
-      notificationType.value = NotificationTypeEnum.INFO;
-      statusMessageTimeoutId = null;
-    }, 3000);
   }
 };
 

@@ -11,7 +11,6 @@
         variant="line"
         clearable
         clearIconName="local-custom:clear-cross-filled"
-        :iconColor="iconClearColor"
         @blur="validateField('name')"
       />
       <span
@@ -30,7 +29,6 @@
         variant="line"
         clearable
         clearIconName="local-custom:clear-cross-filled"
-        :iconColor="iconClearColor"
         @blur="validateField('password')"
       />
       <span
@@ -103,8 +101,6 @@ const handleLogin = () => {
     }
   });
 };
-
-const iconClearColor = "var(--color-gray-theme-complimentary-color)";
 </script>
 
 <style scoped lang="scss">
@@ -174,6 +170,7 @@ const iconClearColor = "var(--color-gray-theme-complimentary-color)";
   font-size: 16px;
   font-weight: $fw-bold;
   line-height: 100%;
+  cursor: pointer;
   border-radius: 4px;
 
   @media (max-width: ($breakpoints-m - 1px)) {
