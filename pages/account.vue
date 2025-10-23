@@ -3,7 +3,7 @@
     <div class="account-page__container">
       <h1 class="account-page__title"> My account </h1>
 
-      <AuthTabs
+      <AuthTab
         v-model:active-tab="activeTab"
         class="account-page__tabs"
       />

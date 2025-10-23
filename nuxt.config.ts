@@ -37,6 +37,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || "/api",
@@ -59,6 +60,9 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@pinia/nuxt",
   ],
+  imports: {
+    autoImport: true,
+  },
   css: ["~/assets/scss/main.scss", "nouislider/dist/nouislider.css"],
   googleFonts: {
     display: "swap",

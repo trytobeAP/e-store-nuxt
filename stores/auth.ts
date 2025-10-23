@@ -1,7 +1,6 @@
 import { computed } from "vue";
 import { useCookie } from "#app";
 import { defineStore } from "pinia";
-import { useApiFetch } from "~/composables/core/useApiFetch";
 import type { FormValues } from "~/composables/forms/useForm";
 
 export const useAuthStore = defineStore("auth", () => {
@@ -15,25 +14,13 @@ export const useAuthStore = defineStore("auth", () => {
       password: credentials.password,
     };
 
-    const { data, error, execute } = useApiFetch<{ token: string }>(
-      "/auth/login",
-      {
-        method: "POST",
-        body,
-        immediate: false,
-        watch: false,
-      },
-    );
+    const response = await $fetch<{ token: string }>("/auth/login", {
+      method: "POST",
+      body,
+    });
 
-    await execute();
-
-    if (error.value) {
-      console.error("Login failed:", error.value);
-      throw new Error("Invalid username or password.");
-    }
-
-    if (data.value?.token) {
-      token.value = data.value.token;
+    if (response.token) {
+      token.value = response.token;
     } else {
       throw new Error("Login successful, but no token received.");
     }
