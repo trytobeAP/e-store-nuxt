@@ -1,37 +1,17 @@
-import { ref, readonly } from "vue";
-import { NotificationTypeEnum } from "~/types/Notification";
+import { storeToRefs } from "pinia";
+import { useNotificationStore } from "~/stores/notification";
 
-const message = ref<string>("");
-const type = ref<NotificationTypeEnum | null>(null);
-let timer: ReturnType<typeof setTimeout> | null = null;
+export function useNotification() {
+  const notificationStore = useNotificationStore();
 
-export function useNotification(duration = 3000) {
-  function show(newMessage: string, newType: NotificationTypeEnum) {
-    if (timer) {
-      clearTimeout(timer);
-    }
+  const { message, type } = storeToRefs(notificationStore);
 
-    message.value = newMessage;
-    type.value = newType;
-
-    timer = setTimeout(() => {
-      hide();
-    }, duration);
-  }
-
-  function hide() {
-    message.value = "";
-    type.value = null;
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-  }
+  const { showNotification, hideNotification } = notificationStore;
 
   return {
-    notificationMessage: readonly(message),
-    notificationType: readonly(type),
-    showNotification: show,
-    hideNotification: hide,
+    notificationMessage: message,
+    notificationType: type,
+    showNotification,
+    hideNotification,
   };
 }

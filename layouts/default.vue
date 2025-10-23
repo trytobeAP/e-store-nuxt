@@ -13,8 +13,7 @@
       @close="closeSidebar"
     />
 
-    <UtilsNotificationCustom
-      mode="fixed"
+    <UtilsNotificationFixed
       :message="notificationMessage"
       :type="notificationType!"
     />

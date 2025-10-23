@@ -1,7 +1,7 @@
 <template>
   <Transition name="slide-down">
     <div
-      v-if="message && mode === 'fixed'"
+      v-if="message"
       class="notification-wrapper-fixed"
       role="alert"
     >
@@ -26,41 +26,21 @@
       </div>
     </div>
   </Transition>
-
-  <div
-    v-if="message && mode === 'inline'"
-    class="notification notification--inline"
-    :class="notificationClasses"
-    role="alert"
-  >
-    <div class="notification__content">
-      <Icon
-        :name="iconName"
-        class="notification__icon"
-      />
-      <span class="notification__text">{{ message }}</span>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  NotificationTypeEnum,
-  type NotificationMode,
-} from "~/types/Notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 
 const props = withDefaults(
   defineProps<{
     message: string;
     type?: NotificationTypeEnum;
-    mode?: NotificationMode;
     actionLink?: string;
     actionText?: string;
   }>(),
   {
     type: NotificationTypeEnum.INFO,
-    mode: "fixed",
     actionLink: "",
     actionText: "VIEW",
   },
@@ -108,28 +88,6 @@ const iconName = computed(() => {
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
-.notification--inline {
-  max-width: 100%;
-  padding: 12px 16px;
-  margin: 0;
-  font-size: 1rem;
-  border: 1px solid;
-  border-radius: 8px;
-  box-shadow: none;
-
-  &.type--error {
-    color: theme-color("error-color");
-    background-color: rgb(216 39 0 / 10%);
-    border-color: theme-color("error-color");
-  }
-
-  &.type--success {
-    color: green;
-    background-color: rgb(0 128 0 / 10%);
-    border-color: green;
-  }
-}
-
 .notification__content {
   display: flex;
   gap: 12px;
@@ -139,15 +97,12 @@ const iconName = computed(() => {
 .notification__icon {
   flex-shrink: 0;
   font-size: 24px;
+  color: inherit;
 }
 
 .notification__text {
   font-size: 14px;
   color: theme-color("opposite-color");
-}
-
-.notification--inline .notification__text {
-  color: inherit;
 }
 
 .notification__action-link {
@@ -164,10 +119,6 @@ const iconName = computed(() => {
 
 .type--error .notification__icon {
   color: theme-color("error-color");
-}
-
-.notification--inline.type--error .notification__icon {
-  color: inherit;
 }
 
 .slide-down-enter-active,

@@ -7,10 +7,9 @@
         v-if="pending"
         :items-count="6"
       />
-      <UtilsNotificationCustom
+      <UtilsNotificationInline
         v-else-if="error"
         class="error-message"
-        mode="inline"
         :type="NotificationTypeEnum.ERROR"
         :message="errorMessage"
         :minWidth="288"
@@ -38,6 +37,8 @@ import { computed } from "vue";
 import { NotificationTypeEnum } from "~/types/Notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
+import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
+
 const {
   data: allProducts,
   pending,

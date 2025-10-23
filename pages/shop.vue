@@ -35,10 +35,9 @@
           :items-count="6"
         />
 
-        <UtilsNotificationCustom
+        <UtilsNotificationInline
           v-else-if="error"
           class="error-message"
-          mode="inline"
           :type="NotificationTypeEnum.ERROR"
           :message="errorMessage"
           :minWidth="288"
@@ -71,6 +70,7 @@ import { NotificationTypeEnum } from "~/types/Notification";
 import type { LocationQueryRaw } from "vue-router";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
+import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
 
 const { isMobile } = useAppBreakpoints();
 
