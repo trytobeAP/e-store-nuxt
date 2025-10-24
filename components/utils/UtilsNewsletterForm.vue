@@ -44,8 +44,8 @@
 <script setup lang="ts">
 import { computed, onUnmounted } from "vue";
 import { useId } from "#imports";
+import { useNotificationStore } from "~/stores/notification";
 import useForm from "~/composables/forms/useForm";
-import { useNotification } from "~/composables/useNotification";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
 import { NotificationTypeEnum } from "~/types/Notification";
 
@@ -64,6 +64,7 @@ const props = defineProps<Props>();
 
 const uniqueId = useId();
 const errorId = computed(() => `${uniqueId}-error`);
+const { showNotification } = useNotificationStore();
 
 const formStyle = computed(() => {
   return {
@@ -71,8 +72,6 @@ const formStyle = computed(() => {
     maxWidth: props.maxWidth,
   };
 });
-
-const { showNotification } = useNotification();
 
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 

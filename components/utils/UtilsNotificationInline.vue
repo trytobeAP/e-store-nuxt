@@ -3,7 +3,6 @@
     class="notification notification--inline"
     role="alert"
     :class="notificationClasses"
-    :style="notificationStyle"
   >
     <div class="notification__content">
       <Icon
@@ -23,25 +22,13 @@ const props = withDefaults(
   defineProps<{
     message: string;
     type?: NotificationTypeEnum;
-    minWidth?: number | string;
   }>(),
   {
     type: NotificationTypeEnum.INFO,
-    minWidth: "auto",
   },
 );
 
-const notificationClasses = computed(() => ({
-  [`type--${props.type}`]: true,
-}));
-
-const notificationStyle = computed(() => {
-  const width =
-    typeof props.minWidth === "number" ? `${props.minWidth}px` : props.minWidth;
-  return {
-    minWidth: width,
-  };
-});
+const notificationClasses = computed(() => `type--${props.type}`);
 
 const iconName = computed(() => {
   switch (props.type) {

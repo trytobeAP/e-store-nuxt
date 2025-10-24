@@ -22,11 +22,12 @@
 
 <script setup lang="ts">
 import { watch } from "vue";
+import { storeToRefs } from "pinia";
 import { NotificationTypeEnum } from "~/types/Notification";
 import AppSidebar from "~/components/layout/AppSidebar.vue";
 import { useAuthStore } from "~/stores/auth";
+import { useNotificationStore } from "~/stores/notification";
 import { useBodyScrollLock } from "~/composables/useBodyScrollLock";
-import { useNotification } from "~/composables/useNotification";
 import { createSidebarState } from "~/composables/useSidebar";
 
 const {
@@ -35,12 +36,16 @@ const {
   close: closeSidebar,
 } = createSidebarState();
 
-const { notificationMessage, notificationType, showNotification } =
-  useNotification();
-
 useBodyScrollLock(isSidebarOpen);
 
 const authStore = useAuthStore();
+
+const notificationStore = useNotificationStore();
+
+const { message: notificationMessage, type: notificationType } =
+  storeToRefs(notificationStore);
+
+const { showNotification } = notificationStore;
 
 watch(
   () => authStore.isAuthenticated,

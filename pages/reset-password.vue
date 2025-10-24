@@ -21,8 +21,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { definePageMeta, useAppBreakpoints } from "#imports";
+import { useNotificationStore } from "~/stores/notification";
 import { NotificationTypeEnum } from "~/types/Notification";
-import { useNotification } from "~/composables/useNotification";
 
 definePageMeta({
   middleware: "guest",
@@ -30,12 +30,12 @@ definePageMeta({
 
 const { isMobile } = useAppBreakpoints();
 
+const { showNotification } = useNotificationStore();
+
 const pageTitle = computed(() => {
   if (isMobile.value) return `Lost password`;
   return `Have you Forgotten Your Password\u00A0?`;
 });
-
-const { showNotification } = useNotification();
 
 const handleFormSuccess = () => {
   showNotification(

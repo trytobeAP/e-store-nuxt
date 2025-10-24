@@ -12,7 +12,6 @@
         class="error-message"
         :type="NotificationTypeEnum.ERROR"
         :message="errorMessage"
-        :minWidth="288"
       />
       <div
         v-else

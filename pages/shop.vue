@@ -40,7 +40,6 @@
           class="error-message"
           :type="NotificationTypeEnum.ERROR"
           :message="errorMessage"
-          :minWidth="288"
         />
 
         <ProductList
@@ -60,6 +59,7 @@ import { useRoute, useRouter } from "#app";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
 import { debounce } from "~/utils/debounce";
+import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
 import {
   validateNumberQuery,
   validateOptionQuery,
@@ -70,7 +70,6 @@ import { NotificationTypeEnum } from "~/types/Notification";
 import type { LocationQueryRaw } from "vue-router";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
-import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
 
 const { isMobile } = useAppBreakpoints();
 
