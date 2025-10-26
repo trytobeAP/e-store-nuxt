@@ -7,21 +7,21 @@
   >
     <div class="input-wrapper">
       <input
-        id="newsletter-email"
+        :id="uniqueId"
         v-model="values.email"
-        type="email"
-        name="newsletter-email"
         class="newsletter-input"
+        type="email"
         placeholder="Give an email, get the newsletter."
         required
         aria-label="Email for newsletter"
+        :name="uniqueId"
         :aria-invalid="!!errors.email"
-        aria-describedby="newsletter-email-error"
+        :aria-describedby="errorId"
         @blur="() => validateField('email')"
       />
       <span
         v-if="errors.email"
-        id="newsletter-email-error"
+        :id="errorId"
         class="validation-error-message"
       >
         {{ errors.email }}
@@ -39,19 +39,15 @@
       />
     </button>
   </form>
-
-  <UtilsNotificationCustom
-    :message="statusMessage"
-    :type="notificationType"
-    mode="fixed"
-  />
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted, computed } from "vue";
+import { computed, onUnmounted } from "vue";
+import { useId } from "#imports";
+import { useNotificationStore } from "~/stores/notification";
 import useForm from "~/composables/forms/useForm";
 import { addEmailToNewsletter } from "~/utils/newsletterStorage";
-import { NotificationTypeEnum } from "~/types/notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 
 const { values, errors, isSubmitting, validateField, submitForm, resetForm } =
   useForm({
@@ -66,6 +62,10 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const uniqueId = useId();
+const errorId = computed(() => `${uniqueId}-error`);
+const { showNotification } = useNotificationStore();
+
 const formStyle = computed(() => {
   return {
     minWidth: props.minWidth ?? "282px",
@@ -73,8 +73,6 @@ const formStyle = computed(() => {
   };
 });
 
-const statusMessage = ref("");
-const notificationType = ref<NotificationTypeEnum>(NotificationTypeEnum.INFO);
 let statusMessageTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 const clearStatusMessageTimeout = () => {
@@ -85,36 +83,28 @@ const clearStatusMessageTimeout = () => {
 };
 
 const performSubscription = (formValues: { email: string }) => {
-  console.log(
-    "Validation passed, attempting subscription for:",
-    formValues.email,
-  );
-  clearStatusMessageTimeout();
-
   const result = addEmailToNewsletter(formValues.email);
 
   switch (result) {
     case "success":
-      statusMessage.value = `Success! ${formValues.email} added.`;
-      notificationType.value = NotificationTypeEnum.SUCCESS;
+      showNotification(
+        `Success! ${formValues.email} added.`,
+        NotificationTypeEnum.SUCCESS,
+      );
       resetForm();
       break;
     case "duplicate":
-      statusMessage.value = `${formValues.email} is already subscribed!`;
-      notificationType.value = NotificationTypeEnum.ERROR;
+      showNotification(
+        `${formValues.email} is already subscribed!`,
+        NotificationTypeEnum.ERROR,
+      );
       break;
     case "error":
-      statusMessage.value = "Could not save email. Please try again later.";
-      notificationType.value = NotificationTypeEnum.ERROR;
+      showNotification(
+        "Could not save email. Please try again later.",
+        NotificationTypeEnum.ERROR,
+      );
       break;
-  }
-
-  if (statusMessage.value) {
-    statusMessageTimeoutId = setTimeout(() => {
-      statusMessage.value = "";
-      notificationType.value = NotificationTypeEnum.INFO;
-      statusMessageTimeoutId = null;
-    }, 3000);
   }
 };
 
@@ -176,6 +166,7 @@ onUnmounted(() => {
   justify-content: center;
   padding-bottom: 10px;
   padding-left: 10px;
+  font-size: 12px;
   color: theme-color(link-color-light);
   cursor: pointer;
   background-color: transparent;

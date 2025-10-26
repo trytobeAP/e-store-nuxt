@@ -33,6 +33,7 @@
         clearable
       />
     </div>
+
     <nav class="sidebar-nav">
       <UtilsNavigationItem
         v-for="item in filteredPrimaryNavItems"
@@ -43,33 +44,75 @@
       >
         {{ item.content }}
       </UtilsNavigationItem>
+
       <BaseDivider
         v-if="filteredPrimaryNavItems.length > 0"
         class="sidebar-divider"
       />
-      <UtilsNavigationItem
-        v-for="item in secondaryNavItems"
-        :key="item.linkSlug"
-        :link="`/${item.linkSlug}`"
+
+      <button
+        v-if="!authAction.isLink"
         class="sidebar-link"
-        @click="$emit('close')"
+        @click="handleAuthActionClick"
       >
         <Icon
-          :name="item.iconName"
+          :name="authAction.icon"
           size="24"
         />
-        <span>{{ item.content }}</span>
+        <span>{{ authAction.text }}</span>
+      </button>
+
+      <UtilsNavigationItem
+        v-else
+        :link="authAction.link!"
+        class="sidebar-link"
+        @click="handleAuthLinkClick"
+      >
+        <Icon
+          :name="authAction.icon"
+          size="24"
+        />
+        <span>{{ authAction.text }}</span>
       </UtilsNavigationItem>
     </nav>
   </BaseSidebar>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import type { TextNavItem, IconNavItem } from "~/types/NavItems";
+import { ref, computed, nextTick } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "~/stores/auth";
+import type { TextNavItem } from "~/types/NavItems";
+import {
+  UNAUTHORIZED_ACTION,
+  AUTHORIZED_ACTION,
+} from "~/constants/AuthActions";
 
 defineProps<{ isOpen: boolean }>();
-defineEmits(["close"]);
+
+const emit = defineEmits<{
+  (e: "close"): void;
+}>();
+
+const router = useRouter();
+const authStore = useAuthStore();
+
+const authAction = computed(() =>
+  authStore.isAuthenticated ? AUTHORIZED_ACTION : UNAUTHORIZED_ACTION,
+);
+
+const handleAuthLinkClick = () => {
+  emit("close");
+};
+
+const handleAuthActionClick = async () => {
+  authStore.logout();
+
+  emit("close");
+
+  await nextTick();
+  router.push("/account");
+};
 
 const searchQuery = ref("");
 const initialPrimaryNavItems = [
@@ -89,26 +132,11 @@ const primaryNavItems: TextNavItem[] = initialPrimaryNavItems.map((item) => ({
   linkSlug: item.split(" ").join("-"),
 }));
 
-const secondaryNavItems: IconNavItem[] = [
-  {
-    content: "My account",
-    linkSlug: "account",
-    iconName: "local-custom:account",
-  },
-  {
-    content: "Log Out",
-    linkSlug: "logout",
-    iconName: "local-custom:logout",
-  },
-];
-
 const filteredPrimaryNavItems = computed(() => {
   if (!searchQuery.value) {
     return primaryNavItems;
   }
-
   const query = searchQuery.value.toLowerCase().trim();
-
   return primaryNavItems.filter((item) =>
     item.content.toLowerCase().includes(query),
   );
@@ -136,10 +164,17 @@ const filteredPrimaryNavItems = computed(() => {
   display: flex;
   gap: 12px;
   align-items: center;
+  width: 100%;
+  padding: 0;
+  font-family: "DM Sans", sans-serif;
   font-size: 18px;
   font-weight: $fw-medium;
   color: theme-color("link-color");
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .sidebar-divider {

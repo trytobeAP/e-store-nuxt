@@ -7,13 +7,11 @@
         v-if="pending"
         :items-count="6"
       />
-      <UtilsNotificationCustom
+      <UtilsNotificationInline
         v-else-if="error"
         class="error-message"
-        mode="inline"
         :type="NotificationTypeEnum.ERROR"
         :message="errorMessage"
-        :minWidth="288"
       />
       <div
         v-else
@@ -35,9 +33,11 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { NotificationTypeEnum } from "~/types/notification";
+import { NotificationTypeEnum } from "~/types/Notification";
 import { useAppBreakpoints } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
+import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
+
 const {
   data: allProducts,
   pending,
@@ -45,6 +45,9 @@ const {
 } = useProducts({ server: false, lazy: true });
 
 const { isMobile } = useAppBreakpoints();
+
+const errorMessage =
+  "Oops! We couldn't load the products. Please check your connection and try again later.";
 
 const randomProducts = computed(() => {
   if (!allProducts.value || allProducts.value.length === 0) {
@@ -59,11 +62,6 @@ const randomProducts = computed(() => {
 
   return productsShuffled.slice(0, numberOfProducts);
 });
-
-const errorMessage = computed(
-  () =>
-    "Oops! We couldn't load the products. Please check your connection and try again later.",
-);
 </script>
 
 <style scoped lang="scss">

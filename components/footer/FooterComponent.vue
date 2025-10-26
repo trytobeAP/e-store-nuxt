@@ -31,7 +31,10 @@
           :is-agreement-accepted="isAgreedToTerms"
         />
 
-        <BaseCheckbox v-model="isAgreedToTerms">
+        <BaseCheckbox
+          v-model="isAgreedToTerms"
+          class="footer-section__checkbox"
+        >
           i agree to the website's terms and conditions
         </BaseCheckbox>
       </div>
@@ -81,6 +84,13 @@ const socialItems: IconNavItem[] = [
 <style scoped lang="scss">
 .footer-divider {
   margin-top: 40px;
+
+  @media (max-width: ($breakpoints-l - 1px)) {
+    width: 100%;
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 .desktop-only-divider {
@@ -109,7 +119,11 @@ const socialItems: IconNavItem[] = [
     display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 100%;
+    max-width: 400px;
     margin-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
@@ -159,6 +173,15 @@ const socialItems: IconNavItem[] = [
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.footer-section__checkbox {
+  :deep(.checkbox-label) {
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: $fw-regular;
+    line-height: 20px;
+  }
 }
 
 .footer-nav-mobile {

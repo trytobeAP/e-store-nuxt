@@ -1,9 +1,9 @@
-import { reactive, ref, computed } from "vue";
+import { reactive, ref, computed, nextTick } from "vue";
 
 interface ValidationRule {
   validate: (value: string | null, allValues: FormValues) => true | string;
 }
-interface FormValues {
+export interface FormValues {
   name: string;
   fullName: string;
   email: string;
@@ -61,6 +61,7 @@ export default function useForm(initialValues?: Partial<FormValues>) {
     values[key] = value;
   };
 
+  const passwordMinLength = 3;
   const rules: FormRules = {
     name: { validate: (value) => (!value ? "Name is required." : true) },
     fullName: {
@@ -85,7 +86,8 @@ export default function useForm(initialValues?: Partial<FormValues>) {
     password: {
       validate: (value) => {
         if (!value) return "Password is required.";
-        if (value.length < 8) return "Password must be at least 8 characters.";
+        if (value.length < passwordMinLength)
+          return `Password must be at least ${passwordMinLength} characters.`;
         return true;
       },
     },
@@ -176,32 +178,33 @@ export default function useForm(initialValues?: Partial<FormValues>) {
     onSubmit: (formValues: FormValues) => Promise<void> | void,
   ) => {
     if (isSubmitting.value) return;
-    const isFormValid = validateForm();
 
-    if (isFormValid) {
-      isSubmitting.value = true;
-      try {
+    isSubmitting.value = true;
+
+    await nextTick();
+
+    try {
+      const isFormValid = validateForm();
+
+      if (isFormValid) {
         const relevantValues = {} as Partial<FormValues>;
-
         const setRelevantValue = <K extends keyof FormValues>(
           key: K,
           value: FormValues[K],
         ) => {
           relevantValues[key] = value;
         };
-
         activeFieldKeys.forEach((key) => {
           setRelevantValue(key, values[key]);
         });
-
         await onSubmit(relevantValues as FormValues);
-      } catch (submitError) {
-        console.error("Form submission callback failed:", submitError);
-      } finally {
-        isSubmitting.value = false;
+      } else {
+        console.log("Form validation failed. Errors:", errors);
       }
-    } else {
-      console.log("Form validation failed. Errors:", errors);
+    } catch (submitError) {
+      console.error("Form submission callback failed:", submitError);
+    } finally {
+      isSubmitting.value = false;
     }
   };
 

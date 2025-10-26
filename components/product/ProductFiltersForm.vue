@@ -7,7 +7,6 @@
         variant="line"
         clearable
         icon-name="local-custom:search"
-        :iconColor="computedInputIconColor"
         icon-position="left"
       />
     </div>
@@ -61,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onUnmounted } from "vue";
+import { ref, watch, onUnmounted } from "vue";
 import { debounce } from "~/utils/debounce";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
@@ -78,8 +77,6 @@ const emit = defineEmits<{
 }>();
 
 const localSearchQuery = ref(props.modelValue.searchQuery);
-
-const computedInputIconColor = computed(() => "var(--color-opposite-color)");
 
 function updateField<K extends keyof Filters>(key: K, value: Filters[K]) {
   const newFilters = {

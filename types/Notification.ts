@@ -3,5 +3,3 @@ export enum NotificationTypeEnum {
   SUCCESS = "success",
   INFO = "info",
 }
-
-export type NotificationMode = "fixed" | "inline";
