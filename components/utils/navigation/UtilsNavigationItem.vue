@@ -2,6 +2,7 @@
   <NuxtLink
     :to="resolvedLink"
     class="item"
+    v-bind="$attrs"
   >
     <slot />
   </NuxtLink>

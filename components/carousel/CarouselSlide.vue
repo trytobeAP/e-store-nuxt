@@ -1,20 +1,17 @@
 <template>
   <div class="carousel-slide">
-    <div
-      v-if="!isLoaded"
-      class="slide-skeleton"
-    />
-    <img
+    <NuxtImg
       class="slide-image"
-      :src="imageSrc"
+      format="webp"
+      placeholder
+      :sizes="HERO_CAROUSEL_IMAGE_SIZES"
+      :src="image.src"
       :alt="image.alt || `Slide ${image.id}`"
-      :style="{ opacity: isLoaded ? 1 : 0 }"
-      @load="onImageLoad"
+      :priority="isFirst"
+      :fetchpriority="isFirst ? 'high' : 'auto'"
+      :loading="isFirst ? 'eager' : 'lazy'"
     />
-    <div
-      v-if="isLoaded"
-      class="slide-content-overlay"
-    >
+    <div class="slide-content-overlay">
       <div class="slide-info">
         <h3
           v-if="image.title"
@@ -45,30 +42,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from "vue";
+import { computed } from "vue";
 import type { CarouselImage } from "~/types/CarouselImage";
+import { HERO_CAROUSEL_IMAGE_SIZES } from "~/constants/imageSizes";
 
 const props = defineProps<{
   image: CarouselImage;
   isActive: boolean;
+  isFirst: boolean;
 }>();
-
-const isLoaded = ref(false);
-const hasStartedLoading = ref(false);
-
-const imageSrc = computed(() => {
-  return props.isActive || hasStartedLoading.value ? props.image.src : "";
-});
-
-watch(imageSrc, (newSrc) => {
-  if (newSrc && !hasStartedLoading.value) {
-    hasStartedLoading.value = true;
-  }
-});
-
-const onImageLoad = () => {
-  isLoaded.value = true;
-};
 
 const formattedPrice = computed(() => {
   if (props.image.price !== undefined) {
@@ -95,7 +77,6 @@ const formattedPrice = computed(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.4s ease-in-out;
 }
 
 .slide-content-overlay {
@@ -117,30 +98,6 @@ const formattedPrice = computed(() => {
     align-items: flex-end;
     justify-content: flex-start;
     padding: 10px;
-  }
-}
-
-.slide-skeleton {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: theme-color("gray-light-color");
-  animation: pulse-bg 1.5s infinite ease-in-out;
-}
-
-@keyframes pulse-bg {
-  0% {
-    background-color: theme-color("gray-light-color");
-  }
-
-  50% {
-    background-color: theme-color("gray-color");
-  }
-
-  100% {
-    background-color: theme-color("gray-light-color");
   }
 }
 

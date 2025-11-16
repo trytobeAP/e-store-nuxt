@@ -1,4 +1,4 @@
-import { useFetch, useRuntimeConfig } from "#app";
+import { useFetch } from "#app";
 import type { UseFetchOptions } from "#app";
 import { useSlugify } from "~/utils/slugify";
 import type { Product } from "~/types/Product";
@@ -6,12 +6,9 @@ import type { Product } from "~/types/Product";
 export type ProductsApiResponse = Product[];
 
 export const useProducts = (options?: UseFetchOptions<Product[]>) => {
-  const config = useRuntimeConfig();
-
-  const url = "/products";
+  const url = "/api/products";
 
   return useFetch<Product[]>(url, {
-    baseURL: config.public.apiBase,
     key: "all-products",
     transform: (response: Product[]): Product[] => {
       return response.map((product) => {

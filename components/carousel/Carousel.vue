@@ -31,6 +31,7 @@
           :key="image.id"
           :image="image"
           :is-active="indexValue === currentSlideIndex"
+          :is-first="indexValue === 0"
           :aria-label="
             image.alt || `Slide ${indexValue + 1} of ${images.length}`
           "

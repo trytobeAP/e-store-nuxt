@@ -12,6 +12,7 @@
         <UtilsNavigationItem
           link="/cart"
           class="nav-link icon-link"
+          aria-label="Cart"
         >
           <Icon
             name="local-custom:cart"

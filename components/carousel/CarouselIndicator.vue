@@ -19,6 +19,7 @@ defineEmits(["select"]);
 
 <style scoped lang="scss">
 .carousel-indicator {
+  position: relative;
   width: 8px;
   height: 8px;
   padding: 0;
@@ -70,5 +71,12 @@ defineEmits(["select"]);
       outline-offset: 1px;
     }
   }
+}
+
+.carousel-indicator::before {
+  position: absolute;
+  inset: -10px;
+  content: "";
+  border-radius: 50%;
 }
 </style>

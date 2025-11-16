@@ -18,11 +18,17 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { definePageMeta } from "#imports";
+import { definePageMeta, useSeoMeta } from "#imports";
 import { AuthTabs } from "~/types/AuthTabs";
 
 definePageMeta({
   middleware: "guest",
+});
+
+useSeoMeta({
+  title: "My Account - Sign In or Register | SHOPEE",
+  description:
+    "Access your SHOPEE account. Sign in to continue shopping or register to create a new account and enjoy exclusive benefits.",
 });
 
 const activeTab = ref<AuthTabs>(AuthTabs.LOGIN);
