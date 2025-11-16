@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from "vue";
 import { useRoute, useRouter } from "#app";
-import { useAppBreakpoints } from "#imports";
+import { useAppBreakpoints, useSeoMeta } from "#imports";
 import { useProducts } from "~/composables/api/useProducts";
 import { debounce } from "~/utils/debounce";
 import UtilsNotificationInline from "~/components/utils/UtilsNotificationInline.vue";
@@ -70,6 +70,15 @@ import { NotificationTypeEnum } from "~/types/Notification";
 import type { LocationQueryRaw } from "vue-router";
 import type { Filters } from "~/types/Filters";
 import type { SelectOption } from "~/types/SelectOption";
+
+useSeoMeta({
+  title: "Shop The Latest Collection | SHOPEE",
+  description:
+    "Explore our curated collection of the latest trends in fashion and electronics. Find high-quality products at the best prices.",
+  ogTitle: "Shop The Latest Collection at SHOPEE",
+  ogDescription:
+    "Explore our curated collection of the latest trends in fashion and electronics.",
+});
 
 const { isMobile } = useAppBreakpoints();
 

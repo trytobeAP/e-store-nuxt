@@ -8,7 +8,7 @@
   aspect-ratio: 1000 / 600;
   background-color: theme-color("gray-light-color");
   border-radius: 16px;
-  animation: pulse-bg 1.5s infinite ease-in-out;
+  animation: pulse-opacity 1.5s infinite ease-in-out;
 
   @media (max-width: ($breakpoints-l - 1px)) {
     aspect-ratio: 800 / 500;
@@ -23,17 +23,17 @@
   }
 }
 
-@keyframes pulse-bg {
+@keyframes pulse-opacity {
   0% {
-    background-color: theme-color("gray-light-color");
+    opacity: 1;
   }
 
   50% {
-    background-color: theme-color("gray-color");
+    opacity: 0.6;
   }
 
   100% {
-    background-color: theme-color("gray-light-color");
+    opacity: 1;
   }
 }
 </style>

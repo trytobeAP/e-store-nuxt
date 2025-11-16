@@ -61,13 +61,13 @@ const iconName = computed(() => {
 
   &.type--error {
     color: theme-color("error-color");
-    background-color: rgb(216 39 0 / 10%);
+    background-color: rgb(216 39 0 / 5%);
     border-color: theme-color("error-color");
   }
 
   &.type--success {
     color: green;
-    background-color: rgb(0 128 0 / 10%);
+    background-color: rgb(0 128 0 / 5%);
     border-color: green;
   }
 }

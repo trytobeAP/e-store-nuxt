@@ -5,11 +5,13 @@
       class="card-link"
     >
       <div class="image-wrapper">
-        <img
+        <NuxtImg
+          class="product-image"
+          format="webp"
+          placeholder
+          :sizes="PRODUCT_CARD_IMAGE_SIZES"
           :src="product.image"
           :alt="product.title"
-          class="product-image"
-          loading="lazy"
         />
         <ProductCardBadges
           :on-sale="product.onSale"
@@ -47,6 +49,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { Product } from "~/types/Product";
+import { PRODUCT_CARD_IMAGE_SIZES } from "~/constants/imageSizes";
 
 const props = defineProps<{
   product: Product;

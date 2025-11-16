@@ -18,7 +18,7 @@ export const useAuthStore = defineStore("auth", () => {
     const response = await $fetch<{ token: string }>("/auth/login", {
       method: "POST",
       body,
-      baseURL: config.public.apiBase,
+      baseURL: config.public.apiBase as string,
     });
 
     if (response.token) {

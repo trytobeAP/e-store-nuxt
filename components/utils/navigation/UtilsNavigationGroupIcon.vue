@@ -7,6 +7,7 @@
       v-for="item in items"
       :key="item.linkSlug"
       class="icon-link-group"
+      v-bind="item.attrs"
       :link="item.linkSlug"
       :class="[linkClass, 'text-link']"
     >

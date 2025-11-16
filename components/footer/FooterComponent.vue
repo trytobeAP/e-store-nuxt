@@ -75,9 +75,21 @@ const desktopNavItems: TextNavItem[] = [
 }));
 
 const socialItems: IconNavItem[] = [
-  { linkSlug: "https://facebook.com", iconName: "ri:facebook-fill" },
-  { linkSlug: "https://instagram.com", iconName: "mdi:instagram" },
-  { linkSlug: "https://twitter.com", iconName: "mdi:twitter" },
+  {
+    linkSlug: "https://facebook.com",
+    iconName: "ri:facebook-fill",
+    attrs: { "aria-label": "Facebook" },
+  },
+  {
+    linkSlug: "https://instagram.com",
+    iconName: "mdi:instagram",
+    attrs: { "aria-label": "Instagram" },
+  },
+  {
+    linkSlug: "https://twitter.com",
+    iconName: "mdi:twitter",
+    attrs: { "aria-label": "Twitter" },
+  },
 ];
 </script>
 

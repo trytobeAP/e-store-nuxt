@@ -13,9 +13,21 @@
 import type { IconNavItem } from "~/types/NavItems";
 
 const socialItems: IconNavItem[] = [
-  { linkSlug: "https://facebook.com", iconName: "local-custom:facebook" },
-  { linkSlug: "https://instagram.com", iconName: "local-custom:instagram" },
-  { linkSlug: "https://twitter.com", iconName: "local-custom:twitter" },
+  {
+    linkSlug: "https://facebook.com",
+    iconName: "local-custom:facebook",
+    attrs: { "aria-label": "Facebook" },
+  },
+  {
+    linkSlug: "https://instagram.com",
+    iconName: "local-custom:instagram",
+    attrs: { "aria-label": "Instagram" },
+  },
+  {
+    linkSlug: "https://twitter.com",
+    iconName: "local-custom:twitter",
+    attrs: { "aria-label": "Twitter" },
+  },
 ];
 </script>
 

@@ -20,12 +20,18 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { definePageMeta, useAppBreakpoints } from "#imports";
+import { definePageMeta, useSeoMeta, useAppBreakpoints } from "#imports";
 import { useNotificationStore } from "~/stores/notification";
 import { NotificationTypeEnum } from "~/types/Notification";
 
 definePageMeta({
   middleware: "guest",
+});
+
+useSeoMeta({
+  title: "Reset Your Password | SHOPEE",
+  description:
+    "Forgot your password? Enter your email address to receive a link to reset your password and regain access to your SHOPEE account.",
 });
 
 const { isMobile } = useAppBreakpoints();
